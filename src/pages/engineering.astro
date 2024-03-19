@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="mt-6">Engineering</h1>
+        <h2>Lego eller Tandhjul</h2>
+        <div class="instructions">
+            <h3 class="font-semibold">
+                1) Double Dimond Model
+                <span class="text-xs">
+                    Mark fortæller (Max 10 min)
+                </span>
+            </h3>
+            <img class="max-w-sm mt-4" src="/public/doublediamond-researchq.png" alt="">
+        </div>
+        <div class="instructions">
+            <h3 class="font-semibold">2) Vælg imellem:</h3>
+            <a href="https://www.youtube.com/watch?v=DSbBOI9dEEw&t=9s">
+                <p>
+                    Lego
+                    <span class="text-xs">
+                        (Se vejledning)
+                    </span>
+                </p>
+            </a>
+            <a href="https://www.youtube.com/watch?v=2UIJc4k1EjI&list=PLhFpOiPt7BHGlwHKAaKTn4PXGNWVrBRlq&index=2">
+                <p>
+                    Tandhjul
+                    <span class="text-xs">
+                        (Se vejledning)
+                    </span>
+                </p>
+            </a>
+        </div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1,h2 {
+		
+		line-height: 1;
+		text-align: center;
+		
+	}
+
+    h1{
+        font-size: 4rem;
+		font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+
+    h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4rem;
+    }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+    .instructions p{
+        margin-left:64px;
+    }
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>

@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+        <div>
+            <h4 id="fokus">Fokus på</h3>
+            <h1 id="headline" class="anton">IN TO GREAT UNKNOWN</h1>
+        </div>
+        <div id="wheelOfFortune">
+              <canvas id="wheel" width="300" height="300"></canvas>
+              <div id="spin">SPIN</div>
+        </div>
+	</main>
+</Layout>
+
+
+<script>
+    const wannaHitInSectors = 0
+
+const sectors = [
+  { color: '#f82', label: 'Web Arkitektur' },
+  { color: '#0bf', label: 'API' },
+  { color: '#fb0', label: 'Javascript' },
+  { color: '#0fb', label: 'Python' },
+  { color: '#b0f', label: 'Garbage' },
+  { color: '#f0b', label: 'IoT' }
+]
+
+const rand = (m, M) => Math.random() * (M - m) + m
+const tot = sectors.length
+const spinEl = document.querySelector('#spin')
+const ctx = document.querySelector('#wheel').getContext('2d')
+const dia = ctx.canvas.width
+const rad = dia / 2
+const PI = Math.PI
+const TAU = 2 * PI
+const arc = TAU / sectors.length
+
+let friction = 0.99 // 0.995=soft, 0.99=mid, 0.98=hard
+let angVel = 0 // Angular velocity
+let ang = 0 // Angle in radians
+
+const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot
+
+function drawSector(sector, i) {
+  const ang = arc * i
+  ctx.save()
+  // COLOR
+  ctx.beginPath()
+  ctx.fillStyle = sector.color
+  ctx.moveTo(rad, rad)
+  ctx.arc(rad, rad, rad, ang, ang + arc)
+  ctx.lineTo(rad, rad)
+  ctx.fill()
+  // TEXT
+  ctx.translate(rad, rad)
+  ctx.rotate(ang + arc / 2)
+  ctx.textAlign = 'right'
+  ctx.fillStyle = '#fff'
+  ctx.font = 'normal 12px sans-serif'
+  ctx.fillText(sector.label, rad - 10, 10)
+  //
+  ctx.restore()
+}
+
+function rotate() {
+  //console.log(getIndex())
+  const sector = sectors[getIndex()]
+  ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`
+  //console.log((ang * PI) / 180)
+  spinEl.textContent = !angVel ? 'SPIN' : sector.label
+  spinEl.style.background = sector.color
+}
+
+function frame() {
+  if (!angVel) return
+  ang += angVel // Update angle
+  ang %= TAU // Normalize angle
+  //angVel *= friction // Friction
+  /*
+  if (angVel < 0.05) {
+    let dynamicAngVal = 0.99 + (getIndex() - wannaHitInSectors) / 1000
+    angVel -= dynamicAngVal
+    console.log()
+  }
+  if (angVel < 0.02 && getIndex() == wannaHitInSectors) angVel = 0
+  */
+  console.log(
+    'ang:',
+    (ang * PI) / 180,
+    'tot',
+    tot,
+    'arc',
+    arc,
+    'math',
+    ang - PI / 2
+  )
+  if (angVel < 0.04) {
+    if (getIndex() != wannaHitInSectors) {
+      angVel *= 1
+    } else {
+      if (getIndex() == wannaHitInSectors + 2) {
+        angVel *= 0.9
+      } else if (getIndex() == wannaHitInSectors + 1) {
+        angVel = 0.2
+      }
+      if (getIndex() == wannaHitInSectors && (ang * PI) / 180 > 0.1) {
+        angVel = 0
+        headlineAnimation()
+      }
+    }
+  }
+  angVel *= friction
+  //if (angVel < 0.02) angVel = 0
+  rotate()
+}
+
+function engine() {
+  frame()
+  requestAnimationFrame(engine)
+}
+function headlineAnimation() {
+  const head = document.querySelector('#headline')
+  const fokus = document.querySelector('#fokus')
+  const sector = sectors[getIndex()]
+  head.textContent = sector.label
+  head.style = 'font-size: 50px; transition: all 0.5s ease;'
+  fokus.style = 'opacity: 1; transition: all 2.5s ease;'
+  setTimeout(() => {
+    head.style = 'font-size: 60px; transition: all 0.5s ease;'
+  }, 200)
+}
+
+function init() {
+  sectors.forEach(drawSector)
+  rotate() // Initial rotation
+  engine() // Start engine
+  spinEl.addEventListener('click', () => {
+    if (!angVel) angVel = 0.45 //rand(0.3, 0.45)
+    //console.log(angVel)
+  })
+}
+
+init()
+
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+    padding: 0 !important;
+    max-height: 100vh;
+    overflow: hidden;
+    scroll-behavior: unset;
+}
+main {
+  height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
+#wheelOfFortune {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+#wheel {
+  display: block;
+  min-width: 22vw;
+}
+
+#spin {
+  
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  margin: -15%;
+  background: #fff;
+  color: #fff;
+  box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  transition: 0.8s;
+}
+
+#spin::after {
+  content: '';
+  position: absolute;
+  top: -17px;
+  border: 10px solid transparent;
+  border-bottom-color: currentColor;
+  border-top: none;
+}
+
+
+h4 {
+  color: white;
+  /*margin-bottom: -240px;*/
+  opacity: 0;
+  text-align: center;
+  /*margin-bottom: -70px;*/
+}
+
+div{
+    text-align: center;
+}
+body {
+  background-color: black;
+  background-image: url('https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  padding: 10%;
+}
+
+main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+
+
+</style>
