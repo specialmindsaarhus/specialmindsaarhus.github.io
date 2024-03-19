@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 
 
 ---
@@ -20,7 +19,8 @@ import Card from '../components/Card.astro';
 
 
 <script>
-    const wannaHitInSectors = 0
+/*
+const wannaHitInSectors = 0
 
 const sectors = [
   { color: '#f82', label: 'Web Arkitektur' },
@@ -82,14 +82,6 @@ function frame() {
   ang += angVel // Update angle
   ang %= TAU // Normalize angle
   //angVel *= friction // Friction
-  /*
-  if (angVel < 0.05) {
-    let dynamicAngVal = 0.99 + (getIndex() - wannaHitInSectors) / 1000
-    angVel -= dynamicAngVal
-    console.log()
-  }
-  if (angVel < 0.02 && getIndex() == wannaHitInSectors) angVel = 0
-  */
   console.log(
     'ang:',
     (ang * PI) / 180,
@@ -147,7 +139,7 @@ function init() {
 }
 
 init()
-
+*/
 </script>
 
 <style>
