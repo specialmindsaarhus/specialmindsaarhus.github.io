@@ -1,1 +1,0 @@
-# specialmindsaarhus.github.io
