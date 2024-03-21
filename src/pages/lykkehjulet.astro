@@ -63,7 +63,7 @@ function drawSector(sector: any, i: any) {
   ctx.rotate(ang + arc / 2)
   ctx.textAlign = 'right'
   ctx.fillStyle = '#fff'
-  ctx.font = 'normal 12px sans-serif'
+  ctx.font = 'normal 10px sans-serif'
   ctx.fillText(sector.label, rad - 10, 10)
   //
   ctx.restore()
@@ -75,7 +75,7 @@ function rotate() {
   ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`
   //console.log((ang * PI) / 180)
   spinEl!.textContent = !angVel ? 'SPIN' : sector.label
-  spinEl!.setAttribute('style.background', sector.color)
+  spinEl!.setAttribute('style', `background-color: ${sector.color}`)
 }
 
 function frame() {
@@ -230,7 +230,7 @@ main {
 		width: 800px;
 		max-width: calc(100% - 2rem);
 		color: white;
-		font-size: 20px;
+		font-size: 16px;
 		line-height: 1.6;
 	}
 .astro-a {
