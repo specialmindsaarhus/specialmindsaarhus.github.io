@@ -19,7 +19,7 @@ import Layout from '../layouts/Layout.astro';
 
 
 <script>
-/*
+
 const wannaHitInSectors = 0
 
 const sectors = [
@@ -31,10 +31,11 @@ const sectors = [
   { color: '#f0b', label: 'IoT' }
 ]
 
-const rand = (m, M) => Math.random() * (M - m) + m
+//const rand = (m: any, M: any) => Math.random() * (M - m) + m
 const tot = sectors.length
 const spinEl = document.querySelector('#spin')
-const ctx = document!.querySelector('#wheel')!.getContext('2d')
+const preCTX = document!.querySelector('#wheel') as HTMLCanvasElement
+const ctx = preCTX.getContext('2d')!
 const dia = ctx.canvas.width
 const rad = dia / 2
 const PI = Math.PI
@@ -47,7 +48,7 @@ let ang = 0 // Angle in radians
 
 const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot
 
-function drawSector(sector, i) {
+function drawSector(sector: any, i: any) {
   const ang = arc * i
   ctx.save()
   // COLOR
@@ -74,7 +75,7 @@ function rotate() {
   ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`
   //console.log((ang * PI) / 180)
   spinEl!.textContent = !angVel ? 'SPIN' : sector.label
-  spinEl!.style.background = sector.color
+  spinEl!.setAttribute('style.background', sector.color)
 }
 
 function frame() {
@@ -121,10 +122,10 @@ function headlineAnimation() {
   const fokus = document.querySelector('#fokus')
   const sector = sectors[getIndex()]
   head!.textContent = sector.label
-  head!.style = 'font-size: 50px; transition: all 0.5s ease;'
-  fokus!.style = 'opacity: 1; transition: all 2.5s ease;'
+  head!.setAttribute('style', 'font-size: 50px; transition: all 0.5s ease;')
+  fokus!.setAttribute('style', 'opacity: 1; transition: all 2.5s ease;')
   setTimeout(() => {
-    head!.style = 'font-size: 60px; transition: all 0.5s ease;'
+    head!.setAttribute('style', 'font-size: 60px; transition: all 0.5s ease;')
   }, 200)
 }
 
@@ -139,7 +140,7 @@ function init() {
 }
 
 init()
-*/
+
 </script>
 
 <style>
