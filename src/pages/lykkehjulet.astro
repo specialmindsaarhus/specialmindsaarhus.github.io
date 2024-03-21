@@ -19,7 +19,7 @@ import Layout from '../layouts/Layout.astro';
 
 
 <script>
-
+/*
 const wannaHitInSectors = 0
 
 const sectors = [
@@ -34,7 +34,7 @@ const sectors = [
 const rand = (m, M) => Math.random() * (M - m) + m
 const tot = sectors.length
 const spinEl = document.querySelector('#spin')
-const ctx = document.querySelector('#wheel').getContext('2d')
+const ctx = document!.querySelector('#wheel')!.getContext('2d')
 const dia = ctx.canvas.width
 const rad = dia / 2
 const PI = Math.PI
@@ -73,8 +73,8 @@ function rotate() {
   const sector = sectors[getIndex()]
   ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`
   //console.log((ang * PI) / 180)
-  spinEl.textContent = !angVel ? 'SPIN' : sector.label
-  spinEl.style.background = sector.color
+  spinEl!.textContent = !angVel ? 'SPIN' : sector.label
+  spinEl!.style.background = sector.color
 }
 
 function frame() {
@@ -120,11 +120,11 @@ function headlineAnimation() {
   const head = document.querySelector('#headline')
   const fokus = document.querySelector('#fokus')
   const sector = sectors[getIndex()]
-  head.textContent = sector.label
-  head.style = 'font-size: 50px; transition: all 0.5s ease;'
-  fokus.style = 'opacity: 1; transition: all 2.5s ease;'
+  head!.textContent = sector.label
+  head!.style = 'font-size: 50px; transition: all 0.5s ease;'
+  fokus!.style = 'opacity: 1; transition: all 2.5s ease;'
   setTimeout(() => {
-    head.style = 'font-size: 60px; transition: all 0.5s ease;'
+    head!.style = 'font-size: 60px; transition: all 0.5s ease;'
   }, 200)
 }
 
@@ -132,14 +132,14 @@ function init() {
   sectors.forEach(drawSector)
   rotate() // Initial rotation
   engine() // Start engine
-  spinEl.addEventListener('click', () => {
+  spinEl!.addEventListener('click', () => {
     if (!angVel) angVel = 0.45 //rand(0.3, 0.45)
     //console.log(angVel)
   })
 }
 
 init()
-
+*/
 </script>
 
 <style>
