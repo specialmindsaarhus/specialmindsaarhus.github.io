@@ -4,39 +4,48 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1 class="mt-6">Programmering</h1>
-        <h2>HTML & CSS</h2>
+		<h1 class="mt-6">Engineering</h1>
+        <h2>3D printede planter</h2>
 		<div class="instructions lykkehjulet">
             <h3 class="font-semibold">
-                Lykkehjulet
+                1) Double Dimond Model
                 <span class="text-xs">
                     Mark fortæller (Max 10 min)
                 </span>
             </h3>
-			<a class="text-sm" href="https://www.google.com/search?q=web+architecture+explained&sca_esv=cebc95f0293f483f&rlz=1C1GCEB_enDK1099DK1100&biw=1920&bih=911&tbm=vid&sxsrf=ACQVn0_ApPKOR_Wq9sMUePfOk85cGvMLrg%3A1712045994981&ei=qr8LZvW8O7-L7NYPo4KwgA4&ved=0ahUKEwj1ufqqjKOFAxW_BdsEHSMBDOAQ4dUDCA0&uact=5&oq=web+architecture+explained&gs_lp=Eg1nd3Mtd2l6LXZpZGVvIhp3ZWIgYXJjaGl0ZWN0dXJlIGV4cGxhaW5lZDIEECMYJzIGEAAYBxgeMgUQABiABDILEAAYgAQYigUYhgMyCxAAGIAEGIoFGIYDMgsQABiABBiKBRiGAzILEAAYgAQYigUYhgNI1ARQAFikA3AAeACQAQCYAU-gAY8CqgEBNLgBA8gBAPgBAZgCBKACogLCAgcQIxiwAhgnwgIHEAAYgAQYDZgDAJIHATSgB7Ea&sclient=gws-wiz-video#fpstate=ive&vld=cid:09d2c476,vid:sDlCSIDwpDs,st:0">Link</a>
+            <img class="max-w-sm mt-4" src="../public/doublediamond-researchq.png" alt="">
+			<div class="my-4">
+				<h6 class="mt-8 mb-0 inspiration">Inspiration:</h3>
+				<a class="text-sm" href="https://www.youtube.com/watch?v=TaxvtUXtw7g">Magnets</a><br>
+				<a class="text-sm" href="https://www.printables.com/model/230363-leaf-drink-coasters-with-decorative-plant-holder#preview">Holes</a><br>
+				<a class="text-sm" href="https://www.instagram.com/reel/C4xBqfru3_y/">Cactus</a><br>
+			</div>
         </div>
         <div class="instructions">
             <h3 class="font-semibold">
-                Box Model
+                Teknikker & Øvelser
 				<span class="text-xs">
-					Farv kasser på udleveret papir...
+					Husk at bruge jeres cheatsheet...
 				</span>
             </h3>
+			<a href="https://www.youtube.com/watch?v=G5NVSOWDqco">
+			
+				<p>
+					Øvelse 1: Boks med et net af huller
+				</p>
+			</a>
+			<a href="https://www.youtube.com/watch?v=GI3BFimvVV8">
+				<p>
+					Øvelse 2: Spejled form med skruehuller
+				</p>
+			
+			</a>
+			<a href="https://www.youtube.com/watch?v=TaxvtUXtw7g">
+			</a>
 			<p>
-				Google
+				Øvelse 3: Blad med bexier streger/huller i
 			</p>
-			<p>
-				Tesla
-			</p>
-			<p>
-				SpaceX
-			</p>
-			<p>
-				Bento Box
-			</p>
-			<p>
-				Memor
-			</p>
+				
         </div>
         <div class="instructions">
             <h3 class="font-semibold">
@@ -94,7 +103,7 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-	.instructions p, .instructions h3{
+	.instructions p, .instructions h3:not(.inspiration){
 		margin-bottom: 12px;
 	}
 	main {
