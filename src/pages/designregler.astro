@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+        <div class="justify-between center-mark py-12">
+            <h1 id="fokus text-xl">Designregler i Engineering</h1>
+            <div>
+              <h2>1) Fejl er en god måde at lære på!</h1>
+              <h2>2) Test ideer for at finde svar!</h1>
+              <h2>3) Print hvis du er i tvivl!</h1>
+            </div>
+        </div>
+        
+	</main>
+</Layout>
+
+
+<script>
+
+</script>
+
+<style>
+.center-mark{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-around;
+  
+}
+.center-mark >div{
+  margin-top: -25vh;
+}
+
+* {
+  /*margin: 0;*/
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+    padding: 0 !important;
+    max-height: 100vh;
+    overflow: hidden;
+    scroll-behavior: unset;
+}
+main {
+  height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
+#wheelOfFortune {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+#wheel {
+  display: block;
+  min-width: 22vw;
+}
+
+#spin {
+  
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  margin: -15%;
+  background: #fff;
+  color: #fff;
+  box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  transition: 0.8s;
+}
+
+#spin::after {
+  content: '';
+  position: absolute;
+  top: -17px;
+  border: 10px solid transparent;
+  border-bottom-color: currentColor;
+  border-top: none;
+}
+
+
+h4 {
+  color: white;
+  /*margin-bottom: -240px;*/
+  opacity: 0;
+  text-align: center;
+  /*margin-bottom: -70px;*/
+}
+
+div{
+    text-align: center;
+}
+body {
+  background-color: black;
+  background-image: url('https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  padding: 10%;
+}
+
+main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 16px;
+		line-height: 1.6;
+	}
+.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+h1 {
+		font-size: 2.5vw;
+		font-weight: 500;
+		line-height: 1;
+		text-align: Left;
+	}
+  h2{
+    margin-bottom: 24px;
+    font-size: 2rem;
+    font-weight: 400;
+		line-height: 1;
+		text-align: center;
+  }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+
+
+</style>
