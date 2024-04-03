@@ -7,11 +7,11 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Welcome to Astro.">
 	<main>
         <div class="justify-between center-mark py-12">
-            <h1 id="fokus text-xl">Designregler i Engineering</h1>
+            <h1 id="fokus text-xl">DESIGNREGLER I ENGINEERING</h2>
             <div>
-              <h2>1) Fejl er en god måde at lære på!</h1>
-              <h2>2) Test ideer for at finde svar!</h1>
-              <h2>3) Print hvis du er i tvivl!</h1>
+              <h2>1) FEJL ER EN GOD MÅDE AT LÆRE PÅ</h1>
+              <h2>2)TEST IDEER FOR AT FINDE SVAR!</h1>
+              <h2>3) PRINT HVIS DU ER I TVIVL!</h1>
             </div>
         </div>
         
@@ -25,14 +25,23 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 .center-mark{
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: space-around;
+  margin-bottom: 24px;
+    text-align: center;
   
 }
+.center-mark h2{
+  letter-spacing: 12px;
+  font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.center-mark h1{
+  margin-bottom: 48px;
+}
+
 .center-mark >div{
-  margin-top: -25vh;
+  
 }
 
 * {
@@ -117,9 +126,8 @@ body {
 
 main {
 		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
+		
+		
 		color: white;
 		font-size: 16px;
 		line-height: 1.6;
@@ -134,10 +142,11 @@ main {
 		z-index: -1;
 	}
 h1 {
-		font-size: 2.5vw;
-		font-weight: 500;
+		font-size: 2.2vw;
+		font-weight: 700;
 		line-height: 1;
-		text-align: Left;
+		text-align: center;
+    letter-spacing: 15px;
 	}
   h2{
     margin-bottom: 24px;
