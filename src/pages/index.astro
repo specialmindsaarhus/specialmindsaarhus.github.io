@@ -1,11 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Engineering from './engineering.astro';
+
+const d = new Date() 
+const whatDay = d.getDay()
+			
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1 class="mt-6">Dagens opgave i <span class="text-gradient">Engeneering</span></h1>
+		<h1 class="mt-6">Dagens Indhold<span class="text-gradient">
+			{whatDay > 2 ? 'Programmering' : 'Engineering'}
+			</span></h1>
 		<ul role="list" class="link-card-grid">
 			<Card
 			href="/programmering_html_css"
@@ -63,7 +70,7 @@ import Card from '../components/Card.astro';
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
-		line-height: 1;
+		line-height: 1.125;
 		text-align: center;
 		margin-bottom: 1em;
 	}
