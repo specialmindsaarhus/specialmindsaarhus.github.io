@@ -10,46 +10,8 @@ const whatDay = d.getDay()
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1 class="mt-6">Dagens Indhold<span class="text-gradient">
-			{whatDay > 2 ? 'Programmering' : 'Engineering'}
-			</span></h1>
-		<ul role="list" class="link-card-grid">
-			<Card
-			href="/engineering_planter_designvalg_2nd"
-			title="Engineering"
-			body="Design af 3D Planter"
-			/>
-			<Card
-			href="/programmering_html_css"
-			title="Programmering"
-			body="GitHub og Opsætning"
-			/>
-			<Card
-			href="/engineering_planter_designvalg"
-			title="Engineering"
-			body="3D Planter"
-			/>
-			<Card
-				href="/programmering_github_opsætning"
-				title="Programmering"
-				body="GitHub og Opsætning"
-			/>
-			<Card
-			href="/engineering_3d_planter"
-			title="Engineering"
-			body="3D Planter"
-			/>
-			<Card
-				href="/boundervisning"
-				title="Bo-Undervisning"
-				body="Hotjob"
-			/>
-			<Card
-				href="/engineering"
-				title="Engineering"
-				body="Bits that Fit(s) - Lego eller tandhjul"
-			/>
-		</ul>
+		<h1>Awesome Headline</h1>
+		<h3>Subhealine</h3>
 	</main>
 </Layout>
 
@@ -60,7 +22,7 @@ const whatDay = d.getDay()
 		width: 800px;
 		max-width: calc(100% - 2rem);
 		color: white;
-		font-size: 20px;
+		/*font-size: 20px;*/
 		line-height: 1.6;
 	}
 	.astro-a {
@@ -73,7 +35,7 @@ const whatDay = d.getDay()
 		z-index: -1;
 	}
 	h1 {
-		font-size: 4rem;
+		/*font-size: 4rem;*/
 		font-weight: 700;
 		line-height: 1.125;
 		text-align: center;
