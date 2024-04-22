@@ -31,10 +31,24 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 			
         </div>
+		<div class="instructions bg-slate-900">
+			<h3>Hvis du bruger Astro
+				<span class="text-xs">
+					Inden du starter, gør følgende...
+				</span>
+			</h3>
+			<p>Tilføj følgende kode til filen 'tailwind.config.mjs':</p>
+				<code>{`corePlugins: {
+					preflight: false,
+				}`}</code>		
+			</div>
 	</main>
 </Layout>
 
 <style>
+	code{
+		margin-left: 64px;
+	}
 	.instructions p, .instructions h3{
 		margin-bottom: 12px;
 	}
