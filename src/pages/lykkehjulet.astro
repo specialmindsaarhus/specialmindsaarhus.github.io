@@ -21,14 +21,26 @@ import Layout from '../layouts/Layout.astro';
 <script>
 const controleSelection = false;
 const wannaHitInSectors = 0
-const sectors = [
+const unsortedSectors = [
   { color: '#b0f ', label: "Array" },
-  { color: '#0bf', label: 'OOP' },
+  { color: '#0bf', label: 'While VS For' },
   { color: '#fb0', label: 'Call Stack' },
   { color: '#f82', label: 'Python' },
-  { color: '#0fb', label: 'Garbage Collection' },
+  { color: '#009d73', label: 'Garbage Collection' },
   { color: '#f0b', label: "API's" }
 ]
+
+
+
+const shuffle = (array: object[]) => { 
+  for (let i = array.length - 1; i > 0; i--) { 
+    const j = Math.floor(Math.random() * (i + 1)); 
+    [array[i], array[j]] = [array[j], array[i]]; 
+  } 
+  return array; 
+}; 
+const sectors = shuffle(unsortedSectors)
+
 
 //const rand = (m: any, M: any) => Math.random() * (M - m) + m
 const tot = sectors.length
@@ -41,9 +53,13 @@ const PI = Math.PI
 const TAU = 2 * PI
 const arc = TAU / sectors.length
 
-let friction = 0.99 // 0.995=soft, 0.99=mid, 0.98=hard
+let friction = random(0.98, 0.995 ) // 0.995=soft, 0.99=mid, 0.98=hard
 let angVel = 0 // Angular velocity
 let ang = 0 // Angle in radians
+
+function random(min: any, max: any) {
+  return min + Math.random() * (max - min);
+}
 
 const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot
 
@@ -75,6 +91,12 @@ function rotate() {
   //console.log((ang * PI) / 180)
   spinEl!.textContent = !angVel ? 'SPIN' : sector.label
   spinEl!.setAttribute('style', `background-color: ${sector.color}`)
+}
+
+function startupRotate() {
+  //console.log(getIndex())
+  ang =2 // Update angle
+
 }
 
 function frame() {
@@ -178,6 +200,7 @@ function headlineAnimation() {
 
 function init() {
   sectors.forEach(drawSector)
+  ang = random(1,6) // Update angle to randomize staringpoint
   rotate() // Initial rotation
   engine() // Start engine
   spinEl!.addEventListener('click', () => {
