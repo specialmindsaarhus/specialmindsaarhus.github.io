@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 <script>
 const controleSelection = false;
 const wannaHitInSectors = 0
-const unsortedSectors = [
+const sectors = [
   { color: '#b0f ', label: "Array" },
   { color: '#0bf', label: 'While VS For' },
   { color: '#fb0', label: 'Call Stack' },
@@ -31,7 +31,7 @@ const unsortedSectors = [
 ]
 
 
-
+/*
 const shuffle = (array: object[]) => { 
   for (let i = array.length - 1; i > 0; i--) { 
     const j = Math.floor(Math.random() * (i + 1)); 
@@ -40,7 +40,7 @@ const shuffle = (array: object[]) => {
   return array; 
 }; 
 const sectors = shuffle(unsortedSectors)
-
+*/
 
 //const rand = (m: any, M: any) => Math.random() * (M - m) + m
 const tot = sectors.length
