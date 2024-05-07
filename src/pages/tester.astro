@@ -1,10 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-//import Card from '../components/Card.astro';
+import Card from '../components/Card.astro';
 //import Engineering from './engineering.astro';
-
-const d = new Date() 
-const whatDay = d.getDay()
 			
 ---
 
@@ -18,11 +15,40 @@ const whatDay = d.getDay()
 			<p>hdhhdh</p>
 			
 			<p>The world is full of fascinating places. Planning the perfect vacation involves packing up, leaving home, and experiencing something new.</p>
+			<br>
+			<div class="grid--container">
+				<div class="bg-red-500 h-8 "></div>
+				<div class="bg-blue-500 h-8 "></div>
+				<div class="bg-green-500 h-8 "></div>
+				<div class="bg-purple-500 h-8 "></div>
+				<div class="bg-yellow-500 h-8 "></div>
+				<div class="bg-pink-500 h-8 "></div>
+			</div>
 		</div> 
+		
 	</main>
 </Layout>
 
 <style>
+	/*grid styling*/
+	.grid--container{
+		display: grid;
+		grid-template-columns: 2fr 100px 1fr;
+		gap: 20px;
+	}
+
+	/*flex styling*/
+	.flex--container{
+		display: flex;
+		width: 100%;
+	}
+	.flex--container > div{
+		width: 30%;
+		margin-right: 20px;
+	}
+
+
+	/* tidliger css*/
 	.div-wrapper{
 		margin: 20vw;
 		padding: 100px;
@@ -30,10 +56,6 @@ const whatDay = d.getDay()
 	}
 	#mark{
 		color:green !important;
-	}
-
-	main{
-		background-image: url('https://sxcontent9668.azureedge.us/cms-assets/assets/Galileo_L12_PPF_DSC_6049_desktop_cef1bc1758.jpg');
 	}
 
 </style>
