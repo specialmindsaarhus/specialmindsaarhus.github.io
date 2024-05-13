@@ -3,9 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 //import Engineering from './engineering.astro';
 
-const d = new Date() 
+const d = new Date()
 const whatDay = d.getDay()
-			
 ---
 
 <Layout title="Welcome to Astro.">
@@ -16,6 +15,11 @@ const whatDay = d.getDay()
 			}
 			</span></h1>
 		<ul role="list" class="link-card-grid">
+			<Card
+			href="/programmering_html_css_ovelser_4th"
+			title="Programmering"
+			body="HTML Øvelser"
+			/>
 			<Card
 			href="/engineering_planter_designvalg_5th"
 			title="Engineering"
