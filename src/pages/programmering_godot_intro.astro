@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import madlavning from "../images/madlavning godot.png"
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="mt-6">Programmering</h1>
+        <h2>Godot & Gamedesign</h2>
+		<div class="instructions bg-slate-800">
+			<h3 class="font-semibold">
+				Om <span class="font-bold">Godot</span> forløbet 
+			</h3>
+			<p class="text-sm leading-12">
+				Hvad vil vi arbejde med og hvordan (Bkrakeys Tutorial)?<br>
+				Hvordan vil timerne foregå (Mark fortæller + Godot)?<br>
+				Hvilke områder kommer vi omkring (Sprites, Models, Textures, Sounds)?<br>
+				Hvorfor Godot?<br>
+				Bagefter: Hvordan kan i 'udvide' og gøre det jeres eget? (Se på det som placeholder; Når andre på lærer man mere!)<br>
+				Er der andre muligeder, så f.eks. Unity?
+			</p>
+			<p class="text-md">
+				Hvad skal vi i dag...? <br>
+				
+			</p>
+		</div>
+		<div class="instructions bg-slate-800">
+            <h3 class="font-semibold">
+                Lykkehjulet
+                <span class="text-xs">
+                    Mark fortæller (Max 10 min)
+                </span>
+            </h3>
+		</div>
+
+		<div class="instructions bg-black-200 border-rose-900">
+            <h3 class="font-semibold">
+                Begreber
+				<span class="text-xs">
+					Et lille cheatsheet så vi gentager og taler om de begreber der dukker op i arbejdet...
+				</span>
+            </h3>
+			<p class="text-sm leading-12">
+				Assets <br>
+				Nodes <br>
+				<br>
+				Sprites <br>
+				Textures <br>
+				Sounds <br>
+			</p>
+        </div>
+       
+        <div class="instructions bg-slate-800">
+            <h3 class="font-semibold">
+                Lave en kopi af spillets assets
+				<span class="text-xs">
+					til din egen mappe på K drevet...
+				</span>
+            </h3>
+			<p>
+				Find det her: <br>
+				K:\Godot Spilprogrammering\brackeys_platformer_assets
+				<br><br>
+				<span class="text-sm">Eller download <a href="https://brackeysgames.itch.io/brackeys-platformer-bundle?download">her</a></span>
+			</p>
+        </div>
+		<div class="instructions bg-slate-800">
+            <a href="https://www.youtube.com/watch?v=LOhfqjmasi0">
+            	<h3 class="font-semibold">
+	                Se vejledning
+	            </h3>
+            </a>
+			<p class="text-xs">
+				Følg vejledningen...
+			</p>
+        </div>
+
+	</main>
+</Layout>
+
+<style>
+	code{
+		margin-left: 64px;
+	}
+	.instructions p, .instructions h3{
+		margin-bottom: 12px;
+	}
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1,h2 {
+		
+		line-height: 1;
+		text-align: center;
+		
+	}
+
+    h1{
+        font-size: 4rem;
+		font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+
+    h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4rem;
+    }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions.color{
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+
+	}
+	.instructions > p{
+		margin-bottom: 24px !important;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+    .instructions p{
+        margin-left:64px;
+    }
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
