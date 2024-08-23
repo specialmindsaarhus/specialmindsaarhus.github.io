@@ -22,25 +22,14 @@ import Layout from '../layouts/Layout.astro';
 const controleSelection = true;
 const wannaHitInSectors = 0
 const sectors = [
-  { color: '#b0f ', label: "Organisering" },
+  { color: '#b0f ', label: "If/Else" },
   { color: '#0bf', label: 'Løkker' },
-  { color: '#fb0', label: 'If/Else' },
+  { color: '#fb0', label: "API's"},
   { color: '#f82', label: 'Datatyper' },
   { color: '#009d73', label: 'Variabler' },
   { color: '#f0b', label: "Array/Objekter" }
 ]
 
-
-/*
-const shuffle = (array: object[]) => { 
-  for (let i = array.length - 1; i > 0; i--) { 
-    const j = Math.floor(Math.random() * (i + 1)); 
-    [array[i], array[j]] = [array[j], array[i]]; 
-  } 
-  return array; 
-}; 
-const sectors = shuffle(unsortedSectors)
-*/
 
 //const rand = (m: any, M: any) => Math.random() * (M - m) + m
 const tot = sectors.length
@@ -200,7 +189,7 @@ function headlineAnimation() {
 
 function init() {
   sectors.forEach(drawSector)
-  ang = random(1,6) // Update angle to randomize staringpoint
+  //ang = random(1,6) // Update angle to randomize startingpoint
   rotate() // Initial rotation
   engine() // Start engine
   spinEl!.addEventListener('click', () => {
