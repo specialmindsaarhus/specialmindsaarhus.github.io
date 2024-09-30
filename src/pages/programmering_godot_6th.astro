@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import madlavning from "../images/madlavning godot.png"
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="mt-6">Programmering</h1>
+        <h2>Godot & Gamedesign</h2>
+		<div class="instructions bg-black">
+			<h3 class="font-semibold">
+                Hvad skal vi i dag?
+                <span class="text-xs">
+                    Mark fortæller (Max 10 min)
+                </span>
+            </h3>
+			<p class="text-sm leading-12">
+				H'erne
+			</p>
+		</div>
+		<div class="instructions bg-black">
+            <h3 class="font-semibold">
+                <a href="/lykkehjulet">
+                    Lykkehjulet
+                </a>
+                <span class="text-xs">
+                    Mark fortæller (Max 10 min)
+                </span>
+            </h3>
+			<span class="text-xs">
+				Tree - Parent & Children <br>
+				HTML <br>
+				Godot Nodes <br>
+				get_node() <br>
+				Going to children <br>
+				Going up the tree <br>
+				drag and drop + ctrl <br>
+				Unique id with %
+			</span>
+		</div>
+       
+		<div class="instructions bg-black">
+            <a href="https://www.youtube.com/watch?v=LOhfqjmasi0">
+            	<h3 class="font-semibold">
+	                Følg vejledning
+	            </h3>
+            </a>
+			<p class="text-xs">
+				Følg vejledningen... lav dit spil.
+			</p>
+        </div>
+
+		<div class="instructions bg-black border-rose-900">
+            <h3 class="font-semibold">
+                Vi afslutter med ... begreber!
+				<br>
+				<span class="text-xs">
+					Et lille cheatsheet så vi gentager og taler om de begreber der dukker op i arbejdet...
+				</span>
+            </h3>
+			<p class="text-sm leading-12">
+				Assets <br>
+				Nodes <br>
+				Sprites <br>
+				Textures <br>
+				Sounds <br>
+			</p>
+        </div>
+
+		<div class="instructions border-rose-900">
+            <h3 class="font-semibold">
+                Vigtige Links:
+            </h3>
+			<p>
+				<a href="https://godotengine.org/download/windows/">
+				Download Godot
+				</p>
+				</a>
+			<p>
+				Find Assets: K:\Godot Spilprogrammering\brackeys_platformer_assets
+				<br>
+				<span class="text-sm">Eller download <a href="https://brackeysgames.itch.io/brackeys-platformer-bundle?download">her</a></span>
+			</p>
+        </div>
+
+		<div class="instructions">
+			<h3 class="font-semibold">
+				Ekstra Opgaver:
+			</h3>
+			<a href="https://www.youtube.com/watch?v=GZrALMvOwY8&ab_channel=PlugWorld">
+				<p>
+					Level Change - Video Tutorial
+				</p>
+			</a>
+			<a href="https://www.sandromaglione.com/articles/how-to-implement-state-machine-pattern-in-godot">
+				<p>
+					Statemachine - Text Tutorial
+				</p>
+			</a>
+			<a href="https://www.youtube.com/watch?v=ow_Lum-Agbs&ab_channel=Bitlytic">
+				<p>
+					Statemachine - Video Tutorial
+				</p>
+			</a>
+		</div>
+
+	</main>
+</Layout>
+
+<style>
+	code{
+		margin-left: 64px;
+	}
+	.instructions p, .instructions h3{
+		margin-bottom: 12px;
+	}
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1,h2 {
+		
+		line-height: 1;
+		text-align: center;
+		
+	}
+
+    h1{
+        font-size: 4rem;
+		font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+
+    h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4rem;
+    }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions.color{
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+
+	}
+	.instructions > p{
+		margin-bottom: 24px !important;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+    .instructions p{
+        margin-left:64px;
+    }
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
