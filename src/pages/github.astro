@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+//import Engineering from './engineering.astro';
+
+const d = new Date()
+const whatDay = d.getDay()
+
+
+
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main>
+		<h1 class="mt-6">Vejlednig<span class="text-gradient">
+			Til Github
+			</span></h1>
+
+    <section>
+        <h2>1. Opret en GitHub-konto</h2>
+        <ol>
+            <li>Gå til <a href="https://github.com">GitHub's hjemmeside</a>.</li>
+            <li>Klik på knappen "Sign up" øverst til højre.</li>
+            <li>Indtast din email-adresse og klik på "Continue".</li>
+            <li>Følg anvisningerne for at oprette et brugernavn og en adgangskode.</li>
+            <li>Bekræft din email-adresse (tjek din inbox for en bekræftelsesmail).</li>
+            <li>Når kontoen er oprettet, log ind på GitHub.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>2. Opret et nyt repository på GitHub</h2>
+        <ol>
+            <li>Når du er logget ind, klik på din profil øverst til højre og vælg "Your repositories".</li>
+            <li>Klik på den grønne "New" knap for at oprette et nyt repository.</li>
+            <li>Udfyld følgende felter:
+                <ul>
+                    <li><strong>Repository name:</strong> Vælg et navn til dit repo, fx <em>test-repo</em>.</li>
+                    <li><strong>Description (valgfrit):</strong> Tilføj en kort beskrivelse af dit projekt.</li>
+                    <li><strong>Public/Private:</strong> Vælg om dit repo skal være offentligt eller privat.</li>
+                </ul>
+            </li>
+            <li>Vigtigt: Fjern markeringen i feltet "Add a README file" (da vi opretter det selv senere).</li>
+            <li>Klik på "Create repository".</li>
+            <li>Vigtigt: Kopier den boks der hedder: "…or push an existing repository from the command line".</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>3. Upload et eksisterende projekt til GitHub</h2>
+        <p>Hvis du allerede har et projekt på din computer, som du vil uploade til GitHub, kan du følge disse trin:</p>
+        <h3>3.1. Åbn terminalen/kommandoprompten</h3>
+        <ol>
+            <li>Naviger til mappen med dit projekt ved hjælp af terminalen.
+                <ul>
+                    <li>Højreklik og åbn terminalen.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>3.3. Opret projekt som et GitHub repository</h3>
+
+        <h3>3.4. Upload (push) projektet til GitHub</h3>
+        <ol>
+            <li>Indskriv følgende i terminal:
+                <ul>
+                    <li><code>git init</code></li>
+                    <li><code>git add .</code></li>
+                    <li><code>git commit -m "batmand"</code></li>
+                    <li>Paste det du kopierede under punkt 2.6.</li>
+                </ul>
+            </li>
+            <li>Den vil skrive: <code>git push -u origin main</code>, og du skal bare trykke enter.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>4. Bekræft, at dit projekt er på GitHub</h2>
+        <ol>
+            <li>Gå tilbage til GitHub og åbn dit repository.</li>
+            <li>Du skulle nu kunne se alle dine filer fra din mappe.</li>
+        </ol>
+    </section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
