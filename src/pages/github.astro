@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro';
 //import Engineering from './engineering.astro';
 
 const d = new Date()
@@ -82,6 +83,11 @@ const whatDay = d.getDay()
             <li>Du skulle nu kunne se alle dine filer fra din mappe.</li>
         </ol>
     </section>
+
+	<VideoComponent 
+		src="/video/github_vejledning.mp4"
+	/>
+
 	</main>
 </Layout>
 

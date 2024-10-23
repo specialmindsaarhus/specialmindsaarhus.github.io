@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro'
 //import Engineering from './engineering.astro';
 
 const d = new Date()
@@ -16,9 +17,115 @@ const whatDay = d.getDay()
 		<h1 class="mt-6">Vejlednig<span class="text-gradient">
 			Til PWA'en
 			</span></h1>
+			
+			<section>
+
+<h2>Side 1: Tilføjelse af Manifest i public-folderen</h2>
+<p class="font-bold">
+    Hvad er manifest.webmanifest, og hvorfor er det vigtigt?
+</p>
+<p>
+    Manifestet er som en beskrivelse af din app, der fortæller browseren, hvordan den skal opføre sig, når den bliver installeret som en PWA (Progressive Web App). Det er en lille fil, men den er vigtig, fordi den giver din PWA sit navn, ikon, farver og andre vigtige informationer. For eksempel, hvis brugerne vil have din app på deres startskærm, så er det manifestet, der sørger for, at ikonet vises korrekt.
+</p>
+<p class="font-bold">Sådan gør du:</p>
+<ol>
+    <li>Åbn dit projekt, og gå til public-folderen. Dette er det sted, hvor dine offentligt tilgængelige filer ligger.</li>
+    <li>Opret en ny fil og kald den <code>manifest.webmanifest</code>.</li>
+    <li>Kopier koden nedenfor ind i filen:</li>
+    <pre><code>
+&#123;<br>
+&nbsp;&nbsp;&quot;name&quot;: &quot;My Cat PWA&quot;,<br>
+&nbsp;&nbsp;&quot;short_name&quot;: &quot;Cat PWA&quot;,<br>
+&nbsp;&nbsp;&quot;description&quot;: &quot;Til alle katteelskere&quot;,<br>
+&nbsp;&nbsp;&quot;start_url&quot;: &quot;/&quot;,<br>
+&nbsp;&nbsp;&quot;display&quot;: &quot;standalone&quot;,<br>
+&nbsp;&nbsp;&quot;background_color&quot;: &quot;#ffffff&quot;,<br>
+&nbsp;&nbsp;&quot;theme_color&quot;: &quot;#000000&quot;,<br>
+&nbsp;&nbsp;&quot;icons&quot;: [&#123;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;src&quot;: &quot;/icons/icon.svg&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;sizes&quot;: &quot;192x192&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;type&quot;: &quot;image/png&quot;<br>
+&nbsp;&nbsp;&#125;]<br>
+&#125;
+    </code></pre>
+    <li>Gem filen i public. Nu har du lavet manifestet, der beskriver din app!</li>
+</ol>
+
+<h2>Side 2: Service Worker i public-folderen</h2>
+<p>
+    <span class="font-bold">
+		Hvad er en service worker, og hvorfor skal vi bruge den?
+		</span>
+		<br><br>
+    Service worker er en smart del af PWA'en, der kører i baggrunden og hjælper din app med at fungere offline eller forbedre hastigheden ved at cache (huske) bestemte filer. Den sørger også for, at appen stadig kan fungere selv uden internet.
+</p>
+<p>Sådan gør du:</p>
+<ol>
+    <li>Gå tilbage til public-folderen.</li>
+    <li>Opret en ny fil og kald den <code>service-worker.js</code>.</li>
+    <li>Indsæt følgende kode i filen:</li>
+    <pre><code>
+const CACHE_NAME = &quot;my-pwa-cache-v1&quot;;<br>
+const urlsToCache = [<br>
+&nbsp;&nbsp;&quot;/manifest.webmanifest&quot;,<br>
+&nbsp;&nbsp;// Tilføj flere filer her, hvis nødvendigt<br>
+];<br><br>
+
+self.addEventListener(&quot;install&quot;, (event) => &#123;<br>
+&nbsp;&nbsp;event.waitUntil(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))<br>
+&nbsp;&nbsp;);<br>
+&#125;);<br><br>
+
+self.addEventListener(&quot;fetch&quot;, (event) => &#123;<br>
+&nbsp;&nbsp;event.respondWith(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caches<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.match(event.request)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then((response) => response || fetch(event.request))<br>
+&nbsp;&nbsp;);<br>
+&#125;);
+    </code></pre>
+    <li>Gem filen. Nu har du oprettet en simpel service worker, der hjælper med at cache din PWA, så den kan fungere bedre offline.</li>
+</ol>
+
+<h1>Side 3: Service Worker Register i /src/scripts/</h1>
+<p>
+    <span class="font-bold">
+		Hvorfor skal vi registrere service worker?
+	</span>
+	<br>
+	<br>
+    Selvom vi har lavet en service worker, skal vi fortælle browseren, at den skal bruges, og det gør vi med en lille smule JavaScript. Denne kode registrerer service worker'en og sørger for, at den begynder at arbejde.
+</p>
+<p>Sådan gør du:</p>
+<ol>
+    <li>Gå til mappen <code>/src/scripts/</code> i dit projekt.</li>
+    <li>Opret en ny fil, og kald den <code>sw-register.js</code>.</li>
+    <li>Indsæt følgende kode i filen:</li>
+    <pre><code>
+if (&quot;serviceWorker&quot; in navigator) &#123;<br>
+&nbsp;&nbsp;window.addEventListener(&quot;load&quot;, () => &#123;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;navigator.serviceWorker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.register(&quot;/service-worker.js&quot;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then((registration) => &#123;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;Service Worker registered successfully:&quot;, registration);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch((error) => &#123;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(&quot;Service Worker registration failed:&quot;, error);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;);<br>
+&nbsp;&nbsp;&#125;);<br>
+&#125;
+    </code></pre>
+    <li>Gem filen.<br> Nu er service worker'en registreret! Når din app indlæses, vil denne kode sikre, at browseren ved, at service worker'en er klar til at gøre sin magi i baggrunden.</li>
+</ol>
+
+			</section>
 
 			
-		
+	
+	<VideoComponent 
+			src="/video/PWA-vejledning.mp4"
+	/>
 			
 	</main>
 </Layout>
@@ -49,6 +156,7 @@ const whatDay = d.getDay()
 		text-align: center;
 		margin-bottom: 1em;
 	}
+
 	.text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
