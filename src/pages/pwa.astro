@@ -17,10 +17,65 @@ const whatDay = d.getDay()
 		<h1 class="mt-6">Vejlednig<span class="text-gradient">
 			Til PWA'en
 			</span></h1>
-			
-			<section>
 
-<h2>Side 1: Tilføjelse af Manifest i public-folderen</h2>
+
+			<section>
+				<h2>Lav en klon af en GitHub template</h2>
+
+				<h3>1. Opret dit eget repository ud fra template:</h3>
+				<p>
+					1. Gå til linket: Åbn CATalog PWA Starter på GitHub.<br>
+					Link: <a href="https://github.com/specialmindsaarhus/CATalog_PWA_Starter" target="_blank">https://github.com/specialmindsaarhus/CATalog_PWA_Starter</a>
+				</p>
+				<p>
+					2. Brug som template: Klik på den grønne knap "Use this template", der vises øverst til højre på siden. Vælg derefter "Create a new repository".
+				</p>
+				<p>
+					3. Navngiv dit nye repository: Giv dit projekt et navn (Eks.: my-first-pwa) og sørg for, at repository-indstillingerne er, som du ønsker dem (sæt dem til public, så du kan se app’en fra din telefon), og klik på "Create repository from template".
+				</p>
+			
+				<h3>2. Åbn dit repository i GitHub Code:</h3>
+				<p>
+					1. Gå til dit nye repository: Når du har oprettet din egen kopi af template-projektet, vil du blive ført til dit nye repository.
+				</p>
+				<p>
+					2. Åbn i GitHub Code: Klik på knappen "Code" og vælg "GitHub Code" for at åbne projektet direkte i en browserbaseret udviklingsmiljø.
+				</p>
+			
+				<h3>3. Lav en lille ændring:</h3>
+				<p>
+					1. Find en fil at ændre: Inde i GitHub Code kan du se dit projekts filer. Find en fil, for eksempel index.html eller en .js fil, og lav en lille ændring – for eksempel tilføje en linje tekst.
+				</p>
+				<p>
+					Eksempel: Tilføj en ny <code>&lt;h3&gt;</code> tag under overskriften, f.eks. <code>&lt;h3&gt;Hej fra mit eget repository!&lt;/h3&gt;</code>.
+				</p>
+			
+				<h3>4. Gem og commit dine ændringer:</h3>
+				<p>
+					1. Gem din ændring: Når du har lavet ændringen, kan du trykke på "Save" (Ctrl+S eller Cmd+S).
+				</p>
+				<p>
+					2. Commit ændringen: Nede i GitHub Codes venstre hjørne ser du en fane med “Source Control”. Her kan du tilføje en commit-besked, f.eks. "Ændret hilsen på forsiden", og klik derefter på "Commit".
+				</p>
+			
+				<h3>5. Push ændringer til dit repository:</h3>
+				<p>
+					1. Push dine ændringer: Efter du har committet, skal du trykke på den lille "sync"-knap, der står for "Push changes" oppe i venstre hjørne af GitHub Code-vinduet.
+				</p>
+				<p>
+					2. Tjek ændringen: Gå tilbage til dit repository på GitHub og opdater siden. Du skulle nu kunne se din ændring live i din kode.
+				</p>
+				<VideoComponent 
+				src="/video/github_vejledning.mp4"
+			/>
+			</section>
+			<br>
+			<div style="border-bottom: 2px solid white;"></div>
+			<br>
+			<section >
+				<h2>Lav din første PWA</h2>
+
+<h3>Side 1: Tilføjelse af Manifest i public-folderen</h3>
 <p class="font-bold">
     Hvad er manifest.webmanifest, og hvorfor er det vigtigt?
 </p>
@@ -51,7 +106,7 @@ const whatDay = d.getDay()
     <li>Gem filen i public. Nu har du lavet manifestet, der beskriver din app!</li>
 </ol>
 
-<h2>Side 2: Service Worker i public-folderen</h2>
+<h3>Side 2: Service Worker i public-folderen</h3>
 <p>
     <span class="font-bold">
 		Hvad er en service worker, og hvorfor skal vi bruge den?
@@ -119,13 +174,13 @@ if (&quot;serviceWorker&quot; in navigator) &#123;<br>
     <li>Gem filen.<br> Nu er service worker'en registreret! Når din app indlæses, vil denne kode sikre, at browseren ved, at service worker'en er klar til at gøre sin magi i baggrunden.</li>
 </ol>
 
+<VideoComponent 
+		src="/video/PWA-vejledning.mp4"
+/>
 			</section>
 
 			
-	
-	<VideoComponent 
-			src="/video/PWA-vejledning.mp4"
-	/>
+		
 			
 	</main>
 </Layout>

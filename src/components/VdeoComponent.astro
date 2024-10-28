@@ -1,15 +1,10 @@
 ---
 
-const { src, text } = Astro.props;
+const { src, text, classes } = Astro.props;
 ---
 
 
-<div class="absolute top-0 bottom-0 right-12">
-    <div class="max-w-full h-[100svh] sticky top-0">
-
-    <video class="absolute bottom-0 right-0" width="400" controls>
-        <source src={src} type="video/mp4">
-        Your browser does not support HTML video.
-      </video>
-</div>
-</div>
+<video class=`absolute bottom-0 right-0 inline-block sticky top-0 ${classes}` width="400" controls>
+    <source src={src} type="video/mp4">
+    Your browser does not support HTML video.
+  </video>
