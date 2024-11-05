@@ -88,20 +88,29 @@ const whatDay = d.getDay()
     <li>Opret en ny fil og kald den <code>manifest.webmanifest</code>.</li>
     <li>Kopier koden nedenfor ind i filen:</li>
     <pre><code>
-&#123;<br>
-&nbsp;&nbsp;&quot;name&quot;: &quot;My Cat PWA&quot;,<br>
-&nbsp;&nbsp;&quot;short_name&quot;: &quot;Cat PWA&quot;,<br>
-&nbsp;&nbsp;&quot;description&quot;: &quot;Til alle katteelskere&quot;,<br>
-&nbsp;&nbsp;&quot;start_url&quot;: &quot;/&quot;,<br>
-&nbsp;&nbsp;&quot;display&quot;: &quot;standalone&quot;,<br>
-&nbsp;&nbsp;&quot;background_color&quot;: &quot;#ffffff&quot;,<br>
-&nbsp;&nbsp;&quot;theme_color&quot;: &quot;#000000&quot;,<br>
-&nbsp;&nbsp;&quot;icons&quot;: [&#123;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&quot;src&quot;: &quot;/icons/icon.svg&quot;,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&quot;sizes&quot;: &quot;192x192&quot;,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&quot;type&quot;: &quot;image/png&quot;<br>
-&nbsp;&nbsp;&#125;]<br>
-&#125;
+		&#123;<br>
+		&nbsp;&quot;name&quot;: &quot;My Cat PWA&quot;,<br>
+		&nbsp;&quot;short_name&quot;: &quot;Cat PWA&quot;,<br>
+		&nbsp;&quot;description&quot;: &quot;Til alle katteelskere&quot;,<br>
+		&nbsp;&quot;start_url&quot;: &quot;/&quot;,<br>
+		&nbsp;&quot;display&quot;: &quot;standalone&quot;,<br>
+		&nbsp;&quot;background_color&quot;: &quot;#ffffff&quot;,<br>
+		&nbsp;&quot;theme_color&quot;: &quot;#000000&quot;,<br>
+		&nbsp;&quot;icons&quot;: [<br>
+		&nbsp;&nbsp;&#123;<br>
+		&nbsp;&nbsp;&nbsp;&quot;src&quot;: &quot;/icon-192x192.png&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;sizes&quot;: &quot;192x192&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;type&quot;: &quot;image/png&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;purpose&quot;: &quot;any maskable&quot;<br>
+		&nbsp;&nbsp;&#125;,<br>
+		&nbsp;&nbsp;&#123;<br>
+		&nbsp;&nbsp;&nbsp;&quot;src&quot;: &quot;/icon-512x512.png&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;sizes&quot;: &quot;512x512&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;type&quot;: &quot;image/png&quot;,<br>
+		&nbsp;&nbsp;&nbsp;&quot;purpose&quot;: &quot;any maskable&quot;<br>
+		&nbsp;&nbsp;&#125;<br>
+		&nbsp;]
+		&#125;
     </code></pre>
     <li>Gem filen i public. Nu har du lavet manifestet, der beskriver din app!</li>
 </ol>
