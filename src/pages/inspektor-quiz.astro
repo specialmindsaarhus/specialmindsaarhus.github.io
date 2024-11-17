@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro'
+//import Engineering from './engineering.astro';
+
+const d = new Date()
+const whatDay = d.getDay()
+
+
+
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main>
+		<h1 class="mt-6">Den store<span class="text-gradient">
+			inspektor quiz
+			</span></h1>
+			
+<section>
+	<br>
+			<div style="border-bottom: 2px solid white;"></div>
+			<br>
+
+	<h3>Introduktion til Inspektor Værktøjet</h3>
+	<p>Se videoen for at være klar til quizzen</p>
+	<br>
+	<div class="video-container">
+		<iframe 
+		  src="https://www.youtube.com/embed/151NXMk0a2c" 
+		  title="YouTube video" 
+		  width="100%"
+		  height="400px"
+		  frameborder="0" 
+		  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+		  allowfullscreen>
+		</iframe>
+	  </div>
+</section>
+
+<section>
+	<br>
+			<div style="border-bottom: 2px solid white;"></div>
+			<br>
+	<h3>Inspektor Quizzen</h3>
+  
+	<ol>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_links.asp" target="_blank">https://www.w3schools.com/html/html_links.asp</a><br>
+		<strong>Opgave</strong>: Find et link på siden, og undersøg, hvad der er i <code>href</code>-attributten.<br>
+		<strong>Tip</strong>: <code>href</code>-attributten viser, hvor linket leder hen. Du kan finde det ved at kigge på et <code>&lt;a&gt;</code>-tag i koden.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_images.asp" target="_blank">https://www.w3schools.com/html/html_images.asp</a><br>
+		<strong>Opgave</strong>: Find et billede på siden og se på <code>src</code>-attributten. Hvad er URL’en til billedet?<br>
+		<strong>Tip</strong>: <code>src</code> står for "source" og angiver billedets adresse. Du kan finde det i et <code>&lt;img&gt;</code>-tag.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_forms.asp" target="_blank">https://www.w3schools.com/html/html_forms.asp</a><br>
+		<strong>Opgave</strong>: Find et input-felt på siden og undersøg, hvilken type input der er.<br>
+		<strong>Tip</strong>: Input-felter har en <code>type</code>-attribut, som fortæller, hvilken slags data der kan indtastes (f.eks. tekst, dato, eller checkbox).
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_tables.asp" target="_blank">https://www.w3schools.com/html/html_tables.asp</a><br>
+		<strong>Opgave</strong>: Find tabellen på siden, og undersøg, hvilke tags der bruges til at definere rækker og celler.<br>
+		<strong>Tip</strong>: Hver række i en tabel defineres med <code>&lt;tr&gt;</code>, og hver celle med <code>&lt;td&gt;</code> (data) eller <code>&lt;th&gt;</code> (overskrift).
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" target="_blank">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button</a><br>
+		<strong>Opgave</strong>: Find et <code>&lt;button&gt;</code>-element og undersøg, om det har nogen attributter som <code>type</code> eller <code>onclick</code>.<br>
+		<strong>Tip</strong>: <code>type</code>-attributten angiver, hvilken funktion knappen har (f.eks. "submit" for at sende en formular). <code>onclick</code> kan vise en funktion, der sker, når knappen klikkes.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank">https://www.w3schools.com/html/html5_semantic_elements.asp</a><br>
+		<strong>Opgave</strong>: Find et <code>&lt;header&gt;</code>-element på siden og undersøg, hvad det indeholder.<br>
+		<strong>Tip</strong>: <code>&lt;header&gt;</code> bruges til at definere en introduktion eller navigation på en side. Se efter overskrifter eller menuer inden i.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_lists.asp" target="_blank">https://www.w3schools.com/html/html_lists.asp</a><br>
+		<strong>Opgave</strong>: Find en liste på siden og undersøg, hvilken tag der bruges til at definere en liste (<code>ul</code>/<code>ol</code>) og dens elementer (<code>&lt;li&gt;</code>).<br>
+		<strong>Tip</strong>: En ul-liste er uordnet og bruger <code>&lt;li&gt;</code> til hver listepost. En ol-liste er ordnet og bruger også <code>&lt;li&gt;</code>.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_audio.asp" target="_blank">https://www.w3schools.com/html/html_audio.asp</a><br>
+		<strong>Opgave</strong>: Find et <code>&lt;audio&gt;</code>-element og undersøg, hvilke attributter der bruges til at indlæse og afspille lyd.<br>
+		<strong>Tip</strong>: <code>src</code> angiver lydfilens adresse, og <code>controls</code> tilføjer afspilningsknapper.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_video.asp" target="_blank">https://www.w3schools.com/html/html_video.asp</a><br>
+		<strong>Opgave</strong>: Find et <code>&lt;video&gt;</code>-element og se på hvilke attributter der bruges, f.eks. <code>autoplay</code>, <code>controls</code>, eller <code>loop</code>.<br>
+		<strong>Tip</strong>: <code>autoplay</code> får videoen til at starte automatisk, <code>controls</code> viser afspilningskontroller, og <code>loop</code> får videoen til at spille i loop.
+	  </li>
+	  <li>
+		<strong>URL</strong>: <a href="https://www.w3schools.com/html/html_header.asp" target="_blank">https://www.w3schools.com/html/html_header.asp</a><br>
+		<strong>Opgave</strong>: Find en <code>&lt;h1&gt;</code> til <code>&lt;h6&gt;</code> overskrift på siden og undersøg, hvilken betydning de har for strukturen af teksten.<br>
+		<strong>Tip</strong>: <code>&lt;h1&gt;</code> er den vigtigste overskrift og bruges til hovedemnet. <code>&lt;h2&gt;</code> til <code>&lt;h6&gt;</code> er underoverskrifter og skaber hierarki.
+	  </li>
+	</ol>
+  </section>
+  
+
+
+			<!--- 
+            <VideoComponent 
+            src="/video/github_vejledning.mp4"
+			/>
+			-->
+			<br>
+			<div style="border-bottom: 2px solid white;"></div>
+			<br>
+
+
+			
+		
+			
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
