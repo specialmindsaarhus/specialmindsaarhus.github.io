@@ -1,0 +1,187 @@
+	---
+import Layout from '../layouts/Layout.astro';
+
+
+/*
+<div class="instructions bg-slate-800">
+			<h3 class="font-semibold">
+				Inspiration og ny viden:
+            </h3>
+			<a href="http://legoengineering.com/general-building-tips-and-tricks/index.html">
+				<p>
+					Om konstruktion
+					<span class="text-xs">
+						Bracing with beams
+					</span>
+				</p>
+			</a>
+			<a href="https://spike.legoeducation.com/prime/project">
+				<p>
+					Om kodning
+				</p>
+			</a>
+			
+        </div>
+		*/
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="mt-6">Engineering</h1>
+        <h2>Frem mod LEGO Dagen i December</h2>
+		<div class="instructions  bg-black">
+           
+		
+			<p class="mb-[0px]">Dagen i dag:</p>
+
+				<p class="text-sm mt-0">
+					H'erne
+				</p>
+				<p class="text-sm mt-0">
+					Til info: Legodag d. 13.12.24
+				</p>
+				<p class="text-sm mt-0">
+					<a href="https://www.youtube.com/watch?v=mLu6rLz-MjQ">
+						Gear Train snak...
+					</a>
+				</p>
+        </div>
+	
+		<div class="instructions  bg-black video-container p-6	">
+			<iframe 
+			  src="https://www.youtube.com/embed/BoOdtxzTs0I" 
+			  title="YouTube video" 
+			  width="100%"
+			  height="400px"
+			  frameborder="0" 
+			  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			  allowfullscreen>
+			</iframe>
+		  </div>
+		  <div class="instructions  bg-black">
+           
+		
+			<p class="mb-[0px]">Bricks Studio 2.0:</p>
+
+				<p class="text-sm mt-0">
+					<a href="https://www.bricklink.com/v3/studio/download.page">
+						Bricks Studio Download Link
+					</a>
+				</p>
+				<p class="text-sm mt-0">
+					<a href="https://www.youtube.com/watch?v=iq69zPkmRX0&list=PLhFpOiPt7BHEMYXaeEk5dTCnEISY_S0cU&index=11">
+						Bricks Studio Vejledning
+					</a>
+				</p>
+        </div>
+		<div class="grid grid-cols-5 gap-4 p-4 instructions items-center">
+			<h3 class="col-span-5">Dit projekt frem mod LEGO dagen:</h3>
+			<div class="instructions min-h-[60%] flex grow justify-center text-sm text-center bg-slate-800"><a class="text-center self-center" href="/github">Bricks Studio</a></div>
+			<div class="instructions min-h-[60%] flex grow justify-center text-sm text-center bg-slate-800"><a class="text-center self-center" href="http://">Eget byg</a></div>
+			<div class="instructions min-h-[60%] flex grow justify-center text-sm text-center bg-slate-800"><a class="text-center self-center" href="/pwa">Bygge <br>-vejledning</a></div>
+			<div class="instructions min-h-[60%] flex grow justify-center text-sm text-center bg-slate-800"><a class="text-center self-center" href="http://">Vilde missioner</a></div>
+			<div class="instructions min-h-[60%] flex grow justify-center text-sm text-center bg-slate-800"><a class="text-center self-center" href="http://">Crazy Robot</a></div>
+		</div>
+			
+        </div>
+
+		
+	</main>
+</Layout>
+
+<style>
+	.offTheSide{
+		position: absolute;
+		right: -200px;
+		bottom: -20px;
+		padding: 40px;
+		z-index: 999;
+		border-radius: 20px;
+		
+		border: 1px solid rgba(var(--accent-light), 25%);
+	}
+	.offTheSide > *{
+		margin-left: 0px !important;
+		margin-top: 0px !important;
+	}
+	a{
+		text-decoration: none;
+	}
+	.instructions p, .instructions p:not(.offTheSide), .instructions h3:not(.inspiration){
+		margin-bottom: 12px;
+	}
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1,h2 {
+		
+		line-height: 1;
+		text-align: center;
+		
+	}
+
+    h1{
+        font-size: 4rem;
+		font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+
+    h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4rem;
+    }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+		position: relative;
+	}
+
+	.instructions.color{
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+    .instructions p{
+        margin-left:64px;
+    }
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
