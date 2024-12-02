@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro'
+//import Engineering from './engineering.astro';
+
+const d = new Date()
+const whatDay = d.getDay()
+
+
+
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main>
+		<h1 class="mt-6">Vejledning <span class="text-gradient">til at bruge FETCH</span></h1>
+		<h3>Brug af Fetch til at hente data og dynamisk opdatere din PWA</h3>
+
+		<section>
+			<h2>Sådan indsætter du HTML og Komponenter i index.astro</h2>
+			<p>Når vi bygger vores PWA, hjælper komponenter os med at holde koden ren og overskuelig. Komponenter er små stykker kode, der fungerer som byggesten, og vi kan genbruge dem flere steder i vores app. I dette afsnit skal vi indsætte nogle komponenter i vores index.astro.</p>
+
+			<h3>Sådan gør du trin for trin:</h3>
+			<hr />
+
+			<h4>1. Importér komponenterne</h4>
+			<p>Først skal vi importere de komponenter, vi vil bruge. Det gør vi ved at tilføje følgende linjer øverst i din index.astro-fil. Disse linjer fortæller projektet, hvor komponenterne ligger, så vi kan bruge dem senere.</p>
+
+			<pre><code>
+import Layout from "../layouts/Layout.astro";
+import ImageComponent from "../components/ImageComponent.astro";
+import IconWithText from "../components/IconWithText.astro";
+import ButtonComponent from "../components/ButtonComponent.astro";
+			</code></pre>
+
+			<p>Nu har vi importeret tre komponenter:</p>
+			<ul>
+				<li><strong>ImageComponent</strong>: Dette viser et billede af en kat.</li>
+				<li><strong>IconWithText</strong>: Dette viser et ikon med noget tekst.</li>
+				<li><strong>ButtonComponent</strong>: Dette er en knap, som vi kan klikke på for at få en ny kat.</li>
+			</ul>
+
+			<hr />
+
+			<h4>2. Indsæt ImageComponent</h4>
+			<p>Næste trin er at indsætte vores første komponent, <code>ImageComponent</code>, inde i <code>&lt;div id="fetchContainer"&gt;</code>. Denne komponent viser et billede af en kat fra The Cat API. Du skal indsætte koden på det sted, hvor der står: <code>&lt;!-- Indsæt ImageComponent --&gt;</code>.</p>
+
+			<pre><code>
+&lt;ImageComponent
+  src="https://cdn2.thecatapi.com/images/ets_USqdE.jpg"
+  alt="Cat Image" 
+/&gt;
+			</code></pre>
+
+			<hr />
+
+			<h4>3. Indsæt tagline</h4>
+			<p>Efter kattebilledet skal vi vise en lille tagline, der beskriver, hvad appen gør. Denne tekst kan du indsætte under billedet som et <code>&lt;p&gt;</code>-element med klassen <code>text-center tiny-text</code>. Det skal placeres, hvor der står: <code>&lt;!-- Indsæt tagline --&gt;</code>.</p>
+
+			<pre><code>
+&lt;p class="text-center tiny-text"&gt;
+  The CATalog &lt;br /&gt;
+  Delivers Cats around the clock.
+&lt;/p&gt;
+			</code></pre>
+
+			<hr />
+
+			<h4>4. Indsæt ikoner med tekst</h4>
+			<p>Nu vil vi vise nogle ikoner med tekst under taglinen. For at gøre det skal vi bruge komponenten <code>IconWithText</code>. Disse ikoner kan vise forskellig information om katten, som dens temperament, oprindelse og energiniveau.</p>
+
+			<p>Indsæt først en container til ikonerne med denne linje:</p>
+
+			<pre><code>
+&lt;div class="text-container"&gt;
+			</code></pre>
+
+			<p>Inde i denne container kan du nu tilføje flere instanser af <code>IconWithText</code>-komponenten, hvor hver instans har et ikon og noget tekst. Det skal indsættes, hvor der står: <code>&lt;!-- Container til ikoner med tekst --&gt;</code>.</p>
+
+			<pre><code>
+&lt;IconWithText
+  iconSrc="../../public/icons/pasport.svg"
+  subText="/Temperament"
+  id="fetchContentOne"
+/&gt;
+&lt;IconWithText
+  iconSrc="../../public/icons/box.svg"
+  subText="/Origin"
+  id="fetchContentTwo"
+/&gt;
+&lt;IconWithText
+  iconSrc="../../public/icons/energy.svg"
+  subText="/Energy level"
+  id="fetchContentThree"
+/&gt;
+			</code></pre>
+
+			<hr />
+
+			<h4>5. Indsæt knappen</h4>
+			<p>Til sidst skal vi indsætte vores <code>ButtonComponent</code>. Denne knap viser en ny kat, når du klikker på den. Find stedet, hvor der står: <code>&lt;!-- Indsæt ButtonComponent med attribute: text="Din tekst" --&gt;</code>, og indsæt denne linje kode:</p>
+
+			<pre><code>
+&lt;ButtonComponent text="New Cat" /&gt;
+			</code></pre>
+
+		</section>
+
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
