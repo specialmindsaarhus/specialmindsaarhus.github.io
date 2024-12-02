@@ -14,99 +14,113 @@ const whatDay = d.getDay()
 
 <Layout title="Special Minds Aarhus @ Github">
 	<main>
-		<h1 class="mt-6">Vejledning <span class="text-gradient">til at bruge FETCH</span></h1>
-		<h3>Brug af Fetch til at hente data og dynamisk opdatere din PWA</h3>
+		<h1 class="mt-6">Vejlednig<span class="text-gradient">
+			til at bruge FETCH
+			</span></h1>
+			<h3>Brug af Fetch til at hente data og dynamisk opdatere din PWA</h3>
+			
 
-		<section>
-			<h2>Sådan indsætter du HTML og Komponenter i index.astro</h2>
-			<p>Når vi bygger vores PWA, hjælper komponenter os med at holde koden ren og overskuelig. Komponenter er små stykker kode, der fungerer som byggesten, og vi kan genbruge dem flere steder i vores app. I dette afsnit skal vi indsætte nogle komponenter i vores index.astro.</p>
+			<section>
+				<h2>Sådan indsætter du HTML og Komponenter i index.astro</h2>
+<p>Når vi bygger vores PWA, hjælper komponenter os med at holde koden ren og overskuelig. Komponenter er små stykker kode, der fungerer som byggesten, og vi kan genbruge dem flere steder i vores app. I dette afsnit skal vi indsætte nogle komponenter i vores index.astro.</p>
 
-			<h3>Sådan gør du trin for trin:</h3>
-			<hr />
+<h3>Sådan gør du trin for trin:</h3>
+<hr />
 
-			<h4>1. Importér komponenterne</h4>
-			<p>Først skal vi importere de komponenter, vi vil bruge. Det gør vi ved at tilføje følgende linjer øverst i din index.astro-fil. Disse linjer fortæller projektet, hvor komponenterne ligger, så vi kan bruge dem senere.</p>
+<h4>1. Importér komponenterne</h4>
+<p>Først skal vi importere de komponenter, vi vil bruge. Det gør vi ved at tilføje følgende linjer øverst i din index.astro-fil. Disse linjer fortæller projektet, hvor komponenterne ligger, så vi kan bruge dem senere.</p>
 
-			<pre><code>
-import Layout from "../layouts/Layout.astro";
-import ImageComponent from "../components/ImageComponent.astro";
-import IconWithText from "../components/IconWithText.astro";
-import ButtonComponent from "../components/ButtonComponent.astro";
-			</code></pre>
+<pre><code>
+import Layout from &quot;../layouts/Layout.astro&quot;;
+import ImageComponent from &quot;../components/ImageComponent.astro&quot;;
+import IconWithText from &quot;../components/IconWithText.astro&quot;;
+import ButtonComponent from &quot;../components/ButtonComponent.astro&quot;;
+</code></pre>
 
-			<p>Nu har vi importeret tre komponenter:</p>
-			<ul>
-				<li><strong>ImageComponent</strong>: Dette viser et billede af en kat.</li>
-				<li><strong>IconWithText</strong>: Dette viser et ikon med noget tekst.</li>
-				<li><strong>ButtonComponent</strong>: Dette er en knap, som vi kan klikke på for at få en ny kat.</li>
-			</ul>
+<p>Nu har vi importeret tre komponenter:</p>
+<ul>
+  <li><strong>ImageComponent</strong>: Dette viser et billede af en kat.</li>
+  <li><strong>IconWithText</strong>: Dette viser et ikon med noget tekst.</li>
+  <li><strong>ButtonComponent</strong>: Dette er en knap, som vi kan klikke på for at få en ny kat.</li>
+</ul>
 
-			<hr />
+<hr />
 
-			<h4>2. Indsæt ImageComponent</h4>
-			<p>Næste trin er at indsætte vores første komponent, <code>ImageComponent</code>, inde i <code>&lt;div id="fetchContainer"&gt;</code>. Denne komponent viser et billede af en kat fra The Cat API. Du skal indsætte koden på det sted, hvor der står: <code>&lt;!-- Indsæt ImageComponent --&gt;</code>.</p>
+<h4>2. Indsæt ImageComponent</h4>
+<p>Næste trin er at indsætte vores første komponent, <code>ImageComponent</code>, inde i &lt;div id=&quot;fetchContainer&quot;&gt;. Denne komponent viser et billede af en kat fra The Cat API. Du skal indsætte koden på det sted, hvor der står: &lt;!-- Indsæt ImageComponent --&gt;.</p>
 
-			<pre><code>
+<pre><code>
 &lt;ImageComponent
-  src="https://cdn2.thecatapi.com/images/ets_USqdE.jpg"
-  alt="Cat Image" 
+  src=&quot;https://cdn2.thecatapi.com/images/ets_USqdE.jpg&quot;
+  alt=&quot;Cat Image&quot; 
 /&gt;
-			</code></pre>
+</code></pre>
 
-			<hr />
+<hr />
 
-			<h4>3. Indsæt tagline</h4>
-			<p>Efter kattebilledet skal vi vise en lille tagline, der beskriver, hvad appen gør. Denne tekst kan du indsætte under billedet som et <code>&lt;p&gt;</code>-element med klassen <code>text-center tiny-text</code>. Det skal placeres, hvor der står: <code>&lt;!-- Indsæt tagline --&gt;</code>.</p>
+<h4>3. Indsæt tagline</h4>
+<p>Efter kattebilledet skal vi vise en lille tagline, der beskriver, hvad appen gør. Denne tekst kan du indsætte under billedet som et <code>&lt;p&gt;</code>-element med klassen <code>text-center tiny-text</code>. Det skal placeres, hvor der står: &lt;!-- Indsæt tagline --&gt;.</p>
 
-			<pre><code>
-&lt;p class="text-center tiny-text"&gt;
+<pre><code>
+&lt;p class=&quot;text-center tiny-text&quot;&gt;
   The CATalog &lt;br /&gt;
   Delivers Cats around the clock.
 &lt;/p&gt;
-			</code></pre>
+</code></pre>
 
-			<hr />
+<hr />
 
-			<h4>4. Indsæt ikoner med tekst</h4>
-			<p>Nu vil vi vise nogle ikoner med tekst under taglinen. For at gøre det skal vi bruge komponenten <code>IconWithText</code>. Disse ikoner kan vise forskellig information om katten, som dens temperament, oprindelse og energiniveau.</p>
+<h4>4. Indsæt ikoner med tekst</h4>
+<p>Nu vil vi vise nogle ikoner med tekst under taglinen. For at gøre det skal vi bruge komponenten <code>IconWithText</code>. Disse ikoner kan vise forskellig information om katten, som dens temperament, oprindelse og energiniveau.</p>
+<p>Indsæt først en container til ikonerne med denne linje:</p>
 
-			<p>Indsæt først en container til ikonerne med denne linje:</p>
+<pre><code>
+&lt;div class=&quot;text-container&quot;&gt;
+</code></pre>
 
-			<pre><code>
-&lt;div class="text-container"&gt;
-			</code></pre>
+<p>Inde i denne container kan du nu tilføje flere instanser af <code>IconWithText</code>-komponenten, hvor hver instans har et ikon og noget tekst. Det skal indsættes, hvor der står: &lt;!-- Container til ikoner med tekst --&gt;.</p>
 
-			<p>Inde i denne container kan du nu tilføje flere instanser af <code>IconWithText</code>-komponenten, hvor hver instans har et ikon og noget tekst. Det skal indsættes, hvor der står: <code>&lt;!-- Container til ikoner med tekst --&gt;</code>.</p>
-
-			<pre><code>
+<pre><code>
 &lt;IconWithText
-  iconSrc="../../public/icons/pasport.svg"
-  subText="/Temperament"
-  id="fetchContentOne"
+  iconSrc=&quot;../../public/icons/pasport.svg&quot;
+  subText=&quot;/Temperament&quot;
+  id=&quot;fetchContentOne&quot; 
 /&gt;
 &lt;IconWithText
-  iconSrc="../../public/icons/box.svg"
-  subText="/Origin"
-  id="fetchContentTwo"
+  iconSrc=&quot;../../public/icons/box.svg&quot;
+  subText=&quot;/Origin&quot;
+  id=&quot;fetchContentTwo&quot; 
 /&gt;
 &lt;IconWithText
-  iconSrc="../../public/icons/energy.svg"
-  subText="/Energy level"
-  id="fetchContentThree"
+  iconSrc=&quot;../../public/icons/energy.svg&quot;
+  subText=&quot;/Energy level&quot;
+  id=&quot;fetchContentThree&quot; 
 /&gt;
-			</code></pre>
+</code></pre>
 
-			<hr />
+<hr />
 
-			<h4>5. Indsæt knappen</h4>
-			<p>Til sidst skal vi indsætte vores <code>ButtonComponent</code>. Denne knap viser en ny kat, når du klikker på den. Find stedet, hvor der står: <code>&lt;!-- Indsæt ButtonComponent med attribute: text="Din tekst" --&gt;</code>, og indsæt denne linje kode:</p>
+<h4>5. Indsæt knappen</h4>
+<p>Til sidst skal vi indsætte vores <code>ButtonComponent</code>. Denne knap viser en ny kat, når du klikker på den. Find stedet, hvor der står: &lt;!-- Indsæt ButtonComponent med attribute: text=&quot;Din tekst&quot; --&gt;, og indsæt denne linje kode:</p>
 
-			<pre><code>
-&lt;ButtonComponent text="New Cat" /&gt;
-			</code></pre>
+<pre><code>
+&lt;ButtonComponent text=&quot;New Cat&quot; /&gt;
+</code></pre>
 
-		</section>
+			</section>
+			<!--- 
+            <VideoComponent 
+            src="/video/github_vejledning.mp4"
+			/>
+			-->
+			<br>
+			<div style="border-bottom: 2px solid white;"></div>
+			<br>
 
+
+			
+		
+			
 	</main>
 </Layout>
 
