@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import madlavning from "../images/madlavning godot.png"
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1 class="mt-6">Programmering</h1>
+        <h2>Godot & Gamedesign</h2>
+		<div class="instructions">
+			<h3>
+
+				Hvad skal vi i dag?
+                <span class="text-xs">
+					Mark fortæller (Max 10 min)
+                </span>
+			</h3>
+			<h3>H'erne</h3>
+			<h3>Lykkehjulet
+				<br>
+				<a href="https://www.youtube.com/watch?v=fkIvmfqX-t0">
+					<span class="text-sm">
+					Algorithems (ca 30 min.)<br>
+				</span>
+			</a>
+			</h3>
+			<h3 class="font-semibold">
+				
+					Vælg imellem:
+				
+				<p class="ps-8 text-red-600">
+					Juleopgaven - Lav din egen algoritme
+				</p>
+				<p class="ps-8">
+					Jeres egetprojekt
+				</p>
+				<p class="ps-8">
+					Den stor inspektor quiz 
+				</p>
+				<p class="ps-8">Box Modellen... 
+					<span class="text-xs ">
+					Få papir fra Mark
+					<br>
+					<a href="https://www.canva.com/design/DAGBXMwvPJA/fxHo2fppB-I5B3_d7CFF_w/edit?utm_content=DAGBXMwvPJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="no-underline">
+						Evt. der efter: HTML Øvelser... følg link!
+					</a>
+					</span>
+				</p>
+            </h3>
+		</div>
+		<div class="grid grid-cols-5 gap-4 p-4 instructions">
+			<h3 class="col-span-5">App-forløbet, i sektioner:</h3>
+			<div class="instructions text-sm text-center bg-slate-800  "><a href="/github">GitHub</a></div>
+			<div class="instructions text-sm text-center bg-slate-800 "><a href="/pwa">Making a PWA</a></div>
+			<div class="instructions text-sm text-center bg-slate-800"><a href="/pwa-html">Working the HTML & CSS</a></div>
+			<div class="instructions text-sm text-center bg-slate-800"><a href="/pwa-fetch">API's & dynamic content (JS)</a></div>
+			<div class="instructions text-sm text-center bg-slate-800"><a href="http://">Animations</a></div>
+		</div>
+		<!---
+		<div class="instructions">
+			<h3 class="font-semibold">
+				<a href="/lykkehjulet">
+				Lykkehjulet!
+			</a>
+			<span class="text-xs">
+				Mark fortæller (Max 10 min)
+			</span>
+		</h3>
+		<p class="text-sm leading-12">
+			PWA runthrough 
+		</p>
+		
+	</div>
+	-->
+		<div class="instructions bg-black">
+			<a href="/inspektor-quiz">
+				<h3>Den stor inspektor quiz</h3>
+			</a>
+        </div>
+	</main>
+</Layout>
+
+<style>
+	code{
+		margin-left: 64px;
+	}
+	.instructions p, .instructions h3{
+		margin-bottom: 12px;
+	}
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1,h2 {
+		
+		line-height: 1;
+		text-align: center;
+		
+	}
+
+    h1{
+        font-size: 4rem;
+		font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+
+    h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4rem;
+    }
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions.color{
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+
+	}
+	.instructions > p{
+		margin-bottom: 24px !important;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+    .instructions p{
+        margin-left:64px;
+    }
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
