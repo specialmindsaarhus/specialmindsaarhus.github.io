@@ -16,76 +16,7 @@ const whatDay = d.getDay()
             <h3>Brug af Fetch til at hente data og dynamisk opdatere din PWA</h3>
             
 
-            <section>
-                <h1>Brug af fetch til at hente data og dynamisk opdatere din PWA</h1>
-                <p>I dette projekt henter vi data fra et API, som giver os et billede og nogle oplysninger om katte, men du kan vælge at bruge den samme metode til at få data om hunde eller endda bruge dit eget API.</p>
-                <p>Vi starter med at forklare, hvordan URL'en og GET-metoden fungerer, og derefter hvordan JavaScript opdaterer din app med dynamisk indhold, så du ser en ny kat (eller hund) hver gang.</p>
-                
-                <h2>1. Forstå URL'en og GET-metoden</h2>
-                <p>Vi bruger en URL til at kalde API'et, som leverer billeder og informationer. Her er den URL, vi bruger til katte:</p>
-                <pre><code>&lt;script&gt;
-            const url = &quot;https://api.thecatapi.com/v1/images/search?size=small&amp;mime_types=jpg&amp;format=json&amp;has_breeds=true&amp;order=RANDOM&amp;page=0&amp;limit=1&quot;;
-            &lt;/script&gt;</code></pre>
-                <p>Lad os bryde det ned:</p>
-                <ul>
-                    <li><strong>size=small</strong>: Vi beder om små billeder.</li>
-                    <li><strong>mime_types=jpg</strong>: Vi beder specifikt om billeder i JPG-format.</li>
-                    <li><strong>has_breeds=true</strong>: Vi vil kun have billeder af katte, der har racespecifikationer.</li>
-                    <li><strong>order=RANDOM</strong>: Vi får et tilfældigt billede hver gang.</li>
-                    <li><strong>limit=1</strong>: Vi får kun ét billede ad gangen.</li>
-                </ul>
-                <p>Når vi laver en GET-anmodning, sender vi en besked til API'et om at hente disse data for os.</p>
-                <p>Her er et eksempel på, hvordan vi laver anmodningen:</p>
-                <pre><code>&lt;script&gt;
             
-            &lt;/script&gt;</code></pre>
-                <p>Vi bruger GET-metoden til at hente data, som er standardmetoden for API-kald, hvor vi bare vil modtage data uden at ændre noget.</p>
-            
-                <h2>2. Skift til hunde-API (eller dit eget API)</h2>
-                <p>Hvis du vil hente data om hunde i stedet, kan du ændre URL'en til dette API, som fungerer på samme måde som katte-API'et:</p>
-                <pre><code>&lt;script&gt;
-            const url = &quot;https://api.thedogapi.com/v1/images/search?size=small&amp;mime_types=jpg&amp;format=json&amp;has_breeds=true&amp;order=RANDOM&amp;page=0&amp;limit=1&quot;;
-            &lt;/script&gt;</code></pre>
-                <p>Alt andet vil fungere på samme måde, bare med hundebilleder i stedet. Du kan også vælge et helt andet API, så længe det leverer billeder og data, som du kan bruge i din app.</p>
-            
-                <h2>3. Brug af JavaScript til at opdatere PWA'en dynamisk</h2>
-                <p>Når vi får data fra API'et, bruger vi JavaScript til at opdatere billederne og teksten i din PWA. Lad os gennemgå, hvordan det virker:</p>
-                <h3>1. Hent billedet fra API'et og opdater det</h3>
-                <p>Først finder vi billedet i HTML'en og opdaterer det med den nye kat (eller hund).</p>
-                <pre><code>&lt;script&gt;
-            let imageElement = document.getElementById(&quot;fetchImage&quot;);
-            imageElement.src = `${fetchData.url}`;
-            &lt;/script&gt;</code></pre>
-                <p>Vi bruger data fra API'et (i variablen <code>fetchData.url</code>) og sætter det som <code>src</code>-attributten for billedet.</p>
-            
-                <h3>2. Opdater tekst i overskriften (h3)</h3>
-                <p>Nu vil vi vise kattens (eller hundens) race som en overskrift i h3-elementet:</p>
-                <pre><code>&lt;script&gt;
-            let contentElement = document.getElementById(&quot;BreedText&quot;);
-            contentElement.innerHTML = `${textData.name}`;
-            &lt;/script&gt;</code></pre>
-                <p>Her bruger vi data fra API'et (<code>textData.name</code>) til at opdatere overskriften med racens navn.</p>
-            
-                <h3>3. Tilføj tekstbeskrivelser</h3>
-                <p>Vi vil også vise nogle flere detaljer om katten (eller hunden), som temperament, oprindelse og energiniveau:</p>
-                <pre><code>&lt;script&gt;
-            // Temperament
-            contentElement = document.getElementById(&quot;fetchContentOne&quot;);
-            contentElement.innerHTML = `${textData.temperament}`;
-            
-            // Oprindelse
-            contentElement = document.getElementById(&quot;fetchContentTwo&quot;);
-            contentElement.innerHTML = `${textData.origin}`;
-            
-            // Energiniveau
-            contentElement = document.getElementById(&quot;fetchContentThree&quot;);
-            contentElement.innerHTML = `${textData.energy_level}`;
-            &lt;/script&gt;</code></pre>
-                <p>Hver gang du trykker på &quot;New Cat&quot; (eller &quot;New Dog&quot;), opdateres disse felter med de nyeste oplysninger fra API'et.</p>
-            
-                <h2>Konklusion</h2>
-                <p>Med denne tilgang kan du dynamisk opdatere din PWA ved at hente billeder og data fra et API. Du kan vælge at beholde katte-API'et, skifte til et hunde-API, eller bruge et andet API efter eget valg. Ved at bruge fetch-metoden kan du gøre din app interaktiv og sjov!</p>
-            </section>
             
             <!--- 
             <VideoComponent 
