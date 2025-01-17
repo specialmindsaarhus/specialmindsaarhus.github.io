@@ -6,33 +6,34 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1 class="mt-8 mb-[unset]">Programmering</h1>
-		<div class="instructions">
+		<h1 class="mt-8 mb-[unset]">Dice Rolling</h1>
+		<div class="instructions text-center">
 
-			<h3 class="font-semibold text-center mt-12  p-8">
-				
-					CLI og Autoclicker projektet:
-				
-				
-					<a href="https://www.youtube.com/watch?v=oBP_umJb_2U" class="no-underline">
-				<p class=" text-md font-thin">Se video om CLI (Command Line Interface)
+			<h2 class="font-semibold text-center mt-12  p-8">
+					Dice Rolling Game
+					<br>
+					Command line game 
+			</h2>
+			<div class="rounded-lg border-2 border-white border-solid mb-4 p-4">
+				<p class=" text-md font-thin mt-0">
+					Fremgangsmåde:
+					<br>
+					1) Tjek/installer python (skriv i terminalen: python -V)
+					<br>
+					2) Hvis ikke eksisterer, så søg på install python 
+					<br>
+					(installer advanced udgaven - kryds alt af)
+					<br>
+					3) Se tutorial video
 					
-						
-					</p>
+				</p>
+			</div>
+
+			<br>
+				<h3>Links</h3>
+				<a href="https://www.youtube.com/watch?v=yVl_G-F7m8c&t=0s" class="no-underline">
+				<p class=" text-md font-thin">Tutorial Video</p>
 				</a>
-				<a href="https://web.mit.edu/mprat/Public/web/Terminus/Web/main.html" class="no-underline">
-				<p class=" text-md font-thin">CLI game
-					
-						
-					</p>
-				</a>
-				<a href="https://www.geeksforgeeks.org/how-to-make-a-python-auto-clicker/" class="no-underline">
-				<p class=" text-md font-thin">Python Autoclicker Tutorial
-					
-						
-					</p>
-				</a>
-            </h3>
 		</div>
 		
 		
@@ -77,11 +78,7 @@ import Layout from '../layouts/Layout.astro';
         margin-bottom: 1.6rem;
     }
 
-    h2{
-        font-size: 1rem;
-        font-weight: 600;
-        margin-bottom: 4rem;
-    }
+    
 	.text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
