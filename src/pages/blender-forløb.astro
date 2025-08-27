@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro';
+//import Engineering from './engineering.astro';
+
+const d = new Date()
+const whatDay = d.getDay()
+
+const videoUrl ="https://www.youtube.com/embed/B0J27sf9N1Y?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z"
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main class="">
+		<h1 class="mt-8 !mb-8">Blender Forløb</h1>
+		<h2 class="mt-8 mb-[unset] text-center font-thin">Modelering, Texture og Animationer</h2><br>
+    	<div class="instructions text-center">
+			<iframe 
+			width="560" 
+			src={videoUrl} 
+			title="YouTube video player" 
+			frameborder="0" 
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			allowfullscreen
+			class="w-full aspect-video"
+		  />
+		  
+		 
+		  <br><br>
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Fra Begynder til Go'</p>	
+					<p class="text-md font-thin mt-0 ">
+						1) Installer Blender <a href="https://www.blender.org/">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br><br>
+						2) Følg tutorialrække, for at lave din første donut <br>
+						<span class="text-sm text-center">En verdens berømt tutorial som ALLE nye starter med. <br>
+							En step by step introduktion til blender og de aller mest essentielle værktæjer. </span>
+							<br><a href="https://www.youtube.com/watch?v=B0J27sf9N1Y&list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&index=1">
+								<span class="text-sm !no-underline"> Link</span><br>
+							</a>
+							<br><br>
+						3) Animation For Beginners! Learn to Animate like a PRO in blender <a href="https://www.youtube.com/watch?v=AEAc_lLjOMc&pp=0gcJCRsBo7VqN5tD">
+							<span class="text-sm !no-underline"> Link</span><br>
+						</a>
+						<span class="text-sm text-center">
+							En step by step introduktion til animationer i blender </span>
+						
+					</p> 
+				</div>
+
+		<VideoComponent 
+				src="/video/blender-forløb-video.mp4"
+				classes="w-full"
+			/>
+			<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Fra Go' til Pro</p>	
+					<p class="text-md font-thin mt-0 ">
+						1) Se videoen oven for - "whats the next step" 
+						<br><br>
+						<span class="text-md underline">Modellering</span><br>
+						<span class="text-sm text-center">Grundig gennemgang af modellering<br> </span><br>
+						1) 5 models in 7 minutes <a href="https://www.youtube.com/watch?v=f_6Wau9WExk">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+						2) Hard surface modeling in 5 minutes<a href="https://www.youtube.com/watch?v=hN1_qfyBg68">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+						2) Bycicle modeling in blender<a href="https://www.youtube.com/watch?v=f_6Wau9WExk">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br><br>
+					</p> 
+					<p class="text-md font-thin mt-0 ">
+						<span class="text-md underline">Texture</span><br>
+						<span class="text-sm text-center">Lær at lave realistiske texture<br> </span><br>
+						1) Blender Guru's texture tutorial <a href="https://www.youtube.com/watch?v=uHCJoNEWjXo">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+						2) Procedural worn painted metal<a href="https://youtu.be/mZDaxZFERqQ?si=B5ngOrJjY2JdAoPM">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+						<br>
+					</p> 
+					<p class="text-md font-thin mt-0 ">
+						<span class="text-md underline">Animation</span><br>
+						<span class="text-sm text-center">Dyk dybere ned i animationsteknikkerne<br> </span><br>
+						1) My New Rigging Workflow in Blender <a href="https://www.youtube.com/watch?v=BiPoPMnU2VI">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+						2) Animate a charater in 15 minutes in blender <a href="https://www.youtube.com/watch?v=imbIsNAvUpM">
+							<span class="text-sm !no-underline"> Link</span>
+						</a>
+						<br>
+					</p> 
+					
+					
+				</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	a{
+		text-decoration: none;
+	}
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>

@@ -1,10 +1,11 @@
 ---
-
+/*absolute bottom-0 right-0 inline-block sticky top-0*/
 const { src, text, classes } = Astro.props;
 ---
 
 
-<video class=`absolute bottom-0 right-0 inline-block sticky top-0 ${classes}` width="400" controls>
+
+<video class=` ${classes}` width="400" controls>
     <source src={src} type="video/mp4">
     Your browser does not support HTML video.
   </video>
