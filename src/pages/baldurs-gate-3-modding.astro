@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import VideoComponent from '../components/VdeoComponent.astro';
+
+const videoUrl1 ="https://www.youtube.com/embed/M4oSsOEEMm4"
+
+
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main class="">
+		<h1 class="mt-8 !mb-8">Baldur's Gate 3 Modding</h1>
+		<h2 class="mt-8 mb-[unset] text-center font-thin">Lav dit eget mod til Baldur's Gate 3 med LUA</h2><br>
+    	<div class="instructions text-center">
+			<iframe 
+			width="560" 
+			src={videoUrl1} 
+			title="YouTube video player" 
+			frameborder="0" 
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			allowfullscreen
+			class="w-full aspect-video"
+		  />
+		  <br><br>
+		 <p class=" text-md font-thin mt-0"><span class="font-semibold">Hvorfor </span> 
+			Modde Baldur's Gate 3?<br><br>
+			<span class="font-semibold">Fordi </span> det giver dig mulighed for at tilføje næsten alt, hvad du kan forestille dig, til spillet. Fra nye klasser og abilities til custom companions. I denne tutorial lærer du at lave et simpelt mod, der tilføjer en ny spell, som summoner en frø-companion.
+			<br><br>
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Setup af dit udviklingsmiljø</p>	
+					<p class="text-md font-thin mt-0 ">
+						1) Installer <a class="!no-underline" href="https://github.com/Norbyte/bg3se/releases">BG3 Script Extender</a>. Dette er nødvendigt for at køre LUA-scripts. <br>	Følg installationsvejledningen på deres GitHub.
+						<br><br>
+						2) Download <a class="!no-underline" href="https://code.visualstudio.com/">Visual Studio Code</a>. 
+						<br><br>
+						3) Hent <a class="!no-underline" href="https://github.com/LaughingLeader/BG3ModManager">BG3 Mod Manager</a> for at installere og administrere dine mods.
+						<br><br>
+						4) Du skal også bruge <a class="!no-underline" href="https://github.com/ShinyHobo/BG3-Modders-Multitool">BG3 Modder's Multitool</a> til at pakke dit mod.
+					</p> 
+				</div>
+				
+		
+				
+		
+			<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Lav dit Mod</p>	
+					<p class="text-md font-thin mt-0 ">
+						1) Følg guiden fra <a class="!no-underline" href="https://www.codedex.io/projects/make-a-bg3-mod-with-lua">Codedex</a> for at skabe dit første mod. <br>Guiden vil tage dig igennem:
+						<br>
+						<ul class="list-disc list-inside text-left">
+							<li>Strukturering af din mod-mappe.</li>
+							<li>Udfyldning af `meta.lsx` med information om dit mod.</li>
+							<li>Definition af din frø-companion's stats.</li>
+							<li>Skrivning af LUA-scriptet til at summon'e frøen.</li>
+							<li>Pakning og test af dit mod.</li>
+						</ul>
+						<br>
+						<span class="text-sm text-center">Husk at du kan spørge din underviser, hvis du sidder fast.<br> </span><br>
+						
+					</p> 
+					
+					
+				</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
