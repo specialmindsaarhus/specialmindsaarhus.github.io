@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const videoUrl1 = "https://www.youtube.com/embed/LOhfqjmasi0?start=534"
+const videoUrl2 = "https://www.youtube.com/embed/HrAhbgP5HRo"
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main class="">
+		<h1 class="mt-8 !mb-8">Tilføj Sprites til Godot</h1>
+		<h2 class="mt-8 mb-[unset] text-center font-thin">Lær at tilføje nye sprites til dit Godot spil</h2><br>
+		<div class="instructions text-center">
+			<img src="/public/itch.png" class="w-full">
+		</div>
+    	<div class="instructions text-center">
+		 <p class=" text-md font-thin mt-0"><span class="text-2xl mt-0">
+			 <span class="font-semibold">Hvorfor </span>
+			 tilføje egne sprites?<br><br>
+			</span>
+
+			<span class="font-semibold">Fordi </span> det giver dig mulighed for at personliggøre dit spil og gøre det unikt. <br> I denne tutorial lærer du at finde gratis sprites online og tilføje dem til dit Godot-spil.
+			<br><br>
+			
+			<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+				<p class=" text-md font-bold mt-0 ">Inden du går i gang</p>
+			<p class="text-md font-thin mt-0 ">
+
+				<span class="font-semibold">Hvad </span> er en sprite...? <br>En sprite er et 2D-billede eller en animation, der bruges i spil til at repræsentere karakterer, objekter eller baggrunde.<br><br>
+				<span class="font-semibold">Hvad </span> er et sprite sheet...? <br>Et sprite sheet er en enkelt billedfil, der indeholder flere sprites arrangeret i et gitter. I stedet for at have mange separate billedfiler, samler man alle animations-frames (f.eks. gang, spring, idle) i én fil. Dette gør det nemmere at organisere og hurtigere at loade i spillet.<br>
+			</p>
+		</div>
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+					
+					<p class=" text-md font-bold mt-0 ">Find og download sprites</p>
+					<p class="text-md font-thin mt-0 ">
+						1) Gå til <a class="" href="https://itch.io/game-assets/free/genre-platformer">itch.io's platformer assets</a> og find en sprite samling du kan lide. <br>
+						<br>
+						2) Download sprite-pakken og pak den ud på din computer.
+						<br><br>
+						3) Find sprite sheet'et - dette er typisk en PNG-fil med flere billeder af din karakter i forskellige positioner.
+					</p>
+				</div>
+
+
+
+
+			<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-md font-bold mt-0 ">Tilføj sprites til dit Godot-spil</p>
+					<p class="text-md font-thin mt-0 ">
+						Du kan vælge at følge én af disse to vejledninger for at tilføje din sprite til Godot:
+						<br><br><br>
+						<span class="font-semibold">Mulighed 1: Brackeys' forklaring (fra 8:54)</span><br>
+						</p>
+						<iframe
+						src={videoUrl1}
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+						class="aspect-video mb-4 px-12"
+					  />
+					  <br><br>
+					  <span class="font-semibold">Mulighed 2: Alternativ tutorial</span><br><br>
+					</p>
+					  <iframe
+						src={videoUrl2}
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+						class="px-12 aspect-video"
+					  />
+					</p>
+					<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid text-center">
+						<p class="text-md font-bold mt-0">Sådan finder du dine animationer i Godot</p>
+						<p class="text-md font-thin mt-0 text-center">
+							<span class="font-semibold">Trin-for-trin:</span>
+							<br><br>
+							1) Find node/scene der hedder <span class="font-semibold">"Player"</span> i dit projekt
+							<br><br>
+							2) Klik på Player-noden for at udvide den
+							<br><br>
+							3) Find den underliggende node der hedder <span class="font-semibold">"AnimatedSprite2D"</span>
+							<br><br>
+							4) Her kan du se de eksisterende animationer der allerede er i spillet
+							<br><br>
+							5) <span class="font-semibold">Vigtigt:</span> Din nye animation skal hedde <span class="font-semibold">"idle"</span> for at fungere korrekt
+							<br><br>
+							<span class="text-sm text-center italic">Husk at du kan spørge din underviser, hvis du sidder fast!</span>
+						</p>
+					</div>
+				</div>
+
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+
+	}
+	.instructions.color{
+
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
