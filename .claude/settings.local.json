@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Add Godot custom sprites tutorial page\n\n- Create new tutorial page for adding custom sprites to Godot games\n- Add instructions for finding free sprites on itch.io\n- Include video tutorials from Brackeys and alternative source\n- Explain sprite and sprite sheet concepts\n- Add step-by-step guide for finding Player and AnimatedSprite2D nodes\n- Add new card on front page linking to tutorial\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(dir:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev)",
+      "Bash(node test-algorithm-executor.mjs:*)",
+      "Bash(node -e:*)",
+      "Bash(npx tsx test-original.ts)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

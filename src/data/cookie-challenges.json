@@ -1,0 +1,86 @@
+{
+  "challenges": [
+    {
+      "id": "challenge-1",
+      "title": "Basic Cookie Decorating",
+      "description": "Decorate each cookie based on its shape",
+      "level": 1,
+      "goalPattern": [
+        { "shape": "star", "icing": "red", "sprinkles": true },
+        { "shape": "circle", "icing": "green", "sprinkles": false },
+        { "shape": "tree", "icing": "red", "sprinkles": true }
+      ],
+      "cookies": [
+        { "id": "1", "shape": "star", "position": 0 },
+        { "id": "2", "shape": "circle", "position": 1 },
+        { "id": "3", "shape": "tree", "position": 2 }
+      ],
+      "exampleSolution": "For each cookie:\n    If shape = \"star\":\n        Set icing = \"red\"\n        Set sprinkles = true\n    Else if shape = \"circle\":\n        Set icing = \"green\"\n        Set sprinkles = false\n    Else if shape = \"tree\":\n        Set icing = \"red\"\n        Set sprinkles = true"
+    },
+    {
+      "id": "challenge-2",
+      "title": "Alternating Colors",
+      "description": "Create an alternating red and green pattern",
+      "level": 2,
+      "goalPattern": [
+        { "shape": "circle", "icing": "red", "sprinkles": false },
+        { "shape": "circle", "icing": "green", "sprinkles": false },
+        { "shape": "circle", "icing": "red", "sprinkles": false },
+        { "shape": "circle", "icing": "green", "sprinkles": false }
+      ],
+      "cookies": [
+        { "id": "1", "shape": "circle", "position": 0 },
+        { "id": "2", "shape": "circle", "position": 1 },
+        { "id": "3", "shape": "circle", "position": 2 },
+        { "id": "4", "shape": "circle", "position": 3 }
+      ],
+      "exampleSolution": "For each cookie:\n    If position is even:\n        Set icing = \"red\"\n    Else:\n        Set icing = \"green\"\n    Set sprinkles = false"
+    },
+    {
+      "id": "challenge-3",
+      "title": "Holiday Special",
+      "description": "Stars get sprinkles, even positions get red icing",
+      "level": 3,
+      "goalPattern": [
+        { "shape": "star", "icing": "red", "sprinkles": true },
+        { "shape": "circle", "icing": "green", "sprinkles": false },
+        { "shape": "star", "icing": "red", "sprinkles": true },
+        { "shape": "tree", "icing": "green", "sprinkles": false },
+        { "shape": "circle", "icing": "red", "sprinkles": false },
+        { "shape": "tree", "icing": "green", "sprinkles": false }
+      ],
+      "cookies": [
+        { "id": "1", "shape": "star", "position": 0 },
+        { "id": "2", "shape": "circle", "position": 1 },
+        { "id": "3", "shape": "star", "position": 2 },
+        { "id": "4", "shape": "tree", "position": 3 },
+        { "id": "5", "shape": "circle", "position": 4 },
+        { "id": "6", "shape": "tree", "position": 5 }
+      ],
+      "exampleSolution": "For each cookie:\n    If shape = \"star\":\n        Set sprinkles = true\n    If position is even:\n        Set icing = \"red\"\n    Else:\n        Set icing = \"green\""
+    },
+    {
+      "id": "challenge-4",
+      "title": "Rainbow Factory",
+      "description": "Use nested loops to apply colors and decorations systematically",
+      "level": 4,
+      "goalPattern": [
+        { "shape": "star", "icing": "red", "sprinkles": true },
+        { "shape": "circle", "icing": "red", "sprinkles": false },
+        { "shape": "star", "icing": "green", "sprinkles": true },
+        { "shape": "circle", "icing": "green", "sprinkles": false },
+        { "shape": "star", "icing": "red", "sprinkles": true },
+        { "shape": "circle", "icing": "red", "sprinkles": false }
+      ],
+      "cookies": [
+        { "id": "1", "shape": "star", "position": 0 },
+        { "id": "2", "shape": "circle", "position": 1 },
+        { "id": "3", "shape": "star", "position": 2 },
+        { "id": "4", "shape": "circle", "position": 3 },
+        { "id": "5", "shape": "star", "position": 4 },
+        { "id": "6", "shape": "circle", "position": 5 }
+      ],
+      "exampleSolution": "For each color in [\"red\", \"green\", \"red\"]:\n    For each cookie:\n        Set icing = current color\n        If shape = \"star\":\n            Set sprinkles = true\n        Else:\n            Set sprinkles = false"
+    }
+  ]
+}
