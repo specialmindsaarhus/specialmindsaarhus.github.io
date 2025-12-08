@@ -11,6 +11,7 @@ export class AlgorithmExecutor {
   private algorithm: string;
   private cookies: Cookie[];
   private currentColor: string = "";
+  private variables: Map<string, number> = new Map();
 
   constructor(algorithm: string, cookies: Cookie[]) {
     this.algorithm = algorithm;
@@ -35,6 +36,23 @@ export class AlgorithmExecutor {
       !line.toLowerCase().includes('cookie')
     );
 
+    // Process pre-loop initialization (lines before "For each cookie:")
+    const loopStartIndex = lines.findIndex(line =>
+      line.toLowerCase().includes('for each')
+    );
+    if (loopStartIndex > 0) {
+      // There are lines before the loop - process them as initialization
+      const initLines = lines.slice(0, loopStartIndex);
+      const dummyCookie: DecoratedCookie = {
+        id: "0",
+        shape: "circle",
+        position: 0,
+        icing: "none",
+        sprinkles: false
+      };
+      this.processCookieWithAlgorithm(dummyCookie, initLines);
+    }
+
     if (hasNestedLoop) {
       this.executeNestedLoops(decoratedCookies, lines);
     } else {
@@ -44,9 +62,10 @@ export class AlgorithmExecutor {
       );
 
       if (hasLoop) {
-        // Process each cookie with the algorithm
+        // Process each cookie with the algorithm (skip pre-loop lines)
+        const loopLines = loopStartIndex >= 0 ? lines.slice(loopStartIndex) : lines;
         for (let i = 0; i < decoratedCookies.length; i++) {
-          this.processCookieWithAlgorithm(decoratedCookies[i], lines);
+          this.processCookieWithAlgorithm(decoratedCookies[i], loopLines);
         }
       } else {
         // Process without loop (apply to first cookie only)
@@ -114,11 +133,31 @@ export class AlgorithmExecutor {
   }
 
   private evaluateCondition(condition: string, cookie: DecoratedCookie): boolean {
+    // Handle numeric comparisons: var = value, var < value, var > value
+    const comparisonMatch = condition.match(/(\w+(?:\s*\/\s*\d+|\s*%\s*\d+)?)\s*(=|<|>|<=|>=)\s*(\d+)/);
+    if (comparisonMatch) {
+      const leftExpr = comparisonMatch[1].trim();
+      const operator = comparisonMatch[2];
+      const rightValue = Number(comparisonMatch[3]);
+
+      const leftValue = this.evaluateExpression(leftExpr, cookie);
+
+      switch (operator) {
+        case '=': return leftValue === rightValue;
+        case '<': return leftValue < rightValue;
+        case '>': return leftValue > rightValue;
+        case '<=': return leftValue <= rightValue;
+        case '>=': return leftValue >= rightValue;
+      }
+    }
+
+    // Handle shape comparisons
     if (condition.includes('shape =')) {
       const shape = this.extractValue(condition, 'shape =');
       return cookie.shape === shape;
     }
 
+    // Backward compatibility
     if (condition.includes('position is even')) {
       return cookie.position % 2 === 0;
     }
@@ -131,20 +170,32 @@ export class AlgorithmExecutor {
   }
 
   private executeSetCommand(command: string, cookie: DecoratedCookie): void {
-    if (command.includes('icing =')) {
-      const value = this.extractValue(command, 'icing =');
+    // Check if it's a variable assignment (not icing or sprinkles)
+    const setMatch = command.match(/set\s+(\w+)\s*=\s*(.+)/i);
+    if (setMatch) {
+      const varName = setMatch[1].toLowerCase();
+      const expression = setMatch[2].trim();
 
-      // Handle "current color" reference
-      if (value === 'current color' && this.currentColor) {
-        cookie.icing = this.currentColor;
-      } else if (['red', 'green', 'blue', 'yellow', 'pink'].includes(value)) {
-        cookie.icing = value;
+      // Special cookie properties
+      if (varName === 'icing') {
+        const value = expression.replace(/['"]/g, '');
+        // Handle "current color" reference
+        if (value === 'current color' && this.currentColor) {
+          cookie.icing = this.currentColor as "red" | "green" | "blue" | "yellow" | "pink" | "none";
+        } else if (['red', 'green', 'blue', 'yellow', 'pink'].includes(value)) {
+          cookie.icing = value as "red" | "green" | "blue" | "yellow" | "pink";
+        }
+        return;
       }
-    }
 
-    if (command.includes('sprinkles =')) {
-      const value = this.extractValue(command, 'sprinkles =');
-      cookie.sprinkles = value === 'true';
+      if (varName === 'sprinkles') {
+        cookie.sprinkles = expression === 'true';
+        return;
+      }
+
+      // Regular variable - evaluate expression
+      const value = this.evaluateExpression(expression, cookie);
+      this.variables.set(varName, value);
     }
   }
 
@@ -154,6 +205,47 @@ export class AlgorithmExecutor {
 
     const afterPrefix = text.substring(index + prefix.length).trim();
     return afterPrefix.replace(/['"]/g, '');
+  }
+
+  private evaluateExpression(expr: string, cookie: DecoratedCookie): number {
+    expr = expr.trim();
+
+    // Handle arithmetic operations (order matters: *, /, %, +, -)
+    const operators = ['%', '/', '*', '+', '-'];
+
+    for (const op of operators) {
+      const parts = expr.split(op);
+      if (parts.length === 2) {
+        const left = this.evaluateExpression(parts[0].trim(), cookie);
+        const right = this.evaluateExpression(parts[1].trim(), cookie);
+
+        switch (op) {
+          case '+': return left + right;
+          case '-': return left - right;
+          case '*': return left * right;
+          case '/': return Math.floor(left / right); // Integer division
+          case '%': return left % right;
+        }
+      }
+    }
+
+    // Check if it's a number literal
+    if (!isNaN(Number(expr))) {
+      return Number(expr);
+    }
+
+    // Check if it's "position"
+    if (expr === 'position') {
+      return cookie.position;
+    }
+
+    // Check if it's a variable
+    if (this.variables.has(expr)) {
+      return this.variables.get(expr)!;
+    }
+
+    // Default to 0
+    return 0;
   }
 
   private processCookieWithAlgorithm(cookie: DecoratedCookie, lines: string[]): void {
@@ -184,7 +276,8 @@ export class AlgorithmExecutor {
 
       // Handle if conditions
       if (trimmedLine.startsWith('if ')) {
-        const conditionMet = this.evaluateCondition(trimmedLine, cookie);
+        const condition = trimmedLine.substring(3).trim(); // Remove "if " prefix
+        const conditionMet = this.evaluateCondition(condition, cookie);
         conditionStack.push({
           condition: conditionMet,
           indent: currentIndent,
@@ -194,6 +287,7 @@ export class AlgorithmExecutor {
       }
       // Handle else if conditions
       else if (trimmedLine.startsWith('else if ')) {
+        const condition = trimmedLine.substring(8).trim(); // Remove "else if " prefix
         // Find the matching if statement at the same indentation level
         let matchingIfIndex = -1;
         for (let j = conditionStack.length - 1; j >= 0; j--) {
@@ -206,7 +300,7 @@ export class AlgorithmExecutor {
 
         if (matchingIfIndex >= 0) {
           const matchingIf = conditionStack[matchingIfIndex];
-          const conditionMet = this.evaluateCondition(trimmedLine, cookie);
+          const conditionMet = this.evaluateCondition(condition, cookie);
 
           // Remove the old condition and add the new else if
           conditionStack.splice(matchingIfIndex, 1);
