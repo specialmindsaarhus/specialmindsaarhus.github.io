@@ -73,13 +73,26 @@ export function AlgorithmEditor({ value, onChange, onExecute, isExecuting }: Alg
             <li><strong>For each color in ["red", "green"]:</strong> - Nested loop through colors</li>
             <li><strong>If shape = "star":</strong> - Check cookie shape</li>
             <li><strong>If position is even:</strong> - Check position (0, 2, 4...)</li>
+            <li><strong>If counter = 0:</strong> - Check variable value</li>
             <li><strong>Set icing = "red":</strong> - Apply red icing</li>
             <li><strong>Set icing = current color:</strong> - Use current loop color</li>
             <li><strong>Set sprinkles = true:</strong> - Add sprinkles</li>
+            <li><strong>Set counter = 0:</strong> - Create/set variable</li>
+            <li><strong>Set counter = counter + 1:</strong> - Increment variable</li>
             <li><strong>Else:</strong> - Alternative condition</li>
           </ul>
+
+          <h4 className="font-semibold text-blue-800 mb-2 mt-4">Advanced:</h4>
+          <ul className="space-y-1 text-blue-700">
+            <li><strong>position</strong> - Cookie position (0, 1, 2, 3...)</li>
+            <li><strong>If position % 4 = 0:</strong> - Check if position divides evenly by 4</li>
+          </ul>
+
           <p className="mt-2 text-blue-600">
             Available colors: red, green, blue, yellow, pink
+          </p>
+          <p className="mt-2 text-blue-600">
+            Math operators: + - * / % (addition, subtraction, multiplication, division, modulo)
           </p>
         </div>
       )}

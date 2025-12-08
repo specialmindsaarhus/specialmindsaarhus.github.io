@@ -80,7 +80,7 @@
         { "id": "5", "shape": "star", "position": 4 },
         { "id": "6", "shape": "circle", "position": 5 }
       ],
-      "exampleSolution": "For each color in [\"red\", \"green\", \"red\"]:\n    For each cookie:\n        Set icing = current color\n        If shape = \"star\":\n            Set sprinkles = true\n        Else:\n            Set sprinkles = false"
+      "exampleSolution": "For each cookie:\n    Set icing = \"red\"\n    If shape = \"star\":\n        Set sprinkles = true\n    Else:\n        Set sprinkles = false\n    If position % 4 = 2:\n        Set icing = \"green\"\n    If position % 4 = 3:\n        Set icing = \"green\""
     }
   ]
 }
