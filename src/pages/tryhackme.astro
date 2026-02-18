@@ -6,109 +6,262 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 ---
 
 <Layout title="Special Minds Aarhus @ Github">
-	<main class="">
-		<h1 class="mt-8 !mb-8">TryHackMe</h1>
-		<h2 class="mt-8 mb-[unset] text-center font-thin">Lær om hacking og IT-sikkerhed gennem spil og øvelser</h2><br>
-    	<div class="instructions text-center">
-			<iframe
-			width="560"
-			src={videoUrl}
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			allowfullscreen
-			class="w-full aspect-video"
-		  />
-		  <br><br>
-		 <p class=" text-md font-thin mt-0"><span class="font-semibold">Hvorfor </span>
-			bruge TryHackMe?<br><br>
-			<span class="font-semibold">Fordi </span> du lærer om IT-sikkerhed og ethical hacking på en sjov og praktisk måde. Du spiller dig igennem læring omkring hacking og IT-sikkerhed i rigtige virtuelle miljøer - direkte i din browser. Du lærer at tænke som en hacker, så du bedre kan beskytte systemer.<br>
-			Alt sammen i et trygt og lovligt miljø i spilformat.
-			<br><br>
-				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+	<main class="tryhackme-page">
+		<div class="logo-container">
+			<img src="/special-minds-logo.png" alt="Special Minds" class="brand-logo" />
+		</div>
 
-					<p class=" text-2xl font-bold mt-0 ">Kom i gang</p>
-					<p class="text-md font-thin mt-0 ">
-						<a class="!no-underline" href="https://tryhackme.com/">
+		<h1>TryHackMe</h1>
+		<h2>Lær om hacking og IT-sikkerhed gennem spil og øvelser</h2>
+
+    	<div class="content">
+			<div class="video-wrapper">
+				<iframe
+				width="560"
+				src={videoUrl}
+				title="YouTube video player"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen
+				class="video"
+			  />
+			</div>
+
+		 	<p class="intro-text">
+				<span class="highlight">Hvorfor</span> bruge TryHackMe?
+			</p>
+			<p class="body-text">
+				<span class="highlight">Fordi</span> du lærer om IT-sikkerhed og ethical hacking på en sjov og praktisk måde. Du spiller dig igennem læring omkring hacking og IT-sikkerhed i rigtige virtuelle miljøer - direkte i din browser. Du lærer at tænke som en hacker, så du bedre kan beskytte systemer.<br>
+				Alt sammen i et trygt og lovligt miljø i spilformat.
+			</p>
+
+			<div class="info-card">
+				<p class="card-title">Kom i gang</p>
+				<div class="card-body">
+					<a class="step-link" href="https://tryhackme.com/">
 						1) Opret en gratis konto på tryhackme.com
-						</a>
-						<br>
-						<span class="text-sm">Brug din skole-email eller personlig email til at oprette kontoen</span>
-						<br><br>
-							2) Log ind og udforsk platformen
-							<br>
-						<span class="text-sm">Når du logger ind, kommer du til dit dashboard hvor du kan se dine fremskridt</span>
-							<br><br>
-					</p>
+					</a>
+					<span class="hint">Brug din skole-email eller personlig email til at oprette kontoen</span>
+
+					<p class="step">2) Log ind og udforsk platformen</p>
+					<span class="hint">Når du logger ind, kommer du til dit dashboard hvor du kan se dine fremskridt</span>
 				</div>
+			</div>
 
-
-				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
-
-					<p class=" text-2xl font-bold mt-0 ">Start din læring</p>
-					<p class="text-md font-thin mt-0 ">
-						<a class="!no-underline" href="https://tryhackme.com/path/outline/presecurity">
+			<div class="info-card">
+				<p class="card-title">Start din læring</p>
+				<div class="card-body">
+					<a class="step-link" href="https://tryhackme.com/path/outline/presecurity">
 						1) Start med "Pre Security" learning path - den er gratis og perfekt for begyndere
-						</a>
-						<br>
-						<span class="text-sm">Her lærer du det helt basale om netværk, web og operativsystemer</span>
-						<br><br>
-						<a class="!no-underline" href="https://tryhackme.com/path/outline/introtocyber">
+					</a>
+					<span class="hint">Her lærer du det helt basale om netværk, web og operativsystemer</span>
+
+					<a class="step-link" href="https://tryhackme.com/path/outline/introtocyber">
 						2) Fortsæt med "Introduction to Cyber Security"
-						</a>
-						<br>
-						<span class="text-sm">Lær om offensive og defensive sikkerhed i praksis</span>
-						<br><br>
-						3) Spil. Lær. Ha' det sjovt!
-						<br>
-						<span class="text-sm">Over 80% af indholdet på TryHackMe er gratis</span>
-						<br><br>
-					</p>
-				</div>
+					</a>
+					<span class="hint">Lær om offensive og defensive sikkerhed i praksis</span>
 
-				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
-
-					<p class=" text-2xl font-bold mt-0 ">Certificeringer</p>
-					<p class="text-md font-thin mt-0 ">
-						Hvis du virkelig dykker ind i det, er der mulighed for branche-anerkendte certificeringer!
-						<br><br>
-						<span class="font-semibold">TryHackMe</span> forbereder dig til certificeringer som:
-						<br>
-						<span class="text-sm">
-						CompTIA Security+ <br>
-						CEH (Certified Ethical Hacker) <br>
-						og mange flere inden for cybersecurity
-						</span>
-						<br><br>
-						<span class="text-sm">Tal med din underviser hvis du vil vide mere om certificeringer</span>
-					</p>
+					<p class="step">3) Spil. Lær. Ha' det sjovt!</p>
+					<span class="hint">Over 80% af indholdet på TryHackMe er gratis</span>
 				</div>
+			</div>
+
+			<div class="info-card accent">
+				<p class="card-title">Certificeringer</p>
+				<div class="card-body">
+					<p class="step">Hvis du virkelig dykker ind i det, er der mulighed for branche-anerkendte certificeringer!</p>
+
+					<p class="body-text"><span class="highlight">TryHackMe</span> forbereder dig til certificeringer som:</p>
+					<ul class="cert-list">
+						<li>CompTIA Security+</li>
+						<li>CEH (Certified Ethical Hacker)</li>
+						<li>og mange flere inden for cybersecurity</li>
+					</ul>
+
+					<span class="hint">Tal med din underviser hvis du vil vide mere om certificeringer</span>
+				</div>
+			</div>
+		</div>
 	</main>
 </Layout>
 
 <style>
-	main {
+	@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&display=swap');
+
+	main.tryhackme-page {
 		margin: auto;
-		padding: 1rem;
+		padding: 2rem 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
 		color: white;
-		font-size: 20px;
-		line-height: 1.6;
+		font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
+		font-size: 18px;
+		line-height: 1.7;
 	}
-	a{
+
+	.logo-container {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.brand-logo {
+		max-width: 280px;
+		height: auto;
+		opacity: 0.9;
+	}
+
+	h1 {
+		font-size: 3.5rem;
+		font-weight: 700;
+		line-height: 1.1;
+		text-align: center;
+		margin-bottom: 0.25em;
+		color: #ecd573;
+	}
+
+	h2 {
+		text-align: center;
+		font-weight: 300;
+		font-size: 1.25rem;
+		color: rgba(255, 255, 255, 0.75);
+		margin-top: 0;
+		margin-bottom: 2.5rem;
+	}
+
+	.video-wrapper {
+		border-radius: 12px;
+		overflow: hidden;
+		margin-bottom: 2.5rem;
+		border: 2px solid #25534f;
+	}
+
+	.video {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		display: block;
+	}
+
+	.intro-text {
+		font-size: 1.3rem;
+		font-weight: 400;
+		margin-bottom: 0.5rem;
+	}
+
+	.body-text {
+		font-weight: 300;
+		margin-bottom: 2rem;
+		color: rgba(255, 255, 255, 0.85);
+	}
+
+	.highlight {
+		font-weight: 600;
+		color: #ecd573;
+	}
+
+	.info-card {
+		border: 2px solid #4ba59d;
+		border-radius: 12px;
+		padding: 2rem;
+		margin-bottom: 1.5rem;
+		background: rgba(75, 165, 157, 0.06);
+		transition: border-color 0.3s ease;
+	}
+
+	.info-card:hover {
+		border-color: #ecd573;
+	}
+
+	.info-card.accent {
+		border-color: #ecd573;
+		background: rgba(236, 213, 115, 0.05);
+	}
+
+	.info-card.accent:hover {
+		border-color: #4ba59d;
+	}
+
+	.card-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 0 0 1rem 0;
+		color: #4ba59d;
+	}
+
+	.info-card.accent .card-title {
+		color: #ecd573;
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.step-link {
+		font-weight: 400;
+		color: white;
+		text-decoration: none;
+		padding: 0.3rem 0;
+		transition: color 0.2s ease;
+	}
+
+	.step-link:hover {
+		color: #ecd573 !important;
+	}
+
+	.step {
+		font-weight: 400;
+		margin: 0.3rem 0;
+	}
+
+	.hint {
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.5);
+		margin-bottom: 0.75rem;
+		display: block;
+	}
+
+	.cert-list {
+		list-style: none;
+		padding: 0;
+		margin: 0.5rem 0 1rem 0;
+	}
+
+	.cert-list li {
+		padding: 0.2rem 0 0.2rem 1.25rem;
+		position: relative;
+		font-weight: 300;
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.cert-list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 8px;
+		height: 8px;
+		background: #4ba59d;
+		border-radius: 50%;
+	}
+
+	a {
 		text-decoration: none;
 	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1.125;
-		text-align: center;
-		margin-bottom: 1em;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		padding: 1.5rem;
 
+	@media (max-width: 640px) {
+		h1 {
+			font-size: 2.5rem;
+		}
+
+		.brand-logo {
+			max-width: 200px;
+		}
+
+		.info-card {
+			padding: 1.25rem;
+		}
 	}
 </style>
