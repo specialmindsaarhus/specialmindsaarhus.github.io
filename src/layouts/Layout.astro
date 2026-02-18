@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
 	title: string;
 }
@@ -34,51 +36,3 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #0c0c0d;
-		background-size: 224px;
-		color:white;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-	.lykkehjulet{
-		background-color: rgb(197, 192, 122) !important;
-	}
-	a{
-		color: white;
-	}
-	a:visited{
-		color: rgba(255, 255, 255, 0.856) !important
-	}
-	body{
-		position: relative;
-	}
-	nav{
-		
-		max-width: 100%;
-	}
-
-	
-</style>

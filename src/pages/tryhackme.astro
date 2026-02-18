@@ -86,19 +86,8 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 </Layout>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&display=swap');
-
-	:global(html) {
-		background: #242d39 !important;
-	}
-
 	main.tryhackme-page {
-		margin: auto;
 		padding: 2rem 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 		font-size: 18px;
 		line-height: 1.7;
 	}
@@ -116,15 +105,11 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 
 	h1 {
 		font-size: 3.5rem;
-		font-weight: 700;
-		line-height: 1.1;
-		text-align: center;
 		margin-bottom: 0.25em;
-		color: #ecd573;
+		color: var(--sm-gold);
 	}
 
 	h2 {
-		text-align: center;
 		font-weight: 300;
 		font-size: 1.25rem;
 		color: rgba(255, 255, 255, 0.75);
@@ -136,7 +121,7 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 		border-radius: 12px;
 		overflow: hidden;
 		margin-bottom: 2.5rem;
-		border: 2px solid #25534f;
+		border: 2px solid var(--sm-teal-dark);
 	}
 
 	.video {
@@ -159,11 +144,11 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 
 	.highlight {
 		font-weight: 600;
-		color: #ecd573;
+		color: var(--sm-gold);
 	}
 
 	.info-card {
-		border: 2px solid #4ba59d;
+		border: 2px solid var(--sm-teal);
 		border-radius: 12px;
 		padding: 2rem;
 		margin-bottom: 1.5rem;
@@ -172,27 +157,27 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 	}
 
 	.info-card:hover {
-		border-color: #ecd573;
+		border-color: var(--sm-gold);
 	}
 
 	.info-card.accent {
-		border-color: #ecd573;
+		border-color: var(--sm-gold);
 		background: rgba(236, 213, 115, 0.05);
 	}
 
 	.info-card.accent:hover {
-		border-color: #4ba59d;
+		border-color: var(--sm-teal);
 	}
 
 	.card-title {
 		font-size: 1.5rem;
 		font-weight: 700;
 		margin: 0 0 1rem 0;
-		color: #4ba59d;
+		color: var(--sm-teal);
 	}
 
 	.info-card.accent .card-title {
-		color: #ecd573;
+		color: var(--sm-gold);
 	}
 
 	.card-body {
@@ -204,13 +189,12 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 	.step-link {
 		font-weight: 400;
 		color: white;
-		text-decoration: none;
 		padding: 0.3rem 0;
 		transition: color 0.2s ease;
 	}
 
 	.step-link:hover {
-		color: #ecd573 !important;
+		color: var(--sm-gold) !important;
 	}
 
 	.step {
@@ -247,12 +231,8 @@ const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
 		transform: translateY(-50%);
 		width: 8px;
 		height: 8px;
-		background: #4ba59d;
+		background: var(--sm-teal);
 		border-radius: 50%;
-	}
-
-	a {
-		text-decoration: none;
 	}
 
 	@media (max-width: 640px) {
