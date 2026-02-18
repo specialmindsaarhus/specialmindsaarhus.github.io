@@ -31,13 +31,23 @@ body {
 	position: relative;
 }
 
+/* === Links === */
 a {
 	color: white;
 	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+a:hover {
+	color: var(--sm-gold) !important;
 }
 
 a:visited {
 	color: rgba(255, 255, 255, 0.856) !important;
+}
+
+a:visited:hover {
+	color: var(--sm-gold) !important;
 }
 
 code {
@@ -50,6 +60,10 @@ code {
 
 nav {
 	max-width: 100%;
+}
+
+nav a:hover {
+	color: var(--sm-gold) !important;
 }
 
 /* === Page Layout === */
@@ -69,15 +83,24 @@ h1 {
 	font-weight: 700;
 	line-height: 1.125;
 	text-align: center;
-	margin-bottom: 1em;
-}
-
-h1, h2 {
-	text-align: center;
+	margin-bottom: 0.5em;
+	color: var(--sm-gold);
 }
 
 h2 {
+	text-align: center;
 	line-height: 1;
+	font-weight: 300;
+	color: rgba(255, 255, 255, 0.75);
+}
+
+/* Highlight keywords (Hvorfor, Fordi, etc.) */
+.font-semibold {
+	color: var(--sm-gold) !important;
+}
+
+.font-bold {
+	color: var(--sm-teal) !important;
 }
 
 .text-gradient {
@@ -103,6 +126,7 @@ h2 {
 .instructions {
 	margin-bottom: 2rem;
 	padding: 1.5rem;
+	text-align: left;
 }
 
 .instructions p,
@@ -132,6 +156,26 @@ h2 {
 
 .instructions strong {
 	color: rgb(var(--accent-light));
+}
+
+/* === Bordered content cards === */
+.border-white {
+	border-color: var(--sm-teal) !important;
+}
+
+.border-solid {
+	background: rgba(75, 165, 157, 0.06);
+	transition: border-color 0.3s ease;
+}
+
+.border-solid:hover {
+	border-color: var(--sm-gold) !important;
+}
+
+/* === Video iframes === */
+iframe {
+	border-radius: 12px;
+	border: 2px solid var(--sm-teal-dark) !important;
 }
 
 /* === Utility === */
