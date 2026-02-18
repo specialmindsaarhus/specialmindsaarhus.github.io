@@ -41,11 +41,11 @@ a {
 a:hover {
 	color: var(--sm-gold) !important;
 }
-
+/*
 a:visited {
 	color: rgba(255, 255, 255, 0.856) !important;
 }
-
+*/
 a:visited:hover {
 	color: var(--sm-gold) !important;
 }
@@ -185,7 +185,44 @@ h2 {
 	color: rgb(var(--accent-light));
 }
 
-/* === Bordered content cards === */
+/* === Info Cards (content sections on subpages) === */
+.info-card {
+	border: 2px solid var(--sm-teal);
+	border-radius: 12px;
+	padding: 2rem;
+	margin-bottom: 1.5rem;
+	background-color: #1a2332;
+	transition: border-color 0.3s ease;
+}
+
+.info-card:hover {
+	border-color: var(--sm-gold);
+}
+
+.info-card .font-bold {
+	color: var(--sm-teal);
+}
+
+.link-card {
+	list-style: none;
+	border: 2px solid var(--sm-teal);
+	border-radius: 12px;
+	padding: 2rem;
+	background-color: #1a2332;
+	transition: border-color 0.3s ease;
+}
+
+.link-card:hover {
+	border-color: var(--sm-gold);
+}
+
+
+
+.link-card .font-bold {
+	color: var(--sm-teal);
+}
+
+/* === Legacy bordered cards fallback === */
 .border-white {
 	border-color: var(--sm-teal) !important;
 }
@@ -206,7 +243,7 @@ iframe[src*="youtube"] {
 .link-card-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
-	gap: 2rem;
+	gap: 1.5rem;
 	padding: 0;
 }
 
