@@ -58,11 +58,38 @@ code {
 	margin-left: 64px;
 }
 
-nav {
-	max-width: 100%;
+/* === Site Header === */
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.75rem 1.5rem;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
-nav a:hover {
+.site-logo {
+	height: 32px;
+	width: auto;
+	opacity: 0.85;
+	transition: opacity 0.2s ease;
+}
+
+.site-logo:hover {
+	opacity: 1;
+}
+
+.site-nav {
+	display: flex;
+	gap: 1.25rem;
+	font-size: 0.8rem;
+}
+
+.site-nav a {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.site-nav a:hover {
 	color: var(--sm-gold) !important;
 }
 
