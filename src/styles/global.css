@@ -94,13 +94,13 @@ h2 {
 	color: rgba(255, 255, 255, 0.75);
 }
 
-/* Highlight keywords (Hvorfor, Fordi, etc.) */
-.font-semibold {
-	color: var(--sm-gold) !important;
+/* Highlight keywords in content areas (Hvorfor, Fordi, etc.) */
+.instructions .font-semibold {
+	color: var(--sm-gold);
 }
 
-.font-bold {
-	color: var(--sm-teal) !important;
+.instructions .font-bold {
+	color: var(--sm-teal);
 }
 
 .text-gradient {
@@ -163,17 +163,8 @@ h2 {
 	border-color: var(--sm-teal) !important;
 }
 
-.border-solid {
-	background: rgba(75, 165, 157, 0.06);
-	transition: border-color 0.3s ease;
-}
-
-.border-solid:hover {
-	border-color: var(--sm-gold) !important;
-}
-
-/* === Video iframes === */
-iframe {
+/* === Video iframes (only YouTube etc, not embeds like Canva) === */
+iframe[src*="youtube"] {
 	border-radius: 12px;
 	border: 2px solid var(--sm-teal-dark) !important;
 }
