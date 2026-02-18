@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const videoUrl = "https://www.youtube.com/embed/rHoFEnjNgBo"
+
+---
+
+<Layout title="Special Minds Aarhus @ Github">
+	<main class="">
+		<h1 class="mt-8 !mb-8">TryHackMe</h1>
+		<h2 class="mt-8 mb-[unset] text-center font-thin">Lær om hacking og IT-sikkerhed gennem spil og øvelser</h2><br>
+    	<div class="instructions text-center">
+			<iframe
+			width="560"
+			src={videoUrl}
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+			class="w-full aspect-video"
+		  />
+		  <br><br>
+		 <p class=" text-md font-thin mt-0"><span class="font-semibold">Hvorfor </span>
+			bruge TryHackMe?<br><br>
+			<span class="font-semibold">Fordi </span> du lærer om IT-sikkerhed og ethical hacking på en sjov og praktisk måde. Du spiller dig igennem læring omkring hacking og IT-sikkerhed i rigtige virtuelle miljøer - direkte i din browser. Du lærer at tænke som en hacker, så du bedre kan beskytte systemer.<br>
+			Alt sammen i et trygt og lovligt miljø i spilformat.
+			<br><br>
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Kom i gang</p>
+					<p class="text-md font-thin mt-0 ">
+						<a class="!no-underline" href="https://tryhackme.com/">
+						1) Opret en gratis konto på tryhackme.com
+						</a>
+						<br>
+						<span class="text-sm">Brug din skole-email eller personlig email til at oprette kontoen</span>
+						<br><br>
+							2) Log ind og udforsk platformen
+							<br>
+						<span class="text-sm">Når du logger ind, kommer du til dit dashboard hvor du kan se dine fremskridt</span>
+							<br><br>
+					</p>
+				</div>
+
+
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Start din læring</p>
+					<p class="text-md font-thin mt-0 ">
+						<a class="!no-underline" href="https://tryhackme.com/path/outline/presecurity">
+						1) Start med "Pre Security" learning path - den er gratis og perfekt for begyndere
+						</a>
+						<br>
+						<span class="text-sm">Her lærer du det helt basale om netværk, web og operativsystemer</span>
+						<br><br>
+						<a class="!no-underline" href="https://tryhackme.com/path/outline/introtocyber">
+						2) Fortsæt med "Introduction to Cyber Security"
+						</a>
+						<br>
+						<span class="text-sm">Lær om offensive og defensive sikkerhed i praksis</span>
+						<br><br>
+						3) Spil. Lær. Ha' det sjovt!
+						<br>
+						<span class="text-sm">Over 80% af indholdet på TryHackMe er gratis</span>
+						<br><br>
+					</p>
+				</div>
+
+				<div class="p-8 mb-8 rounded-lg border-2 border-white border-solid">
+
+					<p class=" text-2xl font-bold mt-0 ">Certificeringer</p>
+					<p class="text-md font-thin mt-0 ">
+						Hvis du virkelig dykker ind i det, er der mulighed for branche-anerkendte certificeringer!
+						<br><br>
+						<span class="font-semibold">TryHackMe</span> forbereder dig til certificeringer som:
+						<br>
+						<span class="text-sm">
+						CompTIA Security+ <br>
+						CEH (Certified Ethical Hacker) <br>
+						og mange flere inden for cybersecurity
+						</span>
+						<br><br>
+						<span class="text-sm">Tal med din underviser hvis du vil vide mere om certificeringer</span>
+					</p>
+				</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	a{
+		text-decoration: none;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1.125;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+
+	}
+</style>
