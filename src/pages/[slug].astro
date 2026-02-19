@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import CmsPage from '../components/CmsPage';
 
 export async function getStaticPaths() {
-  const base = import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055';
+  const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
   try {
     const res = await fetch(
       `${base}/items/pages?filter[status][_eq]=published&fields=slug,title`
@@ -14,12 +14,14 @@ export async function getStaticPaths() {
       params: { slug: page.slug },
       props: { title: page.title },
     }));
-  } catch {
+  } catch (err) {
+    console.warn('[slug].astro: Directus unreachable during build, no static CMS routes generated.', err);
     return [];
   }
 }
 
 const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/');
 const { title } = Astro.props;
 ---
 

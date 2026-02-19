@@ -2,11 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
-const d = new Date()
-const whatDay = d.getDay()
-
 // Fetch CMS-backed pages from Directus at build time
-const base = import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055';
+const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
 let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
 try {
   const res = await fetch(
@@ -16,7 +13,9 @@ try {
     const { data } = await res.json();
     cmsPages = data ?? [];
   }
-} catch {}
+} catch (err) {
+  console.warn('index.astro: Directus unreachable at build time, CMS cards omitted.', err);
+}
 ---
 
 <Layout title="Special Minds Aarhus @ Github">
@@ -118,7 +117,7 @@ try {
 			body="Links og vejledning"
 			/>
 			<Card
-			href="fundamentals_of_programming"
+			href="/fundamentals_of_programming"
 			title="The Fundamentals of Programming m. Python"
 			body="Links og vejledning"
 			/>

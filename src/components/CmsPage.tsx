@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 // --- Types matching the Directus content model ---
 
-interface CardItem {
+interface CardItemData {
   id: number;
   type: 'step' | 'step-link' | 'hint' | 'list-item';
   text: string;
@@ -15,7 +15,7 @@ interface InfoCard {
   title: string;
   variant: 'normal' | 'accent';
   sort: number;
-  items: CardItem[];
+  items: CardItemData[];
 }
 
 interface CmsPageData {
@@ -27,11 +27,38 @@ interface CmsPageData {
   intro_text?: string | null;
   body_label?: string | null;
   body_text?: string | null;
-  info_cards: InfoCard[];
+  info_cards: InfoCard[] | null;
 }
 
 interface DirectusResponse {
   data: CmsPageData[];
+}
+
+// --- Security helpers ---
+
+const ALLOWED_EMBED_HOSTS = new Set([
+  'www.youtube.com',
+  'youtube.com',
+  'player.vimeo.com',
+  'www.canva.com',
+]);
+
+function isSafeEmbedUrl(url: string): boolean {
+  try {
+    return ALLOWED_EMBED_HOSTS.has(new URL(url).hostname);
+  } catch {
+    return false;
+  }
+}
+
+function sanitizeHref(href: string | null | undefined): string {
+  if (!href) return '#';
+  try {
+    const parsed = new URL(href, window.location.href);
+    return parsed.protocol === 'javascript:' ? '#' : href;
+  } catch {
+    return '#';
+  }
 }
 
 // --- Component ---
@@ -46,7 +73,8 @@ export default function CmsPage({ slug }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const base = import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055';
+    const controller = new AbortController();
+    const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
     const url =
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
@@ -57,7 +85,7 @@ export default function CmsPage({ slug }: Props) {
       `&deep[info_cards][_sort]=sort` +
       `&deep[info_cards][items][_sort]=sort`;
 
-    fetch(url)
+    fetch(url, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json() as Promise<DirectusResponse>;
@@ -66,13 +94,18 @@ export default function CmsPage({ slug }: Props) {
         if (!json.data || json.data.length === 0) {
           setError('Siden blev ikke fundet.');
         } else {
-          setPage(json.data[0]);
+          const pageData = json.data[0];
+          setPage(pageData);
+          document.title = `${pageData.title} — Special Minds Aarhus`;
         }
       })
-      .catch(() => {
+      .catch((err: unknown) => {
+        if (err instanceof Error && err.name === 'AbortError') return;
         setError('Kunne ikke hente indhold. Prøv at genindlæse siden.');
       })
       .finally(() => setLoading(false));
+
+    return () => controller.abort();
   }, [slug]);
 
   if (loading) {
@@ -101,12 +134,12 @@ export default function CmsPage({ slug }: Props) {
       {page.subtitle && <h2>{page.subtitle}</h2>}
 
       <div className="content">
-        {page.video_url && (
+        {page.video_url && isSafeEmbedUrl(page.video_url) && (
           <div className="video-wrapper">
             <iframe
               src={page.video_url}
               title="Video"
-              frameBorder="0"
+              style={{ border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="video"
@@ -136,11 +169,11 @@ export default function CmsPage({ slug }: Props) {
           </>
         )}
 
-        {page.info_cards.map((card) => (
+        {(page.info_cards ?? []).map((card) => (
           <div key={card.id} className={`info-card${card.variant === 'accent' ? ' accent' : ''}`}>
             <p className="card-title">{card.title}</p>
             <div className="card-body">
-              {card.items.map((item) => renderItem(item))}
+              {card.items.map((item) => <ItemView key={item.id} item={item} />)}
             </div>
           </div>
         ))}
@@ -149,32 +182,20 @@ export default function CmsPage({ slug }: Props) {
   );
 }
 
-function renderItem(item: CardItem) {
+function ItemView({ item }: { item: CardItemData }) {
   switch (item.type) {
     case 'step-link':
       return (
-        <a key={item.id} className="step-link" href={item.href ?? '#'}>
+        <a className="step-link" href={sanitizeHref(item.href)}>
           {item.text}
         </a>
       );
     case 'hint':
-      return (
-        <span key={item.id} className="hint">
-          {item.text}
-        </span>
-      );
+      return <span className="hint">{item.text}</span>;
     case 'list-item':
-      return (
-        <span key={item.id} className="list-item">
-          {item.text}
-        </span>
-      );
+      return <span className="list-item">{item.text}</span>;
     case 'step':
     default:
-      return (
-        <p key={item.id} className="step">
-          {item.text}
-        </p>
-      );
+      return <p className="step">{item.text}</p>;
   }
 }
