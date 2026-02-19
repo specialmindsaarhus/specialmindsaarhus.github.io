@@ -1,14 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-//import Engineering from './engineering.astro';
 
 const d = new Date()
 const whatDay = d.getDay()
 
-
-
-
+// Fetch CMS-backed pages from Directus at build time
+const base = import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055';
+let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
+try {
+  const res = await fetch(
+    `${base}/items/pages?filter[status][_eq]=published&fields=slug,title,subtitle&sort=title`
+  );
+  if (res.ok) {
+    const { data } = await res.json();
+    cmsPages = data ?? [];
+  }
+} catch {}
 ---
 
 <Layout title="Special Minds Aarhus @ Github">
@@ -27,6 +35,13 @@ const whatDay = d.getDay()
 		</div>
 		
 		<ul role="list" class="link-card-grid">
+			{cmsPages.map(page => (
+				<Card
+					href={`/${page.slug}`}
+					title={page.title}
+					body={page.subtitle ?? ''}
+				/>
+			))}
 			<Card
 			href="/tryhackme"
 			title="TryHackMe - IT Sikkerhed"

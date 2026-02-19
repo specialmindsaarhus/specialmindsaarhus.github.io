@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CmsPage from '../components/CmsPage';
+
+export async function getStaticPaths() {
+  const base = import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055';
+  try {
+    const res = await fetch(
+      `${base}/items/pages?filter[status][_eq]=published&fields=slug,title`
+    );
+    if (!res.ok) return [];
+    const { data } = await res.json();
+    return (data ?? []).map((page: { slug: string; title: string }) => ({
+      params: { slug: page.slug },
+      props: { title: page.title },
+    }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const { title } = Astro.props;
+---
+
+<Layout title={`${title} — Special Minds Aarhus`}>
+  <CmsPage client:only="react" slug={slug} />
+</Layout>

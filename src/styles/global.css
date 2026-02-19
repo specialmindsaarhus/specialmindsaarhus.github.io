@@ -191,7 +191,7 @@ h2 {
 	border-radius: 12px;
 	padding: 2rem;
 	margin-bottom: 1.5rem;
-	background-color: #1a2332;
+	background: rgba(75, 165, 157, 0.06);
 	transition: border-color 0.3s ease;
 }
 
@@ -199,8 +199,130 @@ h2 {
 	border-color: var(--sm-gold);
 }
 
+.info-card.accent {
+	border-color: var(--sm-gold);
+	background: rgba(236, 213, 115, 0.05);
+}
+
+.info-card.accent:hover {
+	border-color: var(--sm-teal);
+}
+
 .info-card .font-bold {
 	color: var(--sm-teal);
+}
+
+.card-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0 0 1rem 0;
+	color: var(--sm-teal);
+}
+
+.info-card.accent .card-title {
+	color: var(--sm-gold);
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.step-link {
+	font-weight: 400;
+	color: white;
+	padding: 0.3rem 0;
+	transition: color 0.2s ease;
+}
+
+.step-link:hover {
+	color: var(--sm-gold) !important;
+}
+
+.step {
+	font-weight: 400;
+	margin: 0.3rem 0;
+}
+
+.hint {
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.5);
+	margin-bottom: 0.75rem;
+	display: block;
+}
+
+.highlight {
+	font-weight: 600;
+	color: var(--sm-gold);
+}
+
+/* === CMS page layout === */
+.cms-page {
+	padding: 2rem 1rem;
+	font-size: 18px;
+	line-height: 1.7;
+}
+
+.cms-page h1 {
+	font-size: 3.5rem;
+	margin-bottom: 0.25em;
+	color: var(--sm-gold);
+	text-align: center;
+}
+
+.cms-page h2 {
+	font-weight: 300;
+	font-size: 1.25rem;
+	color: rgba(255, 255, 255, 0.75);
+	margin-top: 0;
+	margin-bottom: 2.5rem;
+	text-align: center;
+}
+
+.cms-page .video-wrapper {
+	border-radius: 12px;
+	overflow: hidden;
+	margin-bottom: 2.5rem;
+	border: 2px solid var(--sm-teal-dark);
+}
+
+.cms-page .video {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	display: block;
+}
+
+.cms-page .intro-text {
+	font-size: 1.3rem;
+	font-weight: 400;
+	margin-bottom: 0.5rem;
+}
+
+.cms-page .body-text {
+	font-weight: 300;
+	margin-bottom: 2rem;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.list-item {
+	padding: 0.2rem 0 0.2rem 1.25rem;
+	position: relative;
+	font-weight: 300;
+	font-size: 0.95rem;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.list-item::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	background: var(--sm-teal);
+	border-radius: 50%;
 }
 
 .link-card {

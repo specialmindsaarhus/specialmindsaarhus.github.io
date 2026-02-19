@@ -19,3 +19,8 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Directus local data (never commit)
+directus/.env
+directus/database/
+directus/uploads/
