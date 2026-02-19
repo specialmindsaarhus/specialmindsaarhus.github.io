@@ -4,17 +4,25 @@
 
 ---
 
-## Phase 1 — Code to `main` (do this first)
+## ~~Phase 1 — Code to `main`~~ ✅ Done (2026-02-19)
 
-- [ ] Push `dev` branch and merge to `main`
-  - Files to stage: `src/components/CmsPageFallback.tsx`, `src/pages/404.astro`,
-    `.github/workflows/deploy.yml`, `CLAUDE.md`, `directus/`, `src/pages/[slug].astro`,
-    `src/components/CmsPage.tsx`, `src/styles/global.css`, `src/pages/index.astro`
-  - After merge: GitHub Actions will deploy. Verify the site still works.
+dev branch merged to main. GitHub Actions deployed successfully.
 
 ---
 
-## Phase 2 — Directus on Coolify (no domain yet)
+## ~~Phase 2 — Directus on Coolify~~ ✅ Done (2026-02-19)
+
+Directus running at https://cms.spmi.dk with SSL. Schema applied, public permissions set.
+
+---
+
+## ~~Phase 3 — Domain: cms.spmi.dk~~ ✅ Done (2026-02-19)
+
+DNS A record set, SSL certificate provisioned via Let's Encrypt.
+
+---
+
+## ~~Phase 2 — Directus on Coolify (no domain yet)~~
 
 Deploy Directus first using Coolify's auto-generated URL. Add the real domain in Phase 3.
 This way you can verify Directus works before touching DNS.
