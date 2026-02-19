@@ -2,162 +2,165 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> Historical context archived in `claude-historic/`.
+
 ## Project Overview
 
-Special Minds Aarhus educational website built with Astro, featuring interactive tutorials and learning games for autistic students aged 16-25. The site is deployed to GitHub Pages.
+Special Minds Aarhus — educational website for autistic students aged 16-25. Built with Astro + React, deployed to GitHub Pages at https://specialmindsaarhus.github.io.
+
+The site features interactive tutorials and learning games, including an algorithm cookie-decoration game that teaches computational thinking.
+
+## Branches
+
+- `main` — live production site (GitHub Pages deploys from here)
+- `dev` — parallel development branch (current active work)
 
 ## Development Commands
 
 ```bash
-# Start development server (http://localhost:4321)
-npm run dev
-
-# Build for production (includes type checking)
-npm run build
-
-# Preview production build
-npm run preview
-
-# Type check only
-npm run astro check
+npm run dev        # Dev server at http://localhost:4321
+npm run build      # Production build (includes type check)
+npm run preview    # Preview production build
+npm run astro check  # Type check only
 ```
 
 ## Architecture
 
-### Astro + React Islands Pattern
+### Astro + React Islands
 
-The site uses **Astro** as the static site generator with **React islands** for interactive components. This hybrid approach allows:
-- Fast static page loads
-- Interactive React components where needed (e.g., games)
-- Minimal JavaScript shipped to the browser
-
-**Key Pattern**: React components are embedded in Astro pages using the `client:only="react"` directive for client-side-only rendering.
-
-### Site Structure
+Static site generator (Astro) with React islands for interactive components. Interactive components use `client:only="react"` directive.
 
 ```
 src/
 ├── pages/           # Astro pages (routes)
-├── layouts/         # Layout templates
+├── layouts/         # Layout templates (Layout.astro)
 ├── components/      # Reusable components
 │   ├── *.astro     # Static Astro components
 │   └── cookie-game/ # React game components
 └── data/           # Static JSON data
 ```
 
-### GitHub Pages Deployment
+### Deployment
 
-- **Site URL**: https://specialmindsaarhus.github.io
-- **Deployment**: Automated via GitHub Actions (`.github/workflows/deploy.yml`)
-- **Trigger**: Pushes to `main` branch
-- **Config**: `astro.config.mjs` specifies the site URL
+- Automated via GitHub Actions (`.github/workflows/deploy.yml`)
+- Triggers on push to `main`
+- Config: `astro.config.mjs`
 
-## Algorithm Cookie Game Architecture
+## Cookie Game — Key Facts
 
-A custom educational game teaching algorithmic thinking through cookie decoration. Located at `/algorithm-cookie-game`.
-
-### Core Components
-
-**Game State Flow**:
-1. `CookieGameWrapper.tsx` - Top-level wrapper, loads challenges from JSON
-2. `ChallengeList.tsx` - Challenge selection UI
-3. `ChallengeView.tsx` - Main game interface (editor + visualization)
-4. `AlgorithmEditor.tsx` - Code editor with syntax help
-5. `CookieDisplay.tsx` - Visual cookie rendering
-
-**Data Flow**:
-- Static challenges: `src/data/cookie-challenges.json`
-- User progress: localStorage (via `src/components/cookie-game/lib/storage.ts`)
+- Location: `src/components/cookie-game/`
+- Entry: `CookieGameWrapper.tsx` → `ChallengeList.tsx` → `ChallengeView.tsx`
+- Challenges data: `src/data/cookie-challenges.json`
 - Types: `src/components/cookie-game/lib/types.ts`
+- User progress: localStorage via `lib/storage.ts`
+- Core interpreter: `AlgorithmExecutor.ts` — custom pseudocode parser (indentation-based scoping)
 
-### AlgorithmExecutor - Custom Pseudocode Parser
+See `claude-historic/CLAUDE-2025-phase1.md` for deep implementation notes on AlgorithmExecutor.
 
-**Location**: `src/components/cookie-game/AlgorithmExecutor.ts`
+## Testing
 
-This is the **most complex and critical component** - a custom interpreter for educational pseudocode.
-
-#### Key Architecture Decisions
-
-**Indentation-Based Scoping**:
-- Uses `.trimEnd()` NOT `.trim()` to preserve leading whitespace
-- Tracks indentation levels to determine scope
-- Condition stack manages nested if/else-if/else blocks
-
-**Variable System**:
-- Variables stored in `Map<string, number>` (numeric only)
-- Supports arithmetic: `+`, `-`, `*`, `/` (integer division), `%` (modulo)
-- Special keyword: `position` (references cookie.position)
-- Pre-loop initialization: Lines before "For each cookie:" are executed once with a dummy cookie
-
-**Expression Evaluation**:
-- Recursive arithmetic parser with operator precedence
-- Division uses `Math.floor()` for integer division
-- Expressions can include variables, position, and literals
-
-**Condition Evaluation**:
-- Numeric comparisons: `=`, `<`, `>`, `<=`, `>=`
-- Pattern: `(\w+(?:\s*\/\s*\d+|\s*%\s*\d+)?)\s*(=|<|>|<=|>=)\s*(\d+)`
-- Legacy support: `position is even`, `position is odd`
-- Shape matching: `shape = "star"`
-
-**Critical Implementation Details**:
-
-1. **Condition Stack Management**:
-   - Each if/else-if/else pushes a frame with `{condition, indent, executed, type}`
-   - Stack is popped when indentation decreases OR when at same level but not else/else-if
-   - `executed` flag prevents else-if from running after if succeeded
-
-2. **Pre-loop vs Loop Lines**:
-   - Lines before first "For each" are initialization (executed once)
-   - Lines after are loop body (executed per cookie)
-   - Must slice correctly to avoid re-initializing variables per cookie
-
-3. **Nested Loops**:
-   - Outer loop: `For each color in ["red", "green"]:`
-   - Inner loop: `For each cookie:`
-   - `currentColor` variable tracks outer loop state
-   - Use `Set icing = current color` to reference it
-
-#### Common Pitfalls
-
-- **DO NOT** use `.trim()` on lines - it breaks indentation detection
-- **ALWAYS** strip prefixes ("if ", "else if ") before passing to `evaluateCondition()`
-- **REMEMBER** pre-loop lines must be sliced out when processing loop
-- **TEST** with both counter-based and position-based algorithms
-
-### Testing the Game
-
-Test files exist in root (for Node.js testing):
-- `test-algorithm-executor.mjs` - Core parser tests (embedded JS copy)
-- `test-variables.mjs` - Variable system tests (imports .ts, requires tsx)
-
-Run tests:
 ```bash
-node test-algorithm-executor.mjs  # Works (embedded JS)
-npx tsx test-variables.mjs         # Also works (TypeScript)
+node test-algorithm-executor.mjs   # Cookie game parser tests (plain JS)
+npx tsx test-variables.mjs          # Variable system tests (TypeScript)
 ```
 
-## Working with Tutorial Pages
+## Coding Standards
 
-Tutorial pages are Astro files in `src/pages/`. Each page:
-- Uses `Layout.astro` wrapper
-- Contains educational content (HTML/Markdown)
-- Can embed interactive components
+- **Styling**: Tailwind CSS v3, utility-first classes
+- **TypeScript**: strict mode, type check runs before every build
+- **React**: v19, functional components only
+- **Astro**: static-first, use `client:only="react"` for interactive islands
+- **No framework magic**: keep component responsibilities clear and minimal
 
-**Adding a new tutorial**:
-1. Create `src/pages/your-tutorial.astro`
-2. Add a Card link on `src/pages/index.astro`
-3. Use existing pages as templates
+## Adding Content
 
-## Styling
+**New tutorial page** (hardcoded Astro):
+1. Create `src/pages/your-page.astro`
+2. Wrap with `Layout.astro`
+3. Add a Card link on `src/pages/index.astro`
 
-- **Framework**: Tailwind CSS (via `@astrojs/tailwind`)
-- **Config**: Standard Tailwind v3 configuration
-- **Pattern**: Utility-first classes in components
+**New CMS-backed page — Claude API workflow** (no `.astro` file needed):
+1. Read `DIRECTUS_URL` and `DIRECTUS_TOKEN` from the local `.env` file.
+2. POST the page to production Directus:
+   ```bash
+   curl -X POST "$DIRECTUS_URL/items/pages" \
+     -H "Authorization: Bearer $DIRECTUS_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{"slug":"my-page","title":"...","status":"published",...}'
+   ```
+3. The page is **immediately live** via the `404.astro` fallback (no rebuild needed).
+4. Directus fires a webhook → GitHub Actions rebuilds → page gets a proper static route + appears in homepage card grid (~2 min).
 
-## TypeScript
+**New CMS-backed page — co-worker workflow** (content managed in Directus admin UI):
+1. In Directus admin (`https://cms.spmi.dk`), create a `pages` item with the desired slug and set status to `published`. Add `info_cards` and their `items`.
+2. Page is immediately live via the 404 fallback. Rebuild happens automatically via webhook.
 
-- TypeScript enabled for type safety
-- Type checking runs before build (`astro check`)
-- React 19 with TypeScript support
-- Cookie game types: `src/components/cookie-game/lib/types.ts`
+That's it. No `.astro` file or code change is needed for CMS pages.
+
+## Directus CMS
+
+- **Local admin**: `http://localhost:8055` (start with `docker compose -f directus/docker-compose.yml up -d`)
+- **Production**: `https://cms.spmi.dk` (deployed via Coolify on Hetzner VPS)
+- **Env var for frontend**: `PUBLIC_DIRECTUS_URL` (set in `.env` locally, in GitHub Actions secrets for production)
+
+### Collections
+
+| Collection | Key fields |
+|---|---|
+| `pages` | `slug`, `title`, `subtitle`, `status` (draft\|published), `video_url`, `intro_label`, `intro_text`, `body_label`, `body_text` |
+| `info_cards` | `title`, `variant` (normal\|accent), `sort`, `page` (M2O → pages) |
+| `card_items` | `type` (step\|step-link\|hint\|list-item), `text`, `href`, `sort`, `card` (M2O → info_cards) |
+
+### Updating the content model
+
+1. Edit collections in local Directus admin UI
+2. Export snapshot:
+   ```bash
+   docker exec $(docker compose -f directus/docker-compose.yml ps -q directus) \
+     npx directus schema snapshot /directus/snapshots/schema.yaml
+   ```
+3. Commit `directus/snapshots/schema.yaml` and push → Coolify auto-applies on next deploy
+
+### Coolify deployment (one-time setup)
+
+- New Resource → Docker Compose → source path `directus/`, file `docker-compose.coolify.yml`
+- Set env vars from `directus/.env.example`
+- Configure domain (Traefik + SSL handled automatically)
+- Post Deploy Command: `npx directus schema apply /directus/snapshots/schema.yaml`
+
+### Key files
+
+- `directus/docker-compose.yml` — local dev
+- `directus/docker-compose.coolify.yml` — production (Coolify)
+- `directus/.env.example` — all required env vars documented
+- `directus/snapshots/schema.yaml` — versioned content model (generated, not hand-written)
+- `src/components/CmsPage.tsx` — React island that fetches and renders any CMS page
+- `src/components/CmsPageFallback.tsx` — reads slug from `window.location.pathname`, delegates to `CmsPage`
+- `src/pages/404.astro` — GitHub Pages 404 fallback; renders any published Directus page immediately
+
+### 404 fallback — how it works
+
+GitHub Pages serves `404.html` for unknown routes while preserving the URL in the browser.
+`404.astro` renders `CmsPageFallback` (a React island) which reads the URL slug and fetches from Directus.
+This means **any page published in Directus is live instantly** — before the next rebuild.
+
+After a rebuild, `[slug].astro` + `getStaticPaths()` gives the page a proper static route.
+
+### Directus webhook → GitHub rebuild (one-time setup)
+
+1. **GitHub PAT**: Settings → Developer settings → Fine-grained PAT → repo `specialmindsaarhus.github.io`, permission `Actions: write`
+2. **GitHub Actions secret**: repo Settings → Secrets → Actions → `PUBLIC_DIRECTUS_URL=https://cms.spmi.dk`
+3. **Directus Flow**:
+   - Trigger: Event Hook → `items.create` + `items.update` on collection `pages`
+   - Step: Webhook POST to `https://api.github.com/repos/specialmindsaarhus/specialmindsaarhus.github.io/dispatches`
+   - Headers: `Authorization: Bearer <github-pat>`, `Accept: application/vnd.github+json`
+   - Body: `{"event_type":"directus-publish"}`
+
+### Claude's production credentials
+
+Stored in local `.env` (gitignored):
+```
+DIRECTUS_URL=https://cms.spmi.dk
+DIRECTUS_TOKEN=<admin-token>
+```
+Get the token from Directus admin UI → User settings → Generate static token.

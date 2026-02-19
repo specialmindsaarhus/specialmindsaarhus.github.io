@@ -1,0 +1,1062 @@
+# Directus schema snapshot — hand-authored for initial bootstrap.
+# After the first deploy, regenerate with:
+#   docker exec $(docker compose -f directus/docker-compose.yml ps -q directus) \
+#     npx directus schema snapshot /directus/snapshots/schema.yaml
+#
+# NOTE: Permissions (Public read-only, Editor role) must be configured
+# manually in the Directus admin UI — they are not part of the schema snapshot.
+
+version: 1
+directus: "11.0.0"
+vendor: postgres
+
+collections:
+  - collection: pages
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: status
+      archive_value: archived
+      collapse: open
+      collection: pages
+      display_template: "{{title}}"
+      group: null
+      hidden: false
+      icon: article
+      note: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      translations: null
+      unarchive_value: draft
+      versioning: false
+    schema:
+      name: pages
+
+  - collection: info_cards
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: info_cards
+      display_template: "{{title}}"
+      group: null
+      hidden: false
+      icon: credit_card
+      note: null
+      singleton: false
+      sort: 2
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: info_cards
+
+  - collection: card_items
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: card_items
+      display_template: "{{text}}"
+      group: null
+      hidden: false
+      icon: format_list_bulleted
+      note: null
+      singleton: false
+      sort: 3
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: card_items
+
+fields:
+  # ── pages ──────────────────────────────────────────────────────────────────
+
+  - collection: pages
+    field: id
+    type: uuid
+    schema:
+      name: id
+      table: pages
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: id
+      special:
+        - uuid
+      interface: input
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: slug
+    type: string
+    schema:
+      name: slug
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: false
+      is_unique: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: slug
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      group: null
+      required: true
+      conditions: null
+      note: "URL identifier (e.g. medier) — must be unique"
+      options:
+        slug: true
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: title
+    type: string
+    schema:
+      name: title
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: title
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
+      group: null
+      required: true
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: subtitle
+    type: string
+    schema:
+      name: subtitle
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: subtitle
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: status
+    type: string
+    schema:
+      name: status
+      table: pages
+      data_type: character varying
+      default_value: draft
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: status
+      special: null
+      interface: select-dropdown
+      display: labels
+      display_options:
+        choices:
+          - text: Draft
+            value: draft
+            foreground: "#ffffff"
+            background: "#A2B5CD"
+          - text: Published
+            value: published
+            foreground: "#ffffff"
+            background: "#2ECDA7"
+      readonly: false
+      hidden: false
+      sort: 5
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        choices:
+          - text: Draft
+            value: draft
+          - text: Published
+            value: published
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: video_url
+    type: string
+    schema:
+      name: video_url
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 1024
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: video_url
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 6
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: "YouTube embed URL (e.g. https://www.youtube.com/embed/XXXXX)"
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: intro_label
+    type: string
+    schema:
+      name: intro_label
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: intro_label
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 7
+      width: half
+      group: null
+      required: false
+      conditions: null
+      note: "Bold keyword before intro (e.g. Hvorfor)"
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: intro_text
+    type: text
+    schema:
+      name: intro_text
+      table: pages
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: intro_text
+      special: null
+      interface: textarea
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 8
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: body_label
+    type: string
+    schema:
+      name: body_label
+      table: pages
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: body_label
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 9
+      width: half
+      group: null
+      required: false
+      conditions: null
+      note: "Bold keyword before body text (e.g. Fordi)"
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: pages
+    field: body_text
+    type: text
+    schema:
+      name: body_text
+      table: pages
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: body_text
+      special: null
+      interface: textarea
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 10
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  # O2M alias on pages (virtual — points to info_cards)
+  - collection: pages
+    field: info_cards
+    type: alias
+    schema: null
+    meta:
+      collection: pages
+      field: info_cards
+      special:
+        - o2m
+      interface: list-o2m
+      display: related-values
+      display_options:
+        template: "{{title}}"
+      readonly: false
+      hidden: false
+      sort: 11
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        template: "{{title}}"
+        enableCreate: true
+        enableSelect: false
+      translations: null
+      validation: null
+      validation_message: null
+
+  # ── info_cards ─────────────────────────────────────────────────────────────
+
+  - collection: info_cards
+    field: id
+    type: uuid
+    schema:
+      name: id
+      table: info_cards
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: info_cards
+      field: id
+      special:
+        - uuid
+      interface: input
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: info_cards
+    field: page
+    type: uuid
+    schema:
+      name: page
+      table: info_cards
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: pages
+      foreign_key_column: id
+    meta:
+      collection: info_cards
+      field: page
+      special: null
+      interface: select-dropdown-m2o
+      display: related-values
+      display_options:
+        template: "{{title}}"
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        template: "{{title}}"
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: info_cards
+    field: title
+    type: string
+    schema:
+      name: title
+      table: info_cards
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: info_cards
+      field: title
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: info_cards
+    field: variant
+    type: string
+    schema:
+      name: variant
+      table: info_cards
+      data_type: character varying
+      default_value: normal
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: info_cards
+      field: variant
+      special: null
+      interface: select-dropdown
+      display: labels
+      display_options:
+        choices:
+          - text: Normal
+            value: normal
+          - text: Accent
+            value: accent
+            foreground: "#ecd573"
+      readonly: false
+      hidden: false
+      sort: 4
+      width: half
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        choices:
+          - text: Normal
+            value: normal
+          - text: Accent
+            value: accent
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: info_cards
+    field: sort
+    type: integer
+    schema:
+      name: sort
+      table: info_cards
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: info_cards
+      field: sort
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: 5
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  # O2M alias on info_cards (virtual — points to card_items)
+  - collection: info_cards
+    field: items
+    type: alias
+    schema: null
+    meta:
+      collection: info_cards
+      field: items
+      special:
+        - o2m
+      interface: list-o2m
+      display: related-values
+      display_options:
+        template: "{{text}}"
+      readonly: false
+      hidden: false
+      sort: 6
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        template: "{{text}}"
+        enableCreate: true
+        enableSelect: false
+      translations: null
+      validation: null
+      validation_message: null
+
+  # ── card_items ─────────────────────────────────────────────────────────────
+
+  - collection: card_items
+    field: id
+    type: uuid
+    schema:
+      name: id
+      table: card_items
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: card_items
+      field: id
+      special:
+        - uuid
+      interface: input
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: 1
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: card_items
+    field: card
+    type: uuid
+    schema:
+      name: card
+      table: card_items
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: info_cards
+      foreign_key_column: id
+    meta:
+      collection: card_items
+      field: card
+      special: null
+      interface: select-dropdown-m2o
+      display: related-values
+      display_options:
+        template: "{{title}}"
+      readonly: false
+      hidden: false
+      sort: 2
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        template: "{{title}}"
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: card_items
+    field: type
+    type: string
+    schema:
+      name: type
+      table: card_items
+      data_type: character varying
+      default_value: step
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: card_items
+      field: type
+      special: null
+      interface: select-dropdown
+      display: labels
+      display_options:
+        choices:
+          - text: Step
+            value: step
+          - text: Step Link
+            value: step-link
+          - text: Hint
+            value: hint
+          - text: List Item
+            value: list-item
+      readonly: false
+      hidden: false
+      sort: 3
+      width: half
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options:
+        choices:
+          - text: Step
+            value: step
+          - text: Step Link
+            value: step-link
+          - text: Hint
+            value: hint
+          - text: List Item
+            value: list-item
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: card_items
+    field: text
+    type: string
+    schema:
+      name: text
+      table: card_items
+      data_type: character varying
+      default_value: null
+      max_length: 1024
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: card_items
+      field: text
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: card_items
+    field: href
+    type: string
+    schema:
+      name: href
+      table: card_items
+      data_type: character varying
+      default_value: null
+      max_length: 1024
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: card_items
+      field: href
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 5
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: "URL — only used when type is step-link"
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: card_items
+    field: sort
+    type: integer
+    schema:
+      name: sort
+      table: card_items
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: card_items
+      field: sort
+      special: null
+      interface: input
+      display: raw
+      display_options: null
+      readonly: false
+      hidden: true
+      sort: 6
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+relations:
+  - collection: info_cards
+    field: page
+    related_collection: pages
+    schema:
+      table: info_cards
+      column: page
+      foreign_key_table: pages
+      foreign_key_column: id
+      foreign_key_schema: public
+      constraint_name: info_cards_page_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+    meta:
+      many_collection: info_cards
+      many_field: page
+      one_collection: pages
+      one_field: info_cards
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: sort
+      one_deselect_action: nullify
+
+  - collection: card_items
+    field: card
+    related_collection: info_cards
+    schema:
+      table: card_items
+      column: card
+      foreign_key_table: info_cards
+      foreign_key_column: id
+      foreign_key_schema: public
+      constraint_name: card_items_card_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+    meta:
+      many_collection: card_items
+      many_field: card
+      one_collection: info_cards
+      one_field: items
+      one_collection_field: null
+      one_allowed_collections: null
+      junction_field: null
+      sort_field: sort
+      one_deselect_action: nullify
