@@ -39,8 +39,12 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "https://specialmindsaarhus.github.io"
+      CORS_ORIGIN: "https://specialmindsaarhus.github.io,https://dev.spmi.dk"
       PUBLIC_URL: ${PUBLIC_URL}
+      RATE_LIMITER_ENABLED: "true"
+      RATE_LIMITER_STORE: "memory"
+      RATE_LIMITER_POINTS: "50"
+      RATE_LIMITER_DURATION: "1"
     volumes:
       - directus_uploads:/directus/uploads
       - ./snapshots:/directus/snapshots

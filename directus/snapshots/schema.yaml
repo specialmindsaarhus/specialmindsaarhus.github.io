@@ -486,6 +486,45 @@ fields:
       validation: null
       validation_message: null
 
+  - collection: pages
+    field: content
+    type: text
+    schema:
+      name: content
+      table: pages
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: pages
+      field: content
+      special: null
+      interface: input-rich-text-html
+      display: formatted-value
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 12
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: "Rich text body — use this for free-form page content instead of info cards"
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
   # O2M alias on pages (virtual — points to info_cards)
   - collection: pages
     field: info_cards
@@ -722,6 +761,45 @@ fields:
       required: false
       conditions: null
       note: null
+      options: null
+      translations: null
+      validation: null
+      validation_message: null
+
+  - collection: info_cards
+    field: content
+    type: text
+    schema:
+      name: content
+      table: info_cards
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: info_cards
+      field: content
+      special: null
+      interface: input-rich-text-html
+      display: formatted-value
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
+      group: null
+      required: false
+      conditions: null
+      note: "Rich text content — use this instead of card items for simple prose cards"
       options: null
       translations: null
       validation: null

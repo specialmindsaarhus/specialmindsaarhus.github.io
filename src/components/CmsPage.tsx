@@ -15,6 +15,7 @@ interface InfoCard {
   title: string;
   variant: 'normal' | 'accent';
   sort: number;
+  content?: string | null;
   items: CardItemData[];
 }
 
@@ -27,6 +28,7 @@ interface CmsPageData {
   intro_text?: string | null;
   body_label?: string | null;
   body_text?: string | null;
+  content?: string | null;
   info_cards: InfoCard[] | null;
 }
 
@@ -79,8 +81,8 @@ export default function CmsPage({ slug }: Props) {
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
       `&filter[status][_eq]=published` +
-      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,body_label,body_text,` +
-      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,` +
+      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,body_label,body_text,content,` +
+      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content,` +
       `info_cards.items.id,info_cards.items.type,info_cards.items.text,info_cards.items.href,info_cards.items.sort` +
       `&deep[info_cards][_sort]=sort` +
       `&deep[info_cards][items][_sort]=sort`;
@@ -169,11 +171,18 @@ export default function CmsPage({ slug }: Props) {
           </>
         )}
 
+        {page.content && (
+          <div className="rich-content" dangerouslySetInnerHTML={{ __html: page.content }} />
+        )}
+
         {(page.info_cards ?? []).map((card) => (
           <div key={card.id} className={`info-card${card.variant === 'accent' ? ' accent' : ''}`}>
             <p className="card-title">{card.title}</p>
             <div className="card-body">
-              {card.items.map((item) => <ItemView key={item.id} item={item} />)}
+              {card.content
+                ? <div className="rich-content" dangerouslySetInnerHTML={{ __html: card.content }} />
+                : card.items.map((item) => <ItemView key={item.id} item={item} />)
+              }
             </div>
           </div>
         ))}
