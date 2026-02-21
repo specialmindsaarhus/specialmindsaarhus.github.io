@@ -17,9 +17,8 @@ interface CmsPageData {
   video_url?: string | null;
   intro_label?: string | null;
   intro_text?: string | null;
-  ekstra_tekst_label?: string | null;
-  ekstra_tekst_body?: string | null;
-  content?: string | null;
+  vis_ekstra?: boolean | null;
+  ekstra?: string | null;
   info_cards: InfoCard[] | null;
 }
 
@@ -62,7 +61,7 @@ export default function CmsPage({ slug }: Props) {
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
       `&filter[status][_eq]=published` +
-      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,ekstra_tekst_label,ekstra_tekst_body,content,` +
+      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,vis_ekstra,ekstra,` +
       `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content` +
       `&deep[info_cards][_sort]=sort`;
 
@@ -141,21 +140,8 @@ export default function CmsPage({ slug }: Props) {
           </>
         )}
 
-        {page.ekstra_tekst_body && (
-          <>
-            {page.ekstra_tekst_label && (
-              <p className="intro-text">
-                <FirstWord text={page.ekstra_tekst_label} />
-              </p>
-            )}
-            <p className="body-text">
-              <FirstWord text={page.ekstra_tekst_body} />
-            </p>
-          </>
-        )}
-
-        {page.content && (
-          <div className="rich-content" dangerouslySetInnerHTML={{ __html: page.content }} />
+        {page.vis_ekstra && page.ekstra && (
+          <div className="rich-content" dangerouslySetInnerHTML={{ __html: page.ekstra }} />
         )}
 
         {(page.info_cards ?? []).map((card) => (
