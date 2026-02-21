@@ -2,21 +2,12 @@ import { useEffect, useState } from 'react';
 
 // --- Types matching the Directus content model ---
 
-interface CardItemData {
-  id: number;
-  type: 'step' | 'step-link' | 'hint' | 'list-item';
-  text: string;
-  href?: string | null;
-  sort: number;
-}
-
 interface InfoCard {
   id: number;
   title: string;
   variant: 'normal' | 'accent';
   sort: number;
   content?: string | null;
-  items: CardItemData[];
 }
 
 interface CmsPageData {
@@ -26,8 +17,8 @@ interface CmsPageData {
   video_url?: string | null;
   intro_label?: string | null;
   intro_text?: string | null;
-  body_label?: string | null;
-  body_text?: string | null;
+  ekstra_tekst_label?: string | null;
+  ekstra_tekst_body?: string | null;
   content?: string | null;
   info_cards: InfoCard[] | null;
 }
@@ -53,16 +44,6 @@ function isSafeEmbedUrl(url: string): boolean {
   }
 }
 
-function sanitizeHref(href: string | null | undefined): string {
-  if (!href) return '#';
-  try {
-    const parsed = new URL(href, window.location.href);
-    return parsed.protocol === 'javascript:' ? '#' : href;
-  } catch {
-    return '#';
-  }
-}
-
 // --- Component ---
 
 interface Props {
@@ -81,11 +62,9 @@ export default function CmsPage({ slug }: Props) {
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
       `&filter[status][_eq]=published` +
-      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,body_label,body_text,content,` +
-      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content,` +
-      `info_cards.items.id,info_cards.items.type,info_cards.items.text,info_cards.items.href,info_cards.items.sort` +
-      `&deep[info_cards][_sort]=sort` +
-      `&deep[info_cards][items][_sort]=sort`;
+      `&fields=slug,title,subtitle,video_url,intro_label,intro_text,ekstra_tekst_label,ekstra_tekst_body,content,` +
+      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content` +
+      `&deep[info_cards][_sort]=sort`;
 
     fetch(url, { signal: controller.signal })
       .then((res) => {
@@ -153,21 +132,25 @@ export default function CmsPage({ slug }: Props) {
           <>
             {page.intro_label && (
               <p className="intro-text">
-                <span className="highlight">{page.intro_label}</span>
+                <FirstWord text={page.intro_label} />
               </p>
             )}
-            <p className="body-text">{page.intro_text}</p>
+            <p className="body-text">
+              <FirstWord text={page.intro_text} />
+            </p>
           </>
         )}
 
-        {page.body_text && (
+        {page.ekstra_tekst_body && (
           <>
-            {page.body_label && (
+            {page.ekstra_tekst_label && (
               <p className="intro-text">
-                <span className="highlight">{page.body_label}</span>
+                <FirstWord text={page.ekstra_tekst_label} />
               </p>
             )}
-            <p className="body-text">{page.body_text}</p>
+            <p className="body-text">
+              <FirstWord text={page.ekstra_tekst_body} />
+            </p>
           </>
         )}
 
@@ -179,10 +162,9 @@ export default function CmsPage({ slug }: Props) {
           <div key={card.id} className={`info-card${card.variant === 'accent' ? ' accent' : ''}`}>
             <p className="card-title">{card.title}</p>
             <div className="card-body">
-              {card.content
-                ? <div className="rich-content" dangerouslySetInnerHTML={{ __html: card.content }} />
-                : card.items.map((item) => <ItemView key={item.id} item={item} />)
-              }
+              {card.content && (
+                <div className="rich-content" dangerouslySetInnerHTML={{ __html: card.content }} />
+              )}
             </div>
           </div>
         ))}
@@ -191,20 +173,9 @@ export default function CmsPage({ slug }: Props) {
   );
 }
 
-function ItemView({ item }: { item: CardItemData }) {
-  switch (item.type) {
-    case 'step-link':
-      return (
-        <a className="step-link" href={sanitizeHref(item.href)}>
-          {item.text}
-        </a>
-      );
-    case 'hint':
-      return <span className="hint">{item.text}</span>;
-    case 'list-item':
-      return <span className="list-item">{item.text}</span>;
-    case 'step':
-    default:
-      return <p className="step">{item.text}</p>;
-  }
+function FirstWord({ text }: { text: string }) {
+  const space = text.indexOf(' ');
+  if (space === -1) return <span className="first-word">{text}</span>;
+  return <><span className="first-word">{text.slice(0, space)}</span>{text.slice(space)}</>;
 }
+

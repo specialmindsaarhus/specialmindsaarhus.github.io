@@ -229,6 +229,61 @@ h2 {
 	gap: 0.25rem;
 }
 
+/* Rich text rendered inside info cards */
+.card-body .rich-content p {
+	font-weight: 400;
+	margin: 0.3rem 0;
+}
+
+.card-body .rich-content a {
+	color: white;
+	display: block;
+	padding: 0.3rem 0;
+	transition: color 0.2s ease;
+}
+
+.card-body .rich-content a:hover {
+	color: var(--sm-gold) !important;
+}
+
+.card-body .rich-content blockquote {
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.5);
+	margin: 0.5rem 0 0.75rem 0;
+	padding: 0;
+	border: none;
+}
+
+.card-body .rich-content blockquote p {
+	margin: 0;
+}
+
+.card-body .rich-content ul {
+	padding-left: 1.25rem;
+	list-style: none;
+	margin: 0.3rem 0;
+}
+
+.card-body .rich-content li {
+	position: relative;
+	font-weight: 300;
+	font-size: 0.95rem;
+	color: rgba(255, 255, 255, 0.8);
+	padding: 0.2rem 0;
+}
+
+.card-body .rich-content li::before {
+	content: '';
+	position: absolute;
+	left: -1.25rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	background: var(--sm-teal);
+	border-radius: 50%;
+}
+
 .step-link {
 	font-weight: 400;
 	color: white;
@@ -254,6 +309,10 @@ h2 {
 
 .highlight {
 	font-weight: 600;
+	color: var(--sm-gold);
+}
+
+.first-word {
 	color: var(--sm-gold);
 }
 

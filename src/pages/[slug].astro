@@ -25,6 +25,6 @@ if (!slug) return Astro.redirect('/');
 const { title } = Astro.props;
 ---
 
-<Layout title={`${title} — Special Minds Aarhus`}>
+<Layout title={`${title} — Special Minds Aarhus`} showNav={false}>
   <CmsPage client:only="react" slug={slug} />
 </Layout>

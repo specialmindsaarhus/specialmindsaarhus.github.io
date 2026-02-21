@@ -2,6 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import CmsPageFallback from '../components/CmsPageFallback';
 ---
-<Layout title="Special Minds Aarhus">
+<Layout title="Special Minds Aarhus" showNav={false}>
   <CmsPageFallback client:only="react" />
 </Layout>
