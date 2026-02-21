@@ -80,16 +80,15 @@ npx tsx test-variables.mjs          # Variable system tests (TypeScript)
 3. Add a Card link on `src/pages/index.astro`
 
 **New CMS-backed page — Claude API workflow** (no `.astro` file needed):
+
+> Use the `/cms-page` skill — it handles everything below automatically, including UTF-8 safety and placeholder video.
+
 1. Read `DIRECTUS_URL` and `DIRECTUS_TOKEN` from the local `.env` file.
-2. POST the page to production Directus:
-   ```bash
-   curl -X POST "$DIRECTUS_URL/items/pages" \
-     -H "Authorization: Bearer $DIRECTUS_TOKEN" \
-     -H "Content-Type: application/json" \
-     -d '{"slug":"my-page","title":"...","status":"published",...}'
-   ```
-3. The page is **immediately live** via the `404.astro` fallback (no rebuild needed).
-4. Directus fires a webhook → GitHub Actions rebuilds → page gets a proper static route + appears in homepage card grid (~2 min).
+2. **Always use Python, never `curl`** — Windows terminal (cp1252) corrupts Danish characters in curl requests. Write a temporary Python script using `json.dumps(..., ensure_ascii=False).encode('utf-8')` and delete it after.
+3. POST the page to production Directus, then POST `info_cards` (with `page` UUID), then POST `card_items` (with `card` UUID).
+4. Insert a placeholder `video_url` (`https://www.youtube.com/embed/dQw4w9WgXcQ`) — the user replaces it in the Directus admin UI later.
+5. The page is **immediately live** via the `404.astro` fallback (no rebuild needed).
+6. Directus fires a webhook → GitHub Actions rebuilds → page gets a proper static route + appears in homepage card grid (~2 min).
 
 **New CMS-backed page — co-worker workflow** (content managed in Directus admin UI):
 1. In Directus admin (`https://cms.spmi.dk`), create a `pages` item with the desired slug and set status to `published`. Add `info_cards` and their `items`.

@@ -328,6 +328,7 @@ h2 {
 	margin-bottom: 0.25em;
 	color: var(--sm-gold);
 	text-align: center;
+	margin-top: unset;
 }
 
 .cms-page h2 {

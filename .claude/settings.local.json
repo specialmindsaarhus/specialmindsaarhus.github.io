@@ -16,7 +16,15 @@
       "Bash(npm run build:*)",
       "Bash(npx astro check)",
       "Bash(git commit -m \"$(cat <<''EOF''\nfix: Add type assertions for cookie icing property assignments\n\n- Add type assertion when assigning currentColor to cookie.icing\n- Add type assertion when assigning validated color values to cookie.icing\n- Resolves TypeScript build errors where string type was not assignable to color literal union type\n\nFixes GitHub Actions build failure.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebFetch(domain:dev.spmi.dk)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "WebSearch",
+      "WebFetch(domain:education.lego.com)",
+      "WebFetch(domain:www.cmu.edu)",
+      "WebFetch(domain:www.fllcasts.com)",
+      "Bash(npx astro build:*)"
     ],
     "deny": [],
     "ask": []
