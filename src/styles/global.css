@@ -275,7 +275,7 @@ h2 {
 	color: rgba(255, 255, 255, 0.8);
 	padding: 0.2rem 0;
 }
-
+/*
 .card-body .rich-content li::before {
 	content: '';
 	position: absolute;
@@ -286,8 +286,9 @@ h2 {
 	height: 8px;
 	background: var(--sm-teal);
 	border-radius: 50%;
+	color: red;
 }
-
+*/
 .step-link {
 	font-weight: 400;
 	color: white;
