@@ -6,11 +6,11 @@ export async function getStaticPaths() {
   const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
   try {
     const res = await fetch(
-      `${base}/items/pages?filter[status][_eq]=published&fields=slug,title`
+      `${base}/items/pages?filter[status][_eq]=published&filter[slug][_nnull]=true&fields=slug,title`
     );
     if (!res.ok) return [];
     const { data } = await res.json();
-    return (data ?? []).map((page: { slug: string; title: string }) => ({
+    return (data ?? []).filter((page: { slug: string; title: string }) => page.slug).map((page: { slug: string; title: string }) => ({
       params: { slug: page.slug },
       props: { title: page.title },
     }));
@@ -28,9 +28,3 @@ const { title } = Astro.props;
 <Layout title={`${title} — Special Minds Aarhus`} showNav={false}>
   <CmsPage client:only="react" slug={slug} />
 </Layout>
-
-<style>
-  .site-header{
-    justify-content: center !important;
-  }
-</style>

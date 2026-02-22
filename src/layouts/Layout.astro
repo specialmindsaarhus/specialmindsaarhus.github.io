@@ -20,7 +20,7 @@ const { title, showNav = true } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="min-h-screen">
-		<header class="site-header">
+		<header class={`site-header${!showNav ? ' site-header--logo-only' : ''}`}>
 			<a href="/">
 				<img src="/special-minds-logo.png" alt="Special Minds" class="site-logo" />
 			</a>
