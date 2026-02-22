@@ -7,7 +7,7 @@ const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').re
 let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
 try {
   const res = await fetch(
-    `${base}/items/pages?filter[status][_eq]=published&fields=slug,title,subtitle&sort=title`
+    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=dev&fields=slug,title,subtitle&sort=title`
   );
   if (res.ok) {
     const { data } = await res.json();

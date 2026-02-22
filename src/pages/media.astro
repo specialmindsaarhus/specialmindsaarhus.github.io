@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
+let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
+try {
+  const res = await fetch(
+    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=media&fields=slug,title,subtitle&sort=title`
+  );
+  if (res.ok) {
+    const { data } = await res.json();
+    cmsPages = data ?? [];
+  }
+} catch (err) {
+  console.warn('media.astro: Directus unreachable at build time, CMS cards omitted.', err);
+}
+---
+
+<Layout title="Media & Grafik — Special Minds Aarhus">
+	<main>
+		<ul role="list" class="link-card-grid">
+			{cmsPages.map(page => (
+				<Card
+					href={`/${page.slug}`}
+					title={page.title}
+					body={page.subtitle ?? ''}
+				/>
+			))}
+		</ul>
+	</main>
+</Layout>
