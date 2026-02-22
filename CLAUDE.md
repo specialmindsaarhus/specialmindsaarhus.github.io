@@ -85,13 +85,13 @@ npx tsx test-variables.mjs          # Variable system tests (TypeScript)
 
 1. Read `DIRECTUS_URL` and `DIRECTUS_TOKEN` from the local `.env` file.
 2. **Always use Python, never `curl`** — Windows terminal (cp1252) corrupts Danish characters in curl requests. Write a temporary Python script using `json.dumps(..., ensure_ascii=False).encode('utf-8')` and delete it after.
-3. POST the page to production Directus, then POST `info_cards` (with `page` UUID), then POST `card_items` (with `card` UUID).
+3. POST the page to production Directus (include `section`: `"dev"` or `"media"`), then POST `info_cards` (with `page` UUID and HTML `content`).
 4. Insert a placeholder `video_url` (`https://www.youtube.com/embed/dQw4w9WgXcQ`) — the user replaces it in the Directus admin UI later.
 5. The page is **immediately live** via the `404.astro` fallback (no rebuild needed).
-6. Directus fires a webhook → GitHub Actions rebuilds → page gets a proper static route + appears in homepage card grid (~2 min).
+6. Directus fires a webhook → GitHub Actions rebuilds → page gets a proper static route + appears in the correct section's card grid (~2 min).
 
 **New CMS-backed page — co-worker workflow** (content managed in Directus admin UI):
-1. In Directus admin (`https://cms.spmi.dk`), create a `pages` item with the desired slug and set status to `published`. Add `info_cards` and their `items`.
+1. In Directus admin (`https://cms.spmi.dk`), create a `pages` item with the desired slug, set status to `published`, and choose the correct **Section** (Dev or Media). Add `info_cards` with HTML content.
 2. Page is immediately live via the 404 fallback. Rebuild happens automatically via webhook.
 
 That's it. No `.astro` file or code change is needed for CMS pages.
@@ -106,9 +106,21 @@ That's it. No `.astro` file or code change is needed for CMS pages.
 
 | Collection | Key fields |
 |---|---|
-| `pages` | `slug`, `title`, `subtitle`, `status` (draft\|published), `video_url`, `intro_label`, `intro_text`, `body_label`, `body_text` |
-| `info_cards` | `title`, `variant` (normal\|accent), `sort`, `page` (M2O → pages) |
-| `card_items` | `type` (step\|step-link\|hint\|list-item), `text`, `href`, `sort`, `card` (M2O → info_cards) |
+| `pages` | `slug`, `title`, `subtitle`, `status` (draft\|published), `section` (dev\|media), `video_url`, `intro_label`, `intro_text`, `vis_ekstra` (bool), `ekstra` (rich text) |
+| `info_cards` | `title`, `variant` (normal\|accent), `sort`, `content` (rich text HTML), `page` (M2O → pages) |
+
+> **Note:** `card_items` collection was removed. Info card content is now stored as HTML in `info_cards.content`.
+
+### Sections
+
+The `section` field on `pages` controls which landing page a card appears on:
+
+| Value | Page | URL |
+|---|---|---|
+| `dev` | Main dev page | `/` (`index.astro`) |
+| `media` | Media & graphics page | `/media` (`media.astro`) |
+
+Default is `dev`. Set at creation time — changing section after publish moves the card to the other landing page on next rebuild.
 
 ### Updating the content model
 
