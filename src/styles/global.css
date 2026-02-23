@@ -55,7 +55,10 @@ code {
 		Menlo, Monaco, Lucida Console, Liberation Mono,
 		DejaVu Sans Mono, Bitstream Vera Sans Mono,
 		Courier New, monospace;
-	margin-left: 64px;
+	margin-inline: 4px;
+	background: #4ba59d94;
+	padding: 6px;
+	border-radius: 8px;
 }
 
 /* === Site Header === */
