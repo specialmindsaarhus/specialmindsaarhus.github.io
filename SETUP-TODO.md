@@ -20,6 +20,10 @@
 
 ## Remaining
 
+### You must do (requires browser/UI)
+- [ ] **Directus 2FA**: cms.spmi.dk → Settings → My Profile → Two-Factor Authentication
+- [ ] **Webhook PAT renewal**: fine-grained PAT in Directus flow expires 2027-02-20 — regenerate then. Claude can update the flow via API in 30 seconds.
+
 ### Claude can do
 - [ ] **Traefik rate limit on `/auth/*`**: stricter middleware (10 req/min) to prevent credential stuffing — needs SSH + Coolify compose edit
 - [ ] **Read-only frontend token**: create a Directus role/token with read-only access for the frontend, replacing unauthenticated public reads
@@ -31,10 +35,10 @@
 - [x] `https://dev.spmi.dk/media` loads content from production Directus
 - [x] CMS pages appear as cards on homepage
 - [x] Directus publish → GitHub Actions build triggered automatically
-- [x] Non-existent slug shows Danish "not found" message
-- [x] Co-worker edits a card → change visible within seconds (no rebuild needed)
-- [x] All existing hardcoded pages (`/tryhackme`, `/godot_2d`, etc.) still render correctly
-- [x] Claude can POST a new page via API and it's immediately live via 404 fallback (verified 2026-03-18)
+- [ ] Non-existent slug shows Danish "not found" message
+- [ ] Co-worker edits a card → change visible within seconds (no rebuild needed)
+- [ ] All existing hardcoded pages (`/tryhackme`, `/godot_2d`, etc.) still render correctly
+- [ ] Claude can POST a new page via API and it's immediately live via 404 fallback
 
 ---
 

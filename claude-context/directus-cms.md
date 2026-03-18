@@ -69,17 +69,6 @@ After a rebuild, `[slug].astro` + `getStaticPaths()` gives the page a proper sta
    - Headers: `Authorization: Bearer <github-pat>`, `Accept: application/vnd.github+json`
    - Body: `{"event_type":"directus-publish"}`
 
-## Maintenance — PAT renewal
-
-The fine-grained GitHub PAT used in the Directus webhook flow **expires 2027-02-20**.
-
-To renew:
-1. GitHub → Settings → Developer settings → Fine-grained tokens → regenerate the token
-2. Update the flow in Directus: `PATCH https://cms.spmi.dk/flows/operations/8bde7ede-9d3b-47a1-ab4a-4afc971aef3e` with the new `Authorization` header value in the options body
-   - Claude can do this in ~30 seconds via the API using `DIRECTUS_TOKEN` from `.env`
-
----
-
 ## Claude's production credentials
 
 Stored in local `.env` (gitignored):
