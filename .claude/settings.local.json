@@ -24,7 +24,10 @@
       "WebFetch(domain:education.lego.com)",
       "WebFetch(domain:www.cmu.edu)",
       "WebFetch(domain:www.fllcasts.com)",
-      "Bash(npx astro build:*)"
+      "Bash(npx astro build:*)",
+      "Bash(gh issue:*)",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -X POST https://cms.spmi.dk/items/pages -H 'Authorization: Bearer ds4iZIlXv8COLP3r6qvUu1_g2iJSeINd' -H 'Content-Type: application/json' -d '{:*)"
     ],
     "deny": [],
     "ask": []

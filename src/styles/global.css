@@ -67,7 +67,7 @@ code {
 	align-items: center;
 	justify-content: space-between;
 	padding: 0.75rem 1.5rem;
-	max-width: 800px;
+	max-width: 60vw;
 	margin: 0 auto;
 }
 
@@ -104,7 +104,7 @@ code {
 main {
 	margin: auto;
 	padding: 1rem;
-	width: 800px;
+	width: 60%;
 	max-width: calc(100% - 2rem);
 	color: white;
 	font-size: 20px;
@@ -395,10 +395,10 @@ h2 {
 
 .link-card {
 	list-style: none;
-	border: 2px solid var(--sm-teal);
+	border: 1px solid #4ba59d75;
 	border-radius: 12px;
-	padding: 2rem;
-	background-color: #1a2332;
+	overflow: hidden;
+	background-color: #181e29;
 	transition: border-color 0.3s ease;
 }
 
@@ -432,9 +432,9 @@ iframe[src*="youtube"] {
 /* === Card Grid === */
 .link-card-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
 	gap: 1.5rem;
 	padding: 0;
+	grid-template-columns: repeat(2, 1fr);
 }
 
 /* === Lykkehjulet (special) === */
