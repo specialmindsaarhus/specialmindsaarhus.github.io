@@ -23,6 +23,21 @@ npm run preview    # Preview production build
 npm run astro check  # Type check only
 ```
 
+### Local dev with live CMS data
+
+`.env` must have `PUBLIC_DIRECTUS_URL=https://cms.spmi.dk` for CMS cards to load locally. The fallback (`http://localhost:8055`) will return no cards.
+
+To kill stale node processes on Windows (if ports are occupied):
+```bash
+taskkill //F //IM node.exe
+```
+
+### Card component (`src/components/Card.astro`)
+
+- Cards always render a top image section — either a `<img>` (if `image` prop set) or a teal placeholder div
+- CMS cards build the image URL as `${base}/assets/${page.card_image}` — `card_image` is a UUID FK to `directus_files`
+- Hardcoded cards in `index.astro` have no image prop → show teal placeholder
+
 ## Architecture
 
 ### Astro + React Islands

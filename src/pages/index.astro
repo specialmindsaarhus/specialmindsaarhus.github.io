@@ -4,10 +4,10 @@ import Card from '../components/Card.astro';
 
 // Fetch CMS-backed pages from Directus at build time
 const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
-let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
+let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null }[] = [];
 try {
   const res = await fetch(
-    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=dev&fields=slug,title,subtitle&sort=title`
+    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=dev&fields=slug,title,subtitle,card_image&sort=title`
   );
   if (res.ok) {
     const { data } = await res.json();
@@ -29,7 +29,6 @@ try {
     src="https://www.canva.com/design/DAGbJdVzdBY/IvS-X4Q0zW3Qa3Ns6M2Ihg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
   				</iframe>
 			</div>
-<a class="text-sm m-2"href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGbJdVzdBY&#x2F;IvS-X4Q0zW3Qa3Ns6M2Ihg&#x2F;view?utm_content=DAGbJdVzdBY&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Canva Link</a><br>
 			
 		</div>
 		
@@ -39,6 +38,7 @@ try {
 					href={`/${page.slug}`}
 					title={page.title}
 					body={page.subtitle ?? ''}
+					image={page.card_image ? `${base}/assets/${page.card_image}` : undefined}
 				/>
 			))}
 			<Card
