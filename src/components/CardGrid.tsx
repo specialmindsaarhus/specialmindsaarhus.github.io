@@ -21,8 +21,8 @@ const imgStyle: React.CSSProperties = {
 
 const placeholderStyle: React.CSSProperties = {
   ...imgStyle,
-  background: '#4ba59d',
-  opacity: 0.35,
+  background: '#2a4e52',
+  borderRadius: '12px 12px 0 0',
 };
 
 const cardBodyStyle: React.CSSProperties = {
@@ -62,9 +62,9 @@ export default function CardGrid({ cards }: Props) {
     return matchSection && matchText;
   });
 
-  const btnBase = 'px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer';
-  const btnActive = `${btnBase} bg-[#4ba59d] text-white`;
-  const btnInactive = `${btnBase} border border-white/20 text-white/60 hover:text-white/80`;
+  const btnBase = 'px-3 py-1 rounded-full text-xs font-medium transition-all cursor-pointer';
+  const btnActive = `${btnBase} bg-[#4ba59d]/25 text-[#4ba59d] border border-[#4ba59d]/30`;
+  const btnInactive = `${btnBase} bg-white/5 text-white/25 border border-white/10 hover:text-white/50`;
 
   return (
     <div>
@@ -74,7 +74,7 @@ export default function CardGrid({ cards }: Props) {
           placeholder="Søg i forløb..."
           value={query}
           onChange={e => setQuery(e.target.value)}
-          className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:ring-2 focus:ring-[#4ba59d]"
+          className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/40 outline-none opacity-80 focus:opacity-100 border border-transparent focus:border-white/30"
         />
         <div className="flex gap-2">
           <button className={activeSection === 'all' ? btnActive : btnInactive} onClick={() => setActiveSection('all')}>Alle</button>
