@@ -436,6 +436,10 @@ h2 {
 	border-color: var(--sm-teal) !important;
 }
 
+.border-base{
+	border-radius: 8px;
+}
+
 /* === Video iframes (only YouTube etc, not embeds like Canva) === */
 iframe[src*="youtube"] {
 	border-radius: 12px;
@@ -443,7 +447,7 @@ iframe[src*="youtube"] {
 }
 
 /* === Utility === */
-.border {
+.border:focus, .border:active {
 	border: 1px solid rgba(var(--accent-light), 25%);
 	border-radius: 8px;
 }

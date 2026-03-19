@@ -62,7 +62,7 @@ export default function CardGrid({ cards }: Props) {
     return matchSection && matchText;
   });
 
-  const btnBase = 'px-3 py-1 rounded-full text-xs font-medium transition-all cursor-pointer';
+  const btnBase = 'px-3 py-1 border-base text-xs font-medium transition-all cursor-pointer';
   const btnActive = `${btnBase} bg-[#4ba59d]/25 text-[#4ba59d] border border-[#4ba59d]/30`;
   const btnInactive = `${btnBase} bg-white/5 text-white/25 border border-white/10 hover:text-white/50`;
 
