@@ -3,10 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
 const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
-let cmsPages: { slug: string; title: string; subtitle: string | null }[] = [];
+let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null }[] = [];
 try {
   const res = await fetch(
-    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=media&fields=slug,title,subtitle&sort=title`
+    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=media&fields=slug,title,subtitle,card_image&sort=title`
   );
   if (res.ok) {
     const { data } = await res.json();
@@ -25,6 +25,7 @@ try {
 					href={`/${page.slug}`}
 					title={page.title}
 					body={page.subtitle ?? ''}
+					image={page.card_image ?? undefined}
 				/>
 			))}
 		</ul>

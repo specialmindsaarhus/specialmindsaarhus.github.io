@@ -27,7 +27,15 @@
       "Bash(npx astro build:*)",
       "Bash(gh issue:*)",
       "Bash(python -m json.tool)",
-      "Bash(curl -s -X POST https://cms.spmi.dk/items/pages -H 'Authorization: Bearer ds4iZIlXv8COLP3r6qvUu1_g2iJSeINd' -H 'Content-Type: application/json' -d '{:*)"
+      "Bash(curl -s -X POST https://cms.spmi.dk/items/pages -H 'Authorization: Bearer ds4iZIlXv8COLP3r6qvUu1_g2iJSeINd' -H 'Content-Type: application/json' -d '{:*)",
+      "WebFetch(domain:uiverse.io)",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "WebFetch(domain:web.archive.org)",
+      "Bash(PUBLIC_DIRECTUS_URL=https://cms.spmi.dk npm run dev)",
+      "Bash(netstat -ano)",
+      "Bash(xargs -I{} taskkill /F /PID {})",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)"
     ],
     "deny": [],
     "ask": []

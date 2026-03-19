@@ -7,4 +7,15 @@ import react from "@astrojs/react";
 export default defineConfig({
   integrations: [tailwind(), react()],
   site: 'https://specialmindsaarhus.github.io',
+  vite: {
+    server: {
+      proxy: {
+        '/directus': {
+          target: 'https://cms.spmi.dk',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/directus/, ''),
+        },
+      },
+    },
+  },
 });
