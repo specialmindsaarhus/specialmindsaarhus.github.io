@@ -24,16 +24,6 @@ const { title, showNav = true } = Astro.props;
 			<a href="/">
 				<img src="/special-minds-logo.png" alt="Special Minds" class="site-logo" />
 			</a>
-			{showNav && (
-				<nav class="site-nav">
-					<a href="/">
-						<span>Dev</span>
-					</a>
-					<a href="/media">
-						<span>Media</span>
-					</a>
-				</nav>
-			)}
 		</header>
 		<slot />
 	</body>

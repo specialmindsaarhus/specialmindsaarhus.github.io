@@ -398,8 +398,9 @@ h2 {
 
 .link-card {
 	list-style: none;
+	height: 100%;
 	/*border: 1px solid rgba(75, 165, 157, 0.22);*/
-	background-image: linear-gradient(2deg, #2a4e5245, #98a0a100);
+	background-image: linear-gradient(360deg, hsl(186deg 27.33% 21.14%) 20%, hsl(31deg 100% 95% / 55%) 100%);
     padding: 1px;
 	border-radius: 12px;
 	overflow: hidden;
@@ -407,8 +408,21 @@ h2 {
 	transition: border-color 0.3s ease;
 }
 
+.link-card > a {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	text-decoration: none;
+	color: inherit;
+}
+
+.link-card div{
+	background-color: #1f3038;
+}
+
 .link-card:hover {
 	border-color: var(--sm-gold);
+	border:2px;
 }
 
 
@@ -440,6 +454,24 @@ iframe[src*="youtube"] {
 	gap: 1.5rem;
 	padding: 0;
 	grid-template-columns: repeat(2, 1fr);
+}
+
+/* === Section badges (CardGrid) === */
+.badge-dev {
+	display: inline-block;
+	font-size: 0.7rem;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+	background: rgba(75, 165, 157, 0.2);
+	color: #4ba59d;
+}
+.badge-media {
+	display: inline-block;
+	font-size: 0.7rem;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+	background: rgba(99, 102, 241, 0.2);
+	color: #a5b4fc;
 }
 
 /* === Lykkehjulet (special) === */

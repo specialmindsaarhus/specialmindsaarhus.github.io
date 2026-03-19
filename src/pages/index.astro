@@ -1,13 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import CardGrid from '../components/CardGrid';
 
-// Fetch CMS-backed pages from Directus at build time
+interface CardItem {
+  href: string;
+  title: string;
+  body: string;
+  image?: string;
+  section: 'dev' | 'media';
+}
+
+// Fetch all published CMS pages (both sections) at build time
 const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
-let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null }[] = [];
+let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null; section: string | null }[] = [];
 try {
   const res = await fetch(
-    `${base}/items/pages?filter[status][_eq]=published&filter[section][_eq]=dev&fields=slug,title,subtitle,card_image&sort=title`
+    `${base}/items/pages?filter[status][_eq]=published&fields=slug,title,subtitle,card_image,section&sort=title`
   );
   if (res.ok) {
     const { data } = await res.json();
@@ -16,11 +24,42 @@ try {
 } catch (err) {
   console.warn('index.astro: Directus unreachable at build time, CMS cards omitted.', err);
 }
+
+const hardcodedCards: CardItem[] = [
+  { href: '/tryhackme', title: 'TryHackMe - IT Sikkerhed', body: 'Lær hacking og IT-sikkerhed gennem spil og øvelser', section: 'dev' },
+  { href: '/algorithm-cookie-game', title: 'Algorithm Cookie Game', body: 'Lær algoritmisk tænkning gennem cookie-dekoration', section: 'dev' },
+  { href: '/godot-custom-sprites', title: 'Tilføj Custom Sprites til Godot', body: 'Lær at finde og tilføje egne sprites til dit Godot-spil', section: 'dev' },
+  { href: '/baldurs-gate-3-modding', title: "Baldur's Gate 3 Modding", body: 'Lav dit eget mod til Baldur\'s Gate 3 med LUA', section: 'dev' },
+  { href: '/pcbuildersimulator', title: 'PC Builder Simulator', body: 'Spil der lærer dig om hardware og computer-builds', section: 'dev' },
+  { href: '/underthewire', title: 'Under The Wire - Powershel spil', body: 'Spil der lærer dig at bruge powershell og SSH', section: 'dev' },
+  { href: '/blender-forlob', title: 'Blender, fra begynder til Pro', body: 'Modelering, texture og animationer i blender', section: 'dev' },
+  { href: '/blender_godot', title: 'Fra Blender til Godot', body: 'Animationer i Blendeer importeret til Godot', section: 'dev' },
+  { href: '/turringtumble', title: 'Turring Tumble', body: 'Design dine egne 2D sprites i Aseprite', section: 'dev' },
+  { href: '/libresprite', title: 'Libresprite pixelart', body: 'Design dine egne 2D sprites i Aseprite', section: 'dev' },
+  { href: '/cs50', title: 'Computer Science Undervisning', body: 'Undevisningsfroløb', section: 'dev' },
+  { href: '/discord-bot', title: 'Discord Bot forløb', body: 'Links og vejledning', section: 'dev' },
+  { href: '/arduino_forlob', title: 'Arduino Introduktion + Robotarm', body: 'Links og vejledning', section: 'dev' },
+  { href: '/autoclicker', title: 'Autoclicker m. Python', body: 'Links og vejledning', section: 'dev' },
+  { href: '/dice_rolling_game', title: 'Dice Rolling Game m. Python', body: 'Links og vejledning', section: 'dev' },
+  { href: '/fundamentals_of_programming', title: 'The Fundamentals of Programming m. Python', body: 'Links og vejledning', section: 'dev' },
+  { href: '/godot_2d', title: '2D platformspil i Godot', body: 'Links og vejledning', section: 'dev' },
+];
+
+const allCards: CardItem[] = [
+  ...cmsPages.map(page => ({
+    href: `/${page.slug}`,
+    title: page.title,
+    body: page.subtitle ?? '',
+    image: page.card_image ? `${base}/assets/${page.card_image}` : undefined,
+    section: (page.section === 'media' ? 'media' : 'dev') as 'dev' | 'media',
+  })),
+  ...hardcodedCards,
+];
 ---
 
 <Layout title="Special Minds Aarhus @ Github">
 	<main>
-		
+
 		<div class="instructions" style="padding: 0;">
 			<div class="bg-gray-900" style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
  padding-bottom: 0;   overflow: hidden;
@@ -29,106 +68,9 @@ try {
     src="https://www.canva.com/design/DAGbJdVzdBY/IvS-X4Q0zW3Qa3Ns6M2Ihg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
   				</iframe>
 			</div>
-			
+
 		</div>
-		
-		<ul role="list" class="link-card-grid">
-			{cmsPages.map(page => (
-				<Card
-					href={`/${page.slug}`}
-					title={page.title}
-					body={page.subtitle ?? ''}
-					image={page.card_image ? `${base}/assets/${page.card_image}` : undefined}
-				/>
-			))}
-			<Card
-			href="/tryhackme"
-			title="TryHackMe - IT Sikkerhed"
-			body="Lær hacking og IT-sikkerhed gennem spil og øvelser"
-			/>
-			<Card
-			href="/algorithm-cookie-game"
-			title="Algorithm Cookie Game"
-			body="Lær algoritmisk tænkning gennem cookie-dekoration"
-			/>
-			<Card
-			href="/godot-custom-sprites"
-			title="Tilføj Custom Sprites til Godot"
-			body="Lær at finde og tilføje egne sprites til dit Godot-spil"
-			/>
-			<Card
-			href="/baldurs-gate-3-modding"
-			title="Baldur's Gate 3 Modding"
-			body="Lav dit eget mod til Baldur's Gate 3 med LUA"
-			/>
-			<Card
-			href="/pcbuildersimulator"
-			title="PC Builder Simulator"
-			body="Spil der lærer dig om hardware og computer-builds"
-			/>
-			<Card
-			href="/underthewire"
-			title="Under The Wire - Powershel spil"
-			body="Spil der lærer dig at bruge powershell og SSH"
-			/>
-			<Card
-			href="/blender-forlob"
-			title="Blender, fra begynder til Pro"
-			body="Modelering, texture og animationer i blender"
-			/>
-			<Card
-			href="/blender_godot"
-			title="Fra Blender til Godot"
-			body="Animationer i Blendeer importeret til Godot"
-			/>
-			<Card
-			href="/turringtumble"
-			title="Turring Tumble"
-			body="Design dine egne 2D sprites i Aseprite"
-			/>
-			<Card
-			href="/libresprite"
-			title="Libresprite pixelart"
-			body="Design dine egne 2D sprites i Aseprite"
-			/>
-			<Card
-			href="/cs50"
-			title="Computer Science Undervisning"
-			body="Undevisningsfroløb"
-			/>
-			<Card
-			href="/discord-bot"
-			title="Discord Bot forløb"
-			body="Links og vejledning"
-			/>
-			<Card
-			href="/arduino_forlob"
-			title="Arduino Introduktion + Robotarm"
-			body="Links og vejledning"
-			/>
-			<Card
-			href="/autoclicker"
-			title="Autoclicker m. Python"
-			body="Links og vejledning"
-			/>
-			<Card
-			href="/dice_rolling_game"
-			title="Dice Rolling Game m. Python"
-			body="Links og vejledning"
-			/>
-			<Card
-			href="/fundamentals_of_programming"
-			title="The Fundamentals of Programming m. Python"
-			body="Links og vejledning"
-			/>
-			<Card
-			href="/godot_2d"
-			title="2D platformspil i Godot"
-			body="Links og vejledning"
-			/>
 
-
-		</ul>
+		<CardGrid client:only="react" cards={allCards} />
 	</main>
 </Layout>
-
