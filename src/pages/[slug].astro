@@ -1,19 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CmsPage from '../components/CmsPage';
+import LearningFlowPage from '../components/LearningFlow/LearningFlowPage';
 
 export async function getStaticPaths() {
   const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
   try {
     const res = await fetch(
-      `${base}/items/pages?filter[status][_eq]=published&filter[slug][_nnull]=true&fields=slug,title`
+      `${base}/items/pages?filter[status][_eq]=published&filter[slug][_nnull]=true&fields=slug,title,page_mode`
     );
     if (!res.ok) return [];
     const { data } = await res.json();
-    return (data ?? []).filter((page: { slug: string; title: string }) => page.slug).map((page: { slug: string; title: string }) => ({
-      params: { slug: page.slug },
-      props: { title: page.title },
-    }));
+    return (data ?? [])
+      .filter((page: { slug: string; title: string; page_mode: string | null }) => page.slug)
+      .map((page: { slug: string; title: string; page_mode: string | null }) => ({
+        params: { slug: page.slug },
+        props: { title: page.title, pageMode: page.page_mode ?? 'normal' },
+      }));
   } catch (err) {
     console.warn('[slug].astro: Directus unreachable during build, no static CMS routes generated.', err);
     return [];
@@ -22,9 +25,12 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/');
-const { title } = Astro.props;
+const { title, pageMode } = Astro.props;
 ---
 
 <Layout title={`${title} — Special Minds Aarhus`} showNav={false}>
-  <CmsPage client:only="react" slug={slug} />
+  {pageMode === 'flow'
+    ? <LearningFlowPage client:only="react" slug={slug} />
+    : <CmsPage client:only="react" slug={slug} />
+  }
 </Layout>
