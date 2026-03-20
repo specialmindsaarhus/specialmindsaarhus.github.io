@@ -134,7 +134,11 @@ export default function CardGrid({ cards }: Props) {
           {visible.map(card => (
             <li key={card.href} className="link-card">
               <a href={card.href}>
-                <div style={{ position: 'relative' }}>
+                <div style={{ 
+                  position: 'relative',
+                  borderTopLeftRadius: '12px',
+                  borderTopRightRadius: '12px',
+                 }}>
                   {card.image
                     ? <img src={card.image} alt="" style={imgStyle} />
                     : <div style={placeholderStyle} />
@@ -147,7 +151,7 @@ export default function CardGrid({ cards }: Props) {
                       <span style={{
                         position: 'absolute',
                         top: '12px',
-                        right: '10px',
+                        right: '12px',
                         background: 'rgb(69 114 118)',
                         color: '#ffffff',
                         border: '1px solid rgba(75,165,157,0.35)',
