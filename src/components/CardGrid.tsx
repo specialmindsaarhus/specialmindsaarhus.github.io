@@ -180,8 +180,11 @@ export default function CardGrid({ cards }: Props) {
                   })()}
                 </div>
                 <div style={cardBodyStyle}>
+                  <div>
+
                   <h2 style={h2Style}>{card.title}</h2>
                   <p style={pStyle} className="pstyle-dev">{card.body}</p>
+                  </div>
                   <div className="flex flex-wrap gap-1">
                     {card.section.map(s => (
                       <span key={s} className={`badge-${s} badge-tip`} data-label={sectionLabel(s)}>
