@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import CompletionButton from './LearningFlow/CompletionButton';
+import { getStoredUser, setStoredUser } from '../lib/auth';
+import { getProgress, saveStep } from '../lib/progress';
 
 // --- Types matching the Directus content model ---
 
@@ -56,7 +59,9 @@ export default function CmsPage({ slug }: Props) {
 
   useEffect(() => {
     const controller = new AbortController();
-    const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
+    const base = import.meta.env.DEV
+      ? '/directus'
+      : (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'https://cms.spmi.dk').replace(/\/$/, '');
     const url =
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
@@ -155,6 +160,8 @@ export default function CmsPage({ slug }: Props) {
           </div>
         ))}
       </div>
+
+      <NormalPageCompletion slug={slug} />
     </main>
   );
 }
@@ -163,5 +170,83 @@ function FirstWord({ text }: { text: string }) {
   const space = text.indexOf(' ');
   if (space === -1) return <span className="first-word">{text}</span>;
   return <><span className="first-word">{text.slice(0, space)}</span>{text.slice(space)}</>;
+}
+
+function NormalPageCompletion({ slug }: { slug: string }) {
+  const [username, setUsername] = useState<string | null>(null);
+  const [inputVal, setInputVal] = useState('');
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const u = getStoredUser();
+    if (u) {
+      setUsername(u);
+      const p = getProgress(u, slug);
+      setDone(!!p?.completedAt);
+    }
+  }, [slug]);
+
+  function handleComplete() {
+    if (!username) return;
+    saveStep(username, slug, 1, 0);
+    setDone(true);
+  }
+
+  function confirmUsername() {
+    const u = inputVal.trim();
+    if (!u) return;
+    setStoredUser(u);
+    setUsername(u);
+    const p = getProgress(u, slug);
+    setDone(!!p?.completedAt);
+  }
+
+  return (
+    <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+      <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: '1rem', fontSize: '0.95rem' }}>
+        Marker dette projekt som færdig:
+      </p>
+
+      {username ? (
+        <CompletionButton done={done} onClick={handleComplete} />
+      ) : (
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <input
+            type="text"
+            placeholder="Dit Windows-brugernavn"
+            value={inputVal}
+            onChange={e => setInputVal(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') confirmUsername(); }}
+            style={{
+              padding: '0.5rem 0.9rem',
+              borderRadius: '7px',
+              border: '1px solid rgba(75,165,157,0.3)',
+              background: 'rgba(255,255,255,0.06)',
+              color: 'white',
+              fontSize: '0.9rem',
+              outline: 'none',
+              width: '220px',
+            }}
+          />
+          <button
+            onClick={confirmUsername}
+            disabled={!inputVal.trim()}
+            style={{
+              padding: '0.5rem 1rem',
+              borderRadius: '7px',
+              border: 'none',
+              background: inputVal.trim() ? '#4ba59d' : 'rgba(75,165,157,0.2)',
+              color: inputVal.trim() ? 'white' : 'rgba(255,255,255,0.3)',
+              cursor: inputVal.trim() ? 'pointer' : 'default',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+            }}
+          >
+            OK
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 

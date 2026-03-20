@@ -35,7 +35,9 @@
       "Bash(netstat -ano)",
       "Bash(xargs -I{} taskkill /F /PID {})",
       "Bash(taskkill /F /IM node.exe)",
-      "Bash(taskkill //F //IM node.exe)"
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(docker compose:*)",
+      "Bash(npx astro:*)"
     ],
     "deny": [],
     "ask": []
