@@ -19,12 +19,16 @@ const imgStyle: React.CSSProperties = {
   aspectRatio: '3 / 1',
   objectFit: 'cover',
   display: 'block',
+  borderTopLeftRadius: '12px',
+  borderTopRightRadius: '12px',
 };
 
 const placeholderStyle: React.CSSProperties = {
   ...imgStyle,
   background: '#2a4e52',
   borderRadius: '12px 12px 0 0',
+  borderTopLeftRadius: '12px',
+  borderTopRightRadius: '12px',
 };
 
 const cardBodyStyle: React.CSSProperties = {
@@ -34,6 +38,7 @@ const cardBodyStyle: React.CSSProperties = {
   justifyContent: 'space-between',
   flex: 1,
   borderRadius: '0 0 12px 12px',
+  gap:'0.8rem',
 };
 
 const h2Style: React.CSSProperties = {
