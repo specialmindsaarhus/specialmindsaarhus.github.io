@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getStoredUser } from '../lib/auth';
+import { getCardProgress } from '../lib/progress';
 
 interface CardItem {
   href: string;
   title: string;
   body: string;
   image?: string;
-  section: 'dev' | 'media';
+  section: string[];
 }
 
 interface Props {
@@ -14,7 +16,7 @@ interface Props {
 
 const imgStyle: React.CSSProperties = {
   width: '100%',
-  aspectRatio: '16 / 7',
+  aspectRatio: '3 / 1',
   objectFit: 'cover',
   display: 'block',
 };
@@ -27,6 +29,9 @@ const placeholderStyle: React.CSSProperties = {
 
 const cardBodyStyle: React.CSSProperties = {
   padding: '1.1rem 1.2rem 1.2rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
   flex: 1,
   borderRadius: '0 0 12px 12px',
 };
@@ -44,17 +49,41 @@ const pStyle: React.CSSProperties = {
   marginBottom: '0.5rem',
   fontSize: '0.8rem',
   textAlign: 'left',
-  borderLeft: '2px solid rgba(255, 255, 255, 0.22)',
+  //borderLeft: '2px solid rgba(255, 255, 255, 0.22)',
   paddingLeft: '0.65rem',
   color: 'rgb(255 255 255 / 62%)',
 };
 
+const SECTION_LABELS: Record<string, string> = {
+  'dev': 'Dev',
+  'kode': 'Kode',
+  'game-dev': 'Game Dev',
+  'bygge': 'Bygge',
+  'grafisk': 'Grafisk',
+  'media': 'Media',
+};
+function sectionLabel(value: string) {
+  return SECTION_LABELS[value] ?? value;
+}
+
 export default function CardGrid({ cards }: Props) {
   const [query, setQuery] = useState('');
-  const [activeSection, setActiveSection] = useState<'all' | 'dev' | 'media'>('all');
+  const [activeSection, setActiveSection] = useState<string>('all');
+  const [progressMap, setProgressMap] = useState<Record<string, { done: boolean; stepsCompleted: number; total: number } | null>>({});
+
+  useEffect(() => {
+    const username = getStoredUser();
+    if (!username) return;
+    const map: Record<string, { done: boolean; stepsCompleted: number; total: number } | null> = {};
+    for (const card of cards) {
+      const slug = card.href.replace(/^\//, '');
+      map[slug] = getCardProgress(username, slug);
+    }
+    setProgressMap(map);
+  }, [cards]);
 
   const visible = cards.filter(c => {
-    const matchSection = activeSection === 'all' || c.section === activeSection;
+    const matchSection = activeSection === 'all' || c.section.includes(activeSection);
     const needle = query.toLowerCase();
     const matchText = !needle ||
       c.title.toLowerCase().includes(needle) ||
@@ -76,10 +105,20 @@ export default function CardGrid({ cards }: Props) {
           onChange={e => setQuery(e.target.value)}
           className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/40 outline-none opacity-80 focus:opacity-100 border border-transparent focus:border-white/30"
         />
-        <div className="flex gap-2">
-          <button className={activeSection === 'all' ? btnActive : btnInactive} onClick={() => setActiveSection('all')}>Alle</button>
-          <button className={activeSection === 'dev' ? btnActive : btnInactive} onClick={() => setActiveSection('dev')}>Dev</button>
-          <button className={activeSection === 'media' ? btnActive : btnInactive} onClick={() => setActiveSection('media')}>Media</button>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { value: 'all', label: 'Alle' },
+            { value: 'dev', label: 'Dev' },
+            { value: 'kode', label: 'Kode' },
+            { value: 'game-dev', label: 'Game Dev' },
+            { value: 'bygge', label: 'Bygge' },
+            { value: 'grafisk', label: 'Grafisk' },
+            { value: 'media', label: 'Media' },
+          ].map(s => (
+            <button key={s.value} className={activeSection === s.value ? btnActive : btnInactive} onClick={() => setActiveSection(s.value)}>
+              {s.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -90,16 +129,66 @@ export default function CardGrid({ cards }: Props) {
           {visible.map(card => (
             <li key={card.href} className="link-card">
               <a href={card.href}>
-                {card.image
-                  ? <img src={card.image} alt="" style={imgStyle} />
-                  : <div style={placeholderStyle} />
-                }
+                <div style={{ position: 'relative' }}>
+                  {card.image
+                    ? <img src={card.image} alt="" style={imgStyle} />
+                    : <div style={placeholderStyle} />
+                  }
+                  {(() => {
+                    const slug = card.href.replace(/^\//, '');
+                    const prog = progressMap[slug];
+                    if (!prog) return null;
+                    if (prog.done) return (
+                      <span style={{
+                        position: 'absolute',
+                        top: '12px',
+                        right: '10px',
+                        background: 'rgb(69 114 118)',
+                        color: '#ffffff',
+                        border: '1px solid rgba(75,165,157,0.35)',
+                        borderRadius: '50%',
+                        width: '1.4rem',
+                        height: '1.4rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.8rem',
+                        pointerEvents: 'none',
+                      }}>✓</span>
+                    );
+                    const pct = Math.round((prog.stepsCompleted / prog.total) * 100);
+                    return (
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '3px',
+                        background: 'rgba(0,0,0,0.3)',
+                        borderRadius: '12px 12px 0 0',
+                        pointerEvents: 'none',
+                      }}>
+                        <div style={{
+                          width: `${pct}%`,
+                          height: '100%',
+                          background: '#eab308',
+                          borderRadius: '12px 12px 0 0',
+                          transition: 'width 0.4s ease',
+                        }} />
+                      </div>
+                    );
+                  })()}
+                </div>
                 <div style={cardBodyStyle}>
                   <h2 style={h2Style}>{card.title}</h2>
-                  <p style={pStyle}>{card.body}</p>
-                  <span className={card.section === 'media' ? 'badge-media' : 'badge-dev'}>
-                    {card.section === 'media' ? 'Media' : 'Dev'}
-                  </span>
+                  <p style={pStyle} className="pstyle-dev">{card.body}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {card.section.map(s => (
+                      <span key={s} className={`badge-${s} badge-tip`} data-label={sectionLabel(s)}>
+                        {sectionLabel(s)[0]}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </a>
             </li>

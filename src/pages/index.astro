@@ -7,12 +7,12 @@ interface CardItem {
   title: string;
   body: string;
   image?: string;
-  section: 'dev' | 'media';
+  section: string[];
 }
 
 // Fetch all published CMS pages (both sections) at build time
 const base = (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, '');
-let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null; section: string | null }[] = [];
+let cmsPages: { slug: string; title: string; subtitle: string | null; card_image: string | null; section: string[] | null }[] = [];
 try {
   const res = await fetch(
     `${base}/items/pages?filter[status][_eq]=published&fields=slug,title,subtitle,card_image,section&sort=title`
@@ -26,23 +26,23 @@ try {
 }
 
 const hardcodedCards: CardItem[] = [
-  { href: '/tryhackme', title: 'TryHackMe - IT Sikkerhed', body: 'Lær hacking og IT-sikkerhed gennem spil og øvelser', section: 'dev' },
-  { href: '/algorithm-cookie-game', title: 'Algorithm Cookie Game', body: 'Lær algoritmisk tænkning gennem cookie-dekoration', section: 'dev' },
-  { href: '/godot-custom-sprites', title: 'Tilføj Custom Sprites til Godot', body: 'Lær at finde og tilføje egne sprites til dit Godot-spil', section: 'dev' },
-  { href: '/baldurs-gate-3-modding', title: "Baldur's Gate 3 Modding", body: 'Lav dit eget mod til Baldur\'s Gate 3 med LUA', section: 'dev' },
-  { href: '/pcbuildersimulator', title: 'PC Builder Simulator', body: 'Spil der lærer dig om hardware og computer-builds', section: 'dev' },
-  { href: '/underthewire', title: 'Under The Wire - Powershel spil', body: 'Spil der lærer dig at bruge powershell og SSH', section: 'dev' },
-  { href: '/blender-forlob', title: 'Blender, fra begynder til Pro', body: 'Modelering, texture og animationer i blender', section: 'dev' },
-  { href: '/blender_godot', title: 'Fra Blender til Godot', body: 'Animationer i Blendeer importeret til Godot', section: 'dev' },
-  { href: '/turringtumble', title: 'Turring Tumble', body: 'Design dine egne 2D sprites i Aseprite', section: 'dev' },
-  { href: '/libresprite', title: 'Libresprite pixelart', body: 'Design dine egne 2D sprites i Aseprite', section: 'dev' },
-  { href: '/cs50', title: 'Computer Science Undervisning', body: 'Undevisningsfroløb', section: 'dev' },
-  { href: '/discord-bot', title: 'Discord Bot forløb', body: 'Links og vejledning', section: 'dev' },
-  { href: '/arduino_forlob', title: 'Arduino Introduktion + Robotarm', body: 'Links og vejledning', section: 'dev' },
-  { href: '/autoclicker', title: 'Autoclicker m. Python', body: 'Links og vejledning', section: 'dev' },
-  { href: '/dice_rolling_game', title: 'Dice Rolling Game m. Python', body: 'Links og vejledning', section: 'dev' },
-  { href: '/fundamentals_of_programming', title: 'The Fundamentals of Programming m. Python', body: 'Links og vejledning', section: 'dev' },
-  { href: '/godot_2d', title: '2D platformspil i Godot', body: 'Links og vejledning', section: 'dev' },
+  { href: '/tryhackme', title: 'TryHackMe - IT Sikkerhed', body: 'Lær hacking og IT-sikkerhed gennem spil og øvelser', section: ['dev'] },
+  { href: '/algorithm-cookie-game', title: 'Algorithm Cookie Game', body: 'Lær algoritmisk tænkning gennem cookie-dekoration', section: ['dev'] },
+  { href: '/godot-custom-sprites', title: 'Tilføj Custom Sprites til Godot', body: 'Lær at finde og tilføje egne sprites til dit Godot-spil', section: ['dev'] },
+  { href: '/baldurs-gate-3-modding', title: "Baldur's Gate 3 Modding", body: 'Lav dit eget mod til Baldur\'s Gate 3 med LUA', section: ['dev'] },
+  { href: '/pcbuildersimulator', title: 'PC Builder Simulator', body: 'Spil der lærer dig om hardware og computer-builds', section: ['dev'] },
+  { href: '/underthewire', title: 'Under The Wire - Powershel spil', body: 'Spil der lærer dig at bruge powershell og SSH', section: ['dev'] },
+  { href: '/blender-forlob', title: 'Blender, fra begynder til Pro', body: 'Modelering, texture og animationer i blender', section: ['dev'] },
+  { href: '/blender_godot', title: 'Fra Blender til Godot', body: 'Animationer i Blendeer importeret til Godot', section: ['dev'] },
+  { href: '/turringtumble', title: 'Turring Tumble', body: 'Design dine egne 2D sprites i Aseprite', section: ['dev'] },
+  { href: '/libresprite', title: 'Libresprite pixelart', body: 'Design dine egne 2D sprites i Aseprite', section: ['dev'] },
+  { href: '/cs50', title: 'Computer Science Undervisning', body: 'Undevisningsfroløb', section: ['dev'] },
+  { href: '/discord-bot', title: 'Discord Bot forløb', body: 'Links og vejledning', section: ['dev'] },
+  { href: '/arduino_forlob', title: 'Arduino Introduktion + Robotarm', body: 'Links og vejledning', section: ['dev'] },
+  { href: '/autoclicker', title: 'Autoclicker m. Python', body: 'Links og vejledning', section: ['dev'] },
+  { href: '/dice_rolling_game', title: 'Dice Rolling Game m. Python', body: 'Links og vejledning', section: ['dev'] },
+  { href: '/fundamentals_of_programming', title: 'The Fundamentals of Programming m. Python', body: 'Links og vejledning', section: ['dev'] },
+  { href: '/godot_2d', title: '2D platformspil i Godot', body: 'Links og vejledning', section: ['dev'] },
 ];
 
 const allCards: CardItem[] = [
@@ -51,7 +51,7 @@ const allCards: CardItem[] = [
     title: page.title,
     body: page.subtitle ?? '',
     image: page.card_image ? `${base}/assets/${page.card_image}` : undefined,
-    section: (page.section === 'media' ? 'media' : 'dev') as 'dev' | 'media',
+    section: Array.isArray(page.section) ? page.section : (page.section ? [page.section] : ['dev']),
   })),
   ...hardcodedCards,
 ];

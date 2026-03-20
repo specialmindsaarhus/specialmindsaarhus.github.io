@@ -128,6 +128,15 @@ h2 {
 	color: rgba(255, 255, 255, 0.75);
 }
 
+/*cardgrid cards */
+.pstyle-media{
+	border-left: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.pstyle-dev{
+	border-left: 1px solid rgba(75, 165, 157, 0.2);
+}
+
 /* Highlight keywords in content areas (Hvorfor, Fordi, etc.) */
 .instructions .font-semibold {
 	color: var(--sm-gold);
@@ -421,8 +430,7 @@ h2 {
 }
 
 .link-card:hover {
-	border-color: var(--sm-gold);
-	border:2px;
+	background: #ecd6732d;
 }
 
 
@@ -461,21 +469,51 @@ iframe[src*="youtube"] {
 }
 
 /* === Section badges (CardGrid) === */
-.badge-dev {
-	display: inline-block;
-	font-size: 0.7rem;
-	padding: 0.15rem 0.5rem;
-	border-radius: 999px;
-	background: rgba(75, 165, 157, 0.2);
-	color: #4ba59d;
-}
+.badge-dev,
+.badge-kode,
+.badge-game-dev,
+.badge-bygge,
+.badge-grafisk,
 .badge-media {
-	display: inline-block;
-	font-size: 0.7rem;
-	padding: 0.15rem 0.5rem;
-	border-radius: 999px;
-	background: rgba(99, 102, 241, 0.2);
-	color: #a5b4fc;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.2rem;
+	height: 1.2rem;
+	border-radius: 50%;
+	font-size: 0.45rem;
+	font-weight: 400;
+	cursor: default;
+}
+.badge-dev     { border: 1px solid rgba(75, 165, 157, 0.2);  color: #4ba59d; }
+.badge-kode    { border: 1px solid rgba(245, 158, 11, 0.2);  color: #f59e0b; }
+.badge-game-dev{ border: 1px solid rgba(16, 185, 129, 0.2);  color: #10b981; }
+.badge-bygge   { border: 1px solid rgba(249, 115, 22, 0.2);  color: #f97316; }
+.badge-grafisk { border: 1px solid rgba(167, 139, 250, 0.2); color: #a78bfa; }
+.badge-media   { border: 1px solid rgba(99, 102, 241, 0.2);  color: #a5b4fc; }
+
+.badge-tip {
+	position: relative;
+}
+.badge-tip::after {
+	content: attr(data-label);
+	position: absolute;
+	bottom: calc(100% + 5px);
+	left: 50%;
+	transform: translateX(-50%);
+	background: #1e2d3a;
+	color: #fff;
+	font-size: 0.65rem;
+	font-weight: 500;
+	white-space: nowrap;
+	padding: 0.2rem 0.45rem;
+	border-radius: 4px;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+.badge-tip:hover::after {
+	opacity: 1;
 }
 
 /* === Lykkehjulet (special) === */
