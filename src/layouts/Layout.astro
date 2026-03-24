@@ -26,5 +26,26 @@ const { title, showNav = true } = Astro.props;
 			</a>
 		</header>
 		<slot />
+		<footer class="site-footer">
+			<div class="site-footer__logo">
+				<img src="/special-minds-logo.png" alt="Special Minds" class="site-logo" />
+			</div>
+			<div class="site-footer__inner">
+				<div class="site-footer__col site-footer__col--left">
+					<h3>Special Minds er</h3>
+					<p>en socialøkonomisk virksomhed som gennem uddannelses- og beskæftigelsesrettede indsatser hjælper unge og voksne med Autisme Spektrum Forstyrrelse til at lykkes med uddannelse eller job.</p>
+				</div>
+				<div class="site-footer__divider"></div>
+				<div class="site-footer__col site-footer__col--right">
+					<h3>Special Minds bor</h3>
+					<address>
+						Gunnar Clausens Vej 68<br />
+						8260 Viby J<br />
+						Telefon: 86 12 56 60<br />
+						E-mail: <a href="mailto:kontakt@specialminds.dk">kontakt@specialminds.dk</a>
+					</address>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -97,7 +97,7 @@ export default function CardGrid({ cards }: Props) {
   });
 
   const btnBase = 'px-3 py-1 border-base text-xs font-medium transition-all cursor-pointer';
-  const btnActive = `${btnBase} bg-[#4ba59d]/25 text-[#4ba59d] border border-[#4ba59d]/30`;
+  const btnActive = `${btnBase} bg-[#1f3038]/25 text-[#ffffffbf] border border-[#4ba59d]/30`;
   const btnInactive = `${btnBase} bg-white/5 text-white/25 border border-white/10 hover:text-white/50`;
 
   return (
@@ -108,7 +108,7 @@ export default function CardGrid({ cards }: Props) {
           placeholder="Søg i forløb..."
           value={query}
           onChange={e => setQuery(e.target.value)}
-          className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/40 outline-none opacity-80 focus:opacity-100 border border-transparent focus:border-white/30"
+          className="flex-1 px-4 py-2 rounded-lg bg-[#1F3038BF] text-white placeholder-white/40 outline-none opacity-80 focus:opacity-100 border border-transparent focus:border-white/30"
         />
         <div className="flex flex-wrap gap-2">
           {[
@@ -138,6 +138,7 @@ export default function CardGrid({ cards }: Props) {
                   position: 'relative',
                   borderTopLeftRadius: '12px',
                   borderTopRightRadius: '12px',
+                  overflow:'hidden'
                  }}>
                   {card.image
                     ? <img src={card.image} alt="" style={imgStyle} />

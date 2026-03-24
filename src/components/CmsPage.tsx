@@ -11,6 +11,7 @@ interface InfoCard {
   variant: 'normal' | 'accent';
   sort: number;
   content?: string | null;
+  image?: string | null;
 }
 
 interface CmsPageData {
@@ -52,22 +53,25 @@ interface Props {
   slug: string;
 }
 
+const cmsBase = import.meta.env.DEV
+  ? '/directus'
+  : (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'https://cms.spmi.dk').replace(/\/$/, '');
+
 export default function CmsPage({ slug }: Props) {
   const [page, setPage] = useState<CmsPageData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [overlayImage, setOverlayImage] = useState<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
-    const base = import.meta.env.DEV
-      ? '/directus'
-      : (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'https://cms.spmi.dk').replace(/\/$/, '');
+    const base = cmsBase;
     const url =
       `${base}/items/pages` +
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
       `&filter[status][_eq]=published` +
       `&fields=slug,title,subtitle,video_url,intro_label,intro_text,vis_ekstra,ekstra,` +
-      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content` +
+      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content,info_cards.image` +
       `&deep[info_cards][_sort]=sort`;
 
     fetch(url, { signal: controller.signal })
@@ -149,19 +153,103 @@ export default function CmsPage({ slug }: Props) {
           <div className="rich-content" dangerouslySetInnerHTML={{ __html: page.ekstra }} />
         )}
 
-        {(page.info_cards ?? []).map((card) => (
-          <div key={card.id} className={`info-card${card.variant === 'accent' ? ' accent' : ''}`}>
-            <p className="card-title">{card.title}</p>
-            <div className="card-body">
-              {card.content && (
-                <div className="rich-content" dangerouslySetInnerHTML={{ __html: card.content }} />
+        {(page.info_cards ?? []).map((card) => {
+const imageUrl = card.image ? `${cmsBase}/assets/${card.image}` : null;
+          return (
+            <div key={card.id} className={`info-card${card.variant === 'accent' ? ' accent' : ''}`} style={{ position: 'relative' }}>
+              {imageUrl && (
+                <button
+                  onClick={() => setOverlayImage(imageUrl)}
+                  aria-label="Vis billede"
+                  style={{
+                    position: 'absolute',
+                    top: '0.75rem',
+                    right: '0.75rem',
+                    background: 'rgb(255, 255, 255)',
+                    border: '1px solid rgb(255, 255, 255)',
+                    borderRadius: '6px',
+                    width: '2rem',
+                    height: '2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    color: '#4ba59d',
+                    padding: 0,
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                </button>
               )}
+              <p className="card-title">{card.title}</p>
+              <div className="card-body">
+                {card.content && (
+                  <div className="rich-content" dangerouslySetInnerHTML={{ __html: card.content }} />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <NormalPageCompletion slug={slug} />
+
+      {overlayImage && (
+        <div
+          onClick={() => setOverlayImage(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            cursor: 'zoom-out',
+            padding: '1.5rem',
+          }}
+        >
+          <img
+            src={overlayImage}
+            alt=""
+            onClick={e => e.stopPropagation()}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '90vh',
+              borderRadius: '8px',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+              cursor: 'default',
+            }}
+          />
+          <button
+            onClick={() => setOverlayImage(null)}
+            aria-label="Luk billede"
+            style={{
+              position: 'fixed',
+              top: '1rem',
+              right: '1rem',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '50%',
+              width: '2.2rem',
+              height: '2.2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'white',
+              fontSize: '1.1rem',
+              lineHeight: 1,
+              padding: 0,
+            }}
+          >✕</button>
+        </div>
+      )}
     </main>
   );
 }

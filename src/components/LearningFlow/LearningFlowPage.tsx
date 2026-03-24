@@ -13,6 +13,7 @@ interface InfoCard {
   variant: 'normal' | 'accent';
   sort: number;
   content?: string | null;
+  image?: string | null;
 }
 
 interface CmsPageData {
@@ -48,7 +49,7 @@ export default function LearningFlowPage({ slug }: Props) {
       `?filter[slug][_eq]=${encodeURIComponent(slug)}` +
       `&filter[status][_eq]=published` +
       `&fields=slug,title,subtitle,video_url,intro_label,intro_text,` +
-      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content` +
+      `info_cards.id,info_cards.title,info_cards.variant,info_cards.sort,info_cards.content,info_cards.image` +
       `&deep[info_cards][_sort]=sort`;
 
     fetch(url, { signal: controller.signal })
@@ -123,6 +124,7 @@ function Flow({ page, username }: FlowProps) {
   function goToStep(step: number) {
     setCurrentStep(step);
     saveStep(username, page.slug, step, totalCards);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   // step 0 = intro

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import CompletionButton from './CompletionButton';
 
 interface InfoCard {
@@ -6,6 +7,7 @@ interface InfoCard {
   variant: 'normal' | 'accent';
   sort: number;
   content?: string | null;
+  image?: string | null;
 }
 
 interface Props {
@@ -16,8 +18,14 @@ interface Props {
   onNext: () => void;
 }
 
+const cmsBase = import.meta.env.DEV
+  ? '/directus'
+  : (import.meta.env.PUBLIC_DIRECTUS_URL ?? 'https://cms.spmi.dk').replace(/\/$/, '');
+
 export default function StepCard({ card, stepIndex, totalCards, onPrev, onNext }: Props) {
   const isLast = stepIndex === totalCards;
+  const [overlayImage, setOverlayImage] = useState<string | null>(null);
+  const imageUrl = card.image ? `${cmsBase}/assets/${card.image}` : null;
 
   return (
     <main className="cms-page">
@@ -25,7 +33,35 @@ export default function StepCard({ card, stepIndex, totalCards, onPrev, onNext }
         Trin {stepIndex} af {totalCards}
       </p>
 
-      <div className={`info-card${card.variant === 'accent' ? ' accent' : ''}`}>
+      <div className={`info-card${card.variant === 'accent' ? ' accent' : ''}`} style={{ position: 'relative' }}>
+        {imageUrl && (
+          <button
+            onClick={() => setOverlayImage(imageUrl)}
+            aria-label="Vis billede"
+            style={{
+              position: 'absolute',
+              top: '0.75rem',
+              right: '0.75rem',
+              background: 'rgba(75,165,157,0.15)',
+              border: '1px solid rgba(75,165,157,0.35)',
+              borderRadius: '6px',
+              width: '2rem',
+              height: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#4ba59d',
+              padding: 0,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </button>
+        )}
         <p className="card-title">{card.title}</p>
         <div className="card-body">
           {card.content && (
@@ -33,6 +69,58 @@ export default function StepCard({ card, stepIndex, totalCards, onPrev, onNext }
           )}
         </div>
       </div>
+
+      {overlayImage && (
+        <div
+          onClick={() => setOverlayImage(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            cursor: 'zoom-out',
+            padding: '1.5rem',
+          }}
+        >
+          <img
+            src={overlayImage}
+            alt=""
+            onClick={e => e.stopPropagation()}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '90vh',
+              borderRadius: '8px',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+              cursor: 'default',
+            }}
+          />
+          <button
+            onClick={() => setOverlayImage(null)}
+            aria-label="Luk billede"
+            style={{
+              position: 'fixed',
+              top: '1rem',
+              right: '1rem',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '50%',
+              width: '2.2rem',
+              height: '2.2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'white',
+              fontSize: '1.1rem',
+              lineHeight: '1',
+              padding: 0,
+            }}
+          >✕</button>
+        </div>
+      )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem', gap: '1rem' }}>
         <button
