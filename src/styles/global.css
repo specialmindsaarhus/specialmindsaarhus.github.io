@@ -431,7 +431,7 @@ h2 {
 
 .link-card:hover {
 	background: #ecd67373;
-	transform: scale(1.02);
+	transform: scale(1.01);
 	transition: background 0.15s ease-out, transform 0.2s ease-out;
 }
 
