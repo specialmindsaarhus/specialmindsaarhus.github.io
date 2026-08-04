@@ -45,7 +45,7 @@ const hardcodedCards: CardItem[] = [
   { href: '/godot_2d', title: '2D platformspil i Godot', body: 'Links og vejledning', section: ['dev'] },
 ];
 
-const allCards: CardItem[] = [
+const cardCandidates: CardItem[] = [
   ...cmsPages.map(page => ({
     href: `/${page.slug}`,
     title: page.title,
@@ -55,6 +55,17 @@ const allCards: CardItem[] = [
   })),
   ...hardcodedCards,
 ];
+
+// A page can exist in both Directus and the legacy hardcoded list. Keep the
+// first occurrence (CMS cards are listed first) so React always receives one
+// card and one stable key per URL.
+const seenHrefs = new Set<string>();
+const allCards = cardCandidates.filter(card => {
+  const href = card.href.replace(/\/+$/, '') || '/';
+  if (seenHrefs.has(href)) return false;
+  seenHrefs.add(href);
+  return true;
+});
 ---
 
 <Layout title="Special Minds Aarhus @ Github">
